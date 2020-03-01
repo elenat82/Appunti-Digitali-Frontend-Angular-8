@@ -9,11 +9,15 @@ import { AppRoutingModule } from './modules/app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { AngularMaterialModule } from './modules/angular-material.module';
+import { MenuComponent } from './components/menu/menu.component';
+import { FilterlistPipe } from './pipes/filterlist.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    MenuComponent,
+    FilterlistPipe
   ],
   imports: [
     BrowserModule,

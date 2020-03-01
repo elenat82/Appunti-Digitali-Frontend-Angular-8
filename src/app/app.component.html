@@ -1,27 +1,28 @@
-<mat-toolbar color="accent">
-  <mat-toolbar-row>
-    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="sidenav.toggle()" color="primary"
-      class="mat-icon-button sidenav-toggle-button">
-      <mat-icon aria-label="Side nav toggle icon" *ngIf="!sidenav.opened; else showCross">menu</mat-icon>
-      <ng-template #showCross>
-        <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
-      </ng-template>
-    </button>
-    {{title}}
-  </mat-toolbar-row>
-</mat-toolbar>
-<mat-sidenav-container>
-  <mat-sidenav #sidenav mode="push" [fixedInViewport]="true" fixedTopGap="64">
-    <mat-nav-list>
-      <mat-list-item>
-        <mat-icon matListIcon>dashboard</mat-icon>
-        <p>Dashboard</p>
-      </mat-list-item>
-    </mat-nav-list>
+
+<mat-sidenav-container hasBackdrop="false">
+  <mat-sidenav #sidenav mode="push" opened [fixedInViewport]="true" fixedTopGap="0">
+    <app-menu></app-menu>
   </mat-sidenav>
   <mat-sidenav-content>
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="sidenav.toggle()" class="mat-icon-button sidenav-toggle-button">
+          <mat-icon aria-label="Side nav toggle icon" *ngIf="!sidenav.opened; else showCross">menu</mat-icon>
+          <ng-template #showCross>
+            <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
+          </ng-template>
+        </button>
+        {{title}}
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <p>spostare in app component la chiamata al servizio e toglierla dal menu e passarla come parametro</p>
     <main [@fadeAnimation]="getRouterOutletState(o)">
       <router-outlet #o="outlet"></router-outlet>
     </main>
+    <mat-toolbar>
+      <mat-toolbar-row>
+        <p>footer</p>
+      </mat-toolbar-row>
+    </mat-toolbar>
   </mat-sidenav-content>
 </mat-sidenav-container>
