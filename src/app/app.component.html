@@ -1,7 +1,7 @@
 
 <mat-sidenav-container hasBackdrop="false">
   <mat-sidenav #sidenav mode="push" opened [fixedInViewport]="true" fixedTopGap="0">
-    <app-menu></app-menu>
+    <app-menu [menuVoices]="menuVoices"></app-menu>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar>
@@ -15,7 +15,6 @@
         {{title}}
       </mat-toolbar-row>
     </mat-toolbar>
-    <p>spostare in app component la chiamata al servizio e toglierla dal menu e passarla come parametro</p>
     <main [@fadeAnimation]="getRouterOutletState(o)">
       <router-outlet #o="outlet"></router-outlet>
     </main>

@@ -1,17 +1,20 @@
-export interface MenuVoice {
+export interface Content {
     id: number;
     tipo: string;
     titolo: string;
-    tagsangular: TaxonomyInMenu[];
-    tagshtml: TaxonomyInMenu[];
-    tagscss: TaxonomyInMenu[];
-    tagsdrupal: TaxonomyInMenu[];
-    tagsjs: TaxonomyInMenu[];
-    tagsphp: TaxonomyInMenu[];
-    tagsgenerici: TaxonomyInMenu[];
-}
-
-export interface TaxonomyInMenu {
-    id: string;
-    title: string;
+    body: string;
+    tagsangular: [];
+    tagshtml: [];
+    tagscss: [];
+    tagsdrupal: [];
+    tagsjs: [];
+    tagsphp: [];
+    tagsgenerici: [];
+    versioniangular: [];
+    versionicss: [];
+    versionihtml: [];
+    versionijs: [];
+    approfondimenti: [];
+    correlati: [];
+    timestamp: string;
 }

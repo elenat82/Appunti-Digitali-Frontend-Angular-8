@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   rootPath: "http://localhost/appuntidigitali/web/",
-  menu: "api"
+  content: "api"
 };
 
 /*
