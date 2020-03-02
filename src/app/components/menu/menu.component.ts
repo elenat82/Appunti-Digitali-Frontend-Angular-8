@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { MenuService } from 'src/app/services/menu.service';
+import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { ContentService } from 'src/app/services/content.service';
 import { MenuVoice } from 'src/app/models';
 import { Observable } from 'rxjs';
 
@@ -10,12 +10,17 @@ import { Observable } from 'rxjs';
 })
 export class MenuComponent implements OnInit {
 
-  public menuVoices : Observable<MenuVoice[]>;
+  @Input() menuVoices : Observable<any[]>;
+
+  public query = "";
   
-  constructor(private menuService: MenuService) { }
+  constructor(private contentService: ContentService) { }
 
   ngOnInit() {
-    this.menuVoices = this.menuService.getMenu();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    console.log('changes: ', changes);
   }
 
 }

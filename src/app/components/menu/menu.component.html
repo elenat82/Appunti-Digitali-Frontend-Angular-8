@@ -6,7 +6,7 @@
   </button>
 </mat-form-field>
 <mat-nav-list>
-  <mat-list-item *ngFor="let voice of menuVoices  | async  | filterlist : query">
+  <mat-list-item *ngFor="let voice of menuVoices  | filterlist : query">
      <a matLine [routerLink]="['/content', voice.id]">{{ voice.titolo }}</a>
   </mat-list-item>
 </mat-nav-list>
