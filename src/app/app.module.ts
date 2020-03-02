@@ -11,6 +11,7 @@ import { HomeComponent } from './components/home/home.component';
 import { AngularMaterialModule } from './modules/angular-material.module';
 import { MenuComponent } from './components/menu/menu.component';
 import { FilterlistPipe } from './pipes/filterlist.pipe';
+import { StorageModule } from '@ngx-pwa/local-storage';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,10 @@ import { FilterlistPipe } from './pipes/filterlist.pipe';
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
+    StorageModule.forRoot({ 
+      IDBNoWrap: true,
+      IDBDBName: 'appuntiDigitaliDB', // custom database name when in `indexedDB`
+      LSPrefix: 'appuntiDigitaliDB' }) // prefix when in `localStorage` fallback
   ],
   providers: [],
   bootstrap: [AppComponent]
