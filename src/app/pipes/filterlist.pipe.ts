@@ -9,7 +9,7 @@ export class FilterlistPipe implements PipeTransform {
     if(!array) return null;
     if(!field) return array;
     return array.filter(element => {
-      return JSON.stringify(element).indexOf(field) >= 0;
+      return JSON.stringify(element).toLowerCase().indexOf(field.toLowerCase()) >= 0;
     });
   }
 

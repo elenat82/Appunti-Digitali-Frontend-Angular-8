@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
 import { ContentService } from 'src/app/services/content.service';
-import { MenuVoice } from 'src/app/models';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -10,7 +9,7 @@ import { Observable } from 'rxjs';
 })
 export class MenuComponent implements OnInit {
 
-  @Input() menuVoices : Observable<any[]>;
+  @Input() menuVoices : any;
 
   public query = "";
   

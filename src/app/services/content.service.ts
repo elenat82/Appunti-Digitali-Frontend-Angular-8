@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Content } from '../models';
 import { StorageMap, JSONSchema, JSONSchemaObject, JSONSchemaArray } from '@ngx-pwa/local-storage';
 
 @Injectable({
@@ -18,12 +17,13 @@ export class ContentService {
 
   constructor(private httpClient: HttpClient, private storageMap: StorageMap) { }
 
-  getContentFromServer() : Observable<any[]> {
-    return this.httpClient.get<any[]>(environment.rootPath + environment.content);
+  getContentFromServer(typeOfContent) : Observable<any[]> {
+    let url = `${environment.rootPath}${environment.content}${environment[typeOfContent]}`;
+    return this.httpClient.get<any[]>(url);
   }
 
   getContentFromIndexedDB() : Observable<any> {
-    return this.storageMap.get<Content>('content');
+    return this.storageMap.get<any>('content');
   }
 
   writeIntoIndexedDB(key, value): Observable<any> {
