@@ -1,22 +1,78 @@
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
-<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nihil sapiente quos enim tempora fuga velit quaerat quo harum facilis vitae, ea expedita quia sed magni aliquam! Optio dicta at soluta?</p>
+<div class="article-container">
+    <article>
+        <mat-card>
+            <mat-card-header>
+                <mat-card-subtitle>{{content?.tipo}}</mat-card-subtitle>
+                <mat-card-title>{{content?.titolo}}</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="content-container">
+                    <div [innerHTML]="content?.body"></div>
+                </div>
+            </mat-card-content>
+            <mat-card-footer>
+                <div class="tags">
+                    <ul>
+                        <li>
+                            <mat-icon>label</mat-icon>
+                        </li>
+                        <ng-container *ngIf="content?.tagsgenerici">
+                            <li *ngFor="let t of content.tagsgenerici">
+                                <a>{{t.title}}</a>
+                            </li>
+                        </ng-container>
+                        <ng-container *ngIf="content?.tagshtml">
+                            <li *ngFor="let t of content.tagshtml">
+                                <a>{{t.title}}</a>
+                            </li>
+                        </ng-container>
+                        <ng-container *ngIf="content?.tagscss">
+                            <li *ngFor="let t of content.tagscss">
+                                <a>{{t.title}}</a>
+                            </li>
+                        </ng-container>
+                        <ng-container *ngIf="content?.tagsjs">
+                            <li *ngFor="let t of content.tagsjs">
+                                <a>{{t.title}}</a>
+                            </li>
+                        </ng-container>
+                        <ng-container *ngIf="content?.tagsangular">
+                            <li *ngFor="let t of content.tagsangular">
+                                <a>{{t.title}}</a>
+                            </li>
+                        </ng-container>
+                        <ng-container *ngIf="content?.tagsphp">
+                            <li *ngFor="let t of content.tagsphp">
+                                <a>{{t.title}}</a>
+                            </li>
+                        </ng-container>
+                        <ng-container *ngIf="content?.tagsdrupal">
+                            <li *ngFor="let t of content.tagsdrupal">
+                                <a>{{t.title}}</a>
+                            </li>
+                        </ng-container>
+                        <ng-container *ngIf="content?.tagsvarie">
+                            <li *ngFor="let t of content.tagsvarie">
+                                <a>{{t.title}}</a>
+                            </li>
+                        </ng-container>
+                    </ul>
+                </div>
+            </mat-card-footer>
+        </mat-card>
+        
+    </article>
+    <aside>
+        <mat-nav-list>
+            <h3 matSubheader>Approfondimenti</h3>
+            <mat-list-item *ngFor="let appr of content?.approfondimenti">
+                <a matLine href="{{appr.url}}">{{ appr.text }}</a>
+            </mat-list-item>
+            <mat-divider></mat-divider>
+            <h3 matSubheader>Correlati</h3>
+            <mat-list-item *ngFor="let corr of content?.correlati">
+                <a matLine href="{{corr.url}}">{{ corr.text }}</a>
+            </mat-list-item>
+        </mat-nav-list>
+    </aside>
+</div>

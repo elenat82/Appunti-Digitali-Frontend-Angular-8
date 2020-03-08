@@ -97,7 +97,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    //fare unsubscribe
+    
   }
 
 

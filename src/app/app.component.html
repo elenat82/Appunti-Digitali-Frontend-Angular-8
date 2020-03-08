@@ -1,6 +1,6 @@
 
-<mat-sidenav-container hasBackdrop="false">
-  <mat-sidenav #sidenav mode="push" opened [fixedInViewport]="true" fixedTopGap="0">
+<mat-sidenav-container hasBackdrop="false" autosize>
+  <mat-sidenav #sidenav mode="side" opened [fixedInViewport]="true" fixedTopGap="0">
     <app-menu [menuVoices]="menuVoices"></app-menu>
   </mat-sidenav>
   <mat-sidenav-content>

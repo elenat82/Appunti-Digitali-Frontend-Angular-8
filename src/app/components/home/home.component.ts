@@ -76,8 +76,8 @@ export class HomeComponent implements OnInit {
   }
 
   selected(ev) {
-    console.log('evvvvvvvvv: ', ev.option.value);
-    this.router.navigate(['/content', ev.option.value.id]);
+    this.router.navigate(['/content', ev.option.value.tipo.toLowerCase(), ev.option.value.id]);
+    ////////PASSARE TUTTO L'ARTICOLO AL COMPONENT (tutto ev.option.value)
   }
 
   getOptionText(option) {

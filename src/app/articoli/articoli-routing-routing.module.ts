@@ -5,7 +5,7 @@ import { ArticoloComponent } from './articolo/articolo.component';
 
 const routes: Routes = [
   {
-    path: ':id',
+    path: ':materia/:id',
     component: ArticoloComponent
   }
 ];
