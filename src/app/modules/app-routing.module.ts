@@ -5,6 +5,7 @@ import { HomeComponent } from '../components/home/home.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent},
+  { path: 'content', loadChildren: () => import('../articoli/articoli.module').then(m => m.ArticoliModule)},
   { path: '', pathMatch: 'full', redirectTo: 'home' }
 ];
 

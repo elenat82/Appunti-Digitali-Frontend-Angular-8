@@ -13,6 +13,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { FilterlistPipe } from './pipes/filterlist.pipe';
 import { StorageModule } from '@ngx-pwa/local-storage';
 import { SpinnerModule } from './modules/spinner/spinner.module';
+import { ArticoliModule } from './articoli/articoli.module';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { SpinnerModule } from './modules/spinner/spinner.module';
     FormsModule,
     HttpClientModule,
     SpinnerModule,
+    ArticoliModule,
     StorageModule.forRoot({ 
       IDBNoWrap: true,
       IDBDBName: 'appuntiDigitaliDB', // custom database name when in `indexedDB`
@@ -38,4 +40,4 @@ import { SpinnerModule } from './modules/spinner/spinner.module';
   providers: [FilterlistPipe],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { } 

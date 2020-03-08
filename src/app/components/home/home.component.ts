@@ -4,6 +4,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Observable } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 import { FilterlistPipe } from 'src/app/pipes/filterlist.pipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -18,7 +19,7 @@ export class HomeComponent implements OnInit {
   public materieGroups: any[];
   public materieOptions: Observable<any[]>;
 
-  constructor(private contentService: ContentService, public filterlistPipe: FilterlistPipe, private _formBuilder: FormBuilder) { }
+  constructor(private contentService: ContentService, public filterlistPipe: FilterlistPipe, private _formBuilder: FormBuilder, private router: Router,) { }
 
   ngOnInit() {
     this.contentService.notify.subscribe(
@@ -76,6 +77,7 @@ export class HomeComponent implements OnInit {
 
   selected(ev) {
     console.log('evvvvvvvvv: ', ev.option.value);
+    this.router.navigate(['/content', ev.option.value.id]);
   }
 
   getOptionText(option) {
