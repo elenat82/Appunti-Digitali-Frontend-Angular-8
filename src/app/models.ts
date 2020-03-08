@@ -1,11 +1,11 @@
-export interface ContentAngular {
+export interface ContentHtml {
     id: number;
     tipo: string;
     titolo: string;
     body: string, 
-    tagsangular: TaxTerm[];
+    tagshtml: TaxTerm[];
     tagsgenerici: TaxTerm[];
-    versioniangular: TaxTerm[];
+    versionihtml: TaxTerm[];
     approfondimenti: string[];
     correlati: string[];
     timestamp: string;
@@ -24,31 +24,6 @@ export interface ContentCss {
     timestamp: string;
 }
 
-export interface ContentHtml {
-    id: number;
-    tipo: string;
-    titolo: string;
-    body: string, 
-    tagshtml: TaxTerm[];
-    tagsgenerici: TaxTerm[];
-    versionihtml: TaxTerm[];
-    approfondimenti: string[];
-    correlati: string[];
-    timestamp: string;
-}
-
-export interface ContentDrupal {
-    id: number;
-    tipo: string;
-    titolo: string;
-    body: string, 
-    tagsdrupal: TaxTerm[];
-    tagsgenerici: TaxTerm[];
-    approfondimenti: string[];
-    correlati: string[];
-    timestamp: string;
-}
-
 export interface ContentJS {
     id: number;
     tipo: string;
@@ -62,12 +37,37 @@ export interface ContentJS {
     timestamp: string;
 }
 
+export interface ContentAngular {
+    id: number;
+    tipo: string;
+    titolo: string;
+    body: string, 
+    tagsangular: TaxTerm[];
+    tagsgenerici: TaxTerm[];
+    versioniangular: TaxTerm[];
+    approfondimenti: string[];
+    correlati: string[];
+    timestamp: string;
+}
+
 export interface ContentPhp {
     id: number;
     tipo: string;
     titolo: string;
     body: string, 
     tagsphp: TaxTerm[];
+    tagsgenerici: TaxTerm[];
+    approfondimenti: string[];
+    correlati: string[];
+    timestamp: string;
+}
+
+export interface ContentDrupal {
+    id: number;
+    tipo: string;
+    titolo: string;
+    body: string, 
+    tagsdrupal: TaxTerm[];
     tagsgenerici: TaxTerm[];
     approfondimenti: string[];
     correlati: string[];

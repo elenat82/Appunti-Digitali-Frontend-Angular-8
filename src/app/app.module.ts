@@ -35,7 +35,7 @@ import { SpinnerModule } from './modules/spinner/spinner.module';
       IDBDBName: 'appuntiDigitaliDB', // custom database name when in `indexedDB`
       LSPrefix: 'appuntiDigitaliDB' }) // prefix when in `localStorage` fallback
   ],
-  providers: [],
+  providers: [FilterlistPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

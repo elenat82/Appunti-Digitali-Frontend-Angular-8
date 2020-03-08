@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -8,6 +8,8 @@ import { StorageMap, JSONSchema, JSONSchemaObject, JSONSchemaArray } from '@ngx-
   providedIn: 'root'
 })
 export class ContentService {
+
+  @Output() notify = new EventEmitter();
 
   private httpOption = {
     headers: new HttpHeaders(

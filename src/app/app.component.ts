@@ -1,6 +1,6 @@
 import { SpinnerOverlayService } from './services/spinner-overlay/spinner-overlay-service.service';
 import { ContentAngular, ContentCss, ContentDrupal, ContentHtml, ContentJS, ContentPhp, ContentVarie } from './models';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { fadeAnimation } from './animations';
 import { ContentService } from './services/content.service';
 import { Observable, forkJoin, Subject } from 'rxjs';
@@ -17,12 +17,12 @@ export class AppComponent implements OnInit {
   public title = 'Appunti Digitali';
 
   public menuVoices : any;
-  public contentAngular : ContentAngular;
-  public contentCss: ContentCss;
-  public contentDrupal: ContentDrupal;
   public contentHtml: ContentHtml;
+  public contentCss: ContentCss;
   public contentJS: ContentJS;
+  public contentAngular : ContentAngular;
   public contentPhp: ContentPhp;
+  public contentDrupal: ContentDrupal;
   public contentVarie: ContentVarie;
 
   constructor(private contentService: ContentService, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService) { }
@@ -37,12 +37,12 @@ export class AppComponent implements OnInit {
         }
         else {
           forkJoin(
-            this.contentService.getContentFromServer('angular'),
-            this.contentService.getContentFromServer('css'),
-            this.contentService.getContentFromServer('drupal'),
             this.contentService.getContentFromServer('html'),
+            this.contentService.getContentFromServer('css'),
             this.contentService.getContentFromServer('js'),
+            this.contentService.getContentFromServer('angular'),
             this.contentService.getContentFromServer('php'),
+            this.contentService.getContentFromServer('drupal'),
             this.contentService.getContentFromServer('varie')
           ).pipe(
             
@@ -77,22 +77,23 @@ export class AppComponent implements OnInit {
   }
 
   setUpData(data) {
-    this.contentAngular = data[0];
+    this.contentHtml = data[0];
     this.contentCss = data[1];
-    this.contentDrupal = data[2];
-    this.contentHtml = data[3];
-    this.contentJS = data[4];
-    this.contentPhp = data[5];
+    this.contentJS = data[2];
+    this.contentAngular = data[3];
+    this.contentPhp = data[4];
+    this.contentDrupal = data[5];
     this.contentVarie = data[6];
     this.menuVoices = {
-      angular: this.contentAngular,
-      css: this.contentCss,
-      drupal: this.contentDrupal,
       html: this.contentHtml,
+      css: this.contentCss,
       js: this.contentJS,
+      angular: this.contentAngular,
       php: this.contentPhp,
+      drupal: this.contentDrupal,
       varie: this.contentVarie
     }
+    this.contentService.notify.emit(this.menuVoices);
   }
 
   ngOnDestroy(): void {
