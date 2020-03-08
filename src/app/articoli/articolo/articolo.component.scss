@@ -1,0 +1,17 @@
+.article-container {
+    display: flex;
+    height: 100%;
+}
+
+article {
+    width: calc(100% - 250px);
+}
+
+aside {
+    width: 250px;
+    background-color: aquamarine;
+}
+
+.mat-card {
+    margin: 1rem;
+}
