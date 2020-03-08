@@ -19,7 +19,7 @@ export class MenuComponent implements OnInit {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log('changes: ', changes);
+    //console.log('changes: ', changes);
   }
 
 }

@@ -1,3 +1,6 @@
+<div class="logo-container">
+  <img src="assets/img/logo.svg">
+</div>
 <mat-form-field>
   <mat-label>Cerca</mat-label>
   <input matInput type="text" [(ngModel)]="query">
@@ -7,8 +10,8 @@
 </mat-form-field>
 
 <mat-nav-list>
-  <h3 matSubheader>Angular</h3>
-  <mat-list-item *ngFor="let voice of menuVoices?.angular  | filterlist : query">
+  <h3 matSubheader>Html</h3>
+  <mat-list-item *ngFor="let voice of menuVoices?.html  | filterlist : query">
     <a matLine [routerLink]="['/content', voice.id]">{{ voice.titolo }}</a>
   </mat-list-item>
   <mat-divider></mat-divider>
@@ -17,18 +20,23 @@
     <a matLine [routerLink]="['/content', voice.id]">{{ voice.titolo }}</a>
   </mat-list-item>
   <mat-divider></mat-divider>
-  <h3 matSubheader>Drupal</h3>
-  <mat-list-item *ngFor="let voice of menuVoices?.drupal  | filterlist : query">
+  <h3 matSubheader>Javascript</h3>
+  <mat-list-item *ngFor="let voice of menuVoices?.js  | filterlist : query">
     <a matLine [routerLink]="['/content', voice.id]">{{ voice.titolo }}</a>
   </mat-list-item>
   <mat-divider></mat-divider>
-  <h3 matSubheader>JavaScript</h3>
-  <mat-list-item *ngFor="let voice of menuVoices?.js  | filterlist : query">
+  <h3 matSubheader>Angular</h3>
+  <mat-list-item *ngFor="let voice of menuVoices?.angular  | filterlist : query">
     <a matLine [routerLink]="['/content', voice.id]">{{ voice.titolo }}</a>
   </mat-list-item>
   <mat-divider></mat-divider>
   <h3 matSubheader>Php</h3>
   <mat-list-item *ngFor="let voice of menuVoices?.php  | filterlist : query">
+    <a matLine [routerLink]="['/content', voice.id]">{{ voice.titolo }}</a>
+  </mat-list-item>
+  <mat-divider></mat-divider>
+  <h3 matSubheader>Drupal</h3>
+  <mat-list-item *ngFor="let voice of menuVoices?.drupal  | filterlist : query">
     <a matLine [routerLink]="['/content', voice.id]">{{ voice.titolo }}</a>
   </mat-list-item>
   <mat-divider></mat-divider>
