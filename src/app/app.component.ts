@@ -28,55 +28,52 @@ export class AppComponent implements OnInit {
   constructor(private contentService: ContentService, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService) { }
 
   ngOnInit() {
-    this.spinnerOverlayService.show();
-    this.contentService.getContentFromIndexedDB().subscribe(
-      (res) => {
-        if (res) {
-          this.setUpData(res);
-          this.spinnerOverlayService.hide();
+    forkJoin(
+      this.contentService.getContentFromIndexedDB('html'),
+      this.contentService.getContentFromIndexedDB('css'),
+      this.contentService.getContentFromIndexedDB('javascript'),
+      this.contentService.getContentFromIndexedDB('angular'),
+      this.contentService.getContentFromIndexedDB('php'),
+      this.contentService.getContentFromIndexedDB('drupal'),
+      this.contentService.getContentFromIndexedDB('varie')
+    ).pipe(
+      
+    ).subscribe(
+      (response) => {
+        console.log('responseeeeeeeeeeeeeee from indexeddb: ', response);
+        if (response[0] != undefined) {
+          this.setUpData(response, false);
         }
         else {
           forkJoin(
             this.contentService.getContentFromServer('html'),
             this.contentService.getContentFromServer('css'),
-            this.contentService.getContentFromServer('js'),
+            this.contentService.getContentFromServer('javascript'),
             this.contentService.getContentFromServer('angular'),
             this.contentService.getContentFromServer('php'),
             this.contentService.getContentFromServer('drupal'),
             this.contentService.getContentFromServer('varie')
-          ).pipe(
-            
-          ).subscribe(
-            (response) => {
-              if (response) {
-                this.setUpData(response);
-                this.contentService.writeIntoIndexedDB('content', response).subscribe(
-                  (res) => {
-                    console.log('res della scrittura nel db: ', res);
-                    this.spinnerOverlayService.hide();
-                  },
-                  (err) => {
-                    console.log('errore nella writeIntoIndexedDB: ', err);
-                    this.spinnerOverlayService.hide();
-                  }
-                );
+          )
+          .subscribe(
+            (res) => {
+              console.log('res fromserverrrrrrrrrrrr: ', res);
+              if (res[0] != undefined) {
+                this.setUpData(res, true);
               }
             },
             (err) => {
-              console.log('errore nella fork join: ', err);
-              this.spinnerOverlayService.hide();
+              console.log('err: ', err);
             }
           );
         }
       },
       (err) => {
-        console.log('errore nella getContentFromIndexedDB: ', err);
-        this.spinnerOverlayService.hide();
+        console.log('errore nella fork join: ', err);
       }
     );
   }
 
-  setUpData(data) {
+  setUpData(data: any, write: boolean) {
     this.contentHtml = data[0];
     this.contentCss = data[1];
     this.contentJS = data[2];
@@ -92,8 +89,25 @@ export class AppComponent implements OnInit {
       php: this.contentPhp,
       drupal: this.contentDrupal,
       varie: this.contentVarie
+    };
+
+    if (write) {
+      forkJoin(
+        this.contentService.writeIntoIndexedDB('html', this.contentHtml),
+        this.contentService.writeIntoIndexedDB('css', this.contentCss),
+        this.contentService.writeIntoIndexedDB('javascript', this.contentJS),
+        this.contentService.writeIntoIndexedDB('angular', this.contentAngular),
+        this.contentService.writeIntoIndexedDB('php', this.contentPhp),
+        this.contentService.writeIntoIndexedDB('drupal', this.contentDrupal),
+        this.contentService.writeIntoIndexedDB('varie', this.contentVarie)
+      ).subscribe(
+        () => {
+          this.contentService.dataSavedToLS.emit();
+        }
+      )
     }
-    this.contentService.notify.emit(this.menuVoices);
+    
+    
   }
 
   ngOnDestroy(): void {

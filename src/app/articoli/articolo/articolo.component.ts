@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute, ParamMap, Router, NavigationExtras, Params } from '@angular/router';
+import { switchMap, map } from 'rxjs/operators';
 import { ContentService } from 'src/app/services/content.service';
-import { forkJoin, combineLatest } from 'rxjs';
+import { forkJoin, combineLatest, pipe } from 'rxjs';
+import { StorageMap } from '@ngx-pwa/local-storage';
 
 @Component({
   selector: 'app-articolo',
@@ -13,27 +14,36 @@ export class ArticoloComponent implements OnInit {
 
   public content: any;
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute, private contentService: ContentService) {this.router.routeReuseStrategy.shouldReuseRoute = () => false; }
+  constructor(
+    private router: Router, 
+    private activatedRoute: ActivatedRoute, 
+    private contentService: ContentService,
+    private storageMap: StorageMap) {this.router.routeReuseStrategy.shouldReuseRoute = () => false; }
 
   ngOnInit() {
-    combineLatest(
-      this.contentService.notify,
-      this.activatedRoute.paramMap
-    ).subscribe(
-      (res : any) => {
-        console.log('res: ', res);
-        let materia = res[1].params.materia;
-        let id = parseInt(res[1].params.id, 10);
-        this.content = res[0][materia].filter( el => {
-          return el.id == id;
-        })[0];
-        
-      },
-      (err) => {
-        console.log('err: ', err);
-      }
-    );
 
+    this.activatedRoute.params.forEach((params: Params) => {
+      this.storageMap.get(params.materia)
+      .pipe(
+        map( (data : any[]) => {
+          return data.filter( el => {
+            return el.id == params.id
+          })[0]
+        }),
+        map( (obj: any) => {
+          let frag = document.createRange().createContextualFragment(obj.body);
+          let codes = frag.querySelectorAll('.code');
+          console.log('codes: ', codes);
+          return obj;
+        })
+      )
+      .subscribe(
+        (res : any) => {
+          this.content = res;
+        }
+      )
+    });
+    
   }
 
   ngOnDestroy(): void {

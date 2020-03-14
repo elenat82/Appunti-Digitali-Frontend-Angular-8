@@ -6,7 +6,7 @@ export const environment = {
   css: "content/css",
   drupal: "content/drupal",
   html: "content/html",
-  js: "content/js",
+  js: "content/javascript",
   php: "content/php",
   varie: "content/varie"
 };

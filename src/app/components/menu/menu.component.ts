@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, SimpleChanges } from '@angular/core';
+import { Component, OnInit, Input, SimpleChanges, OnDestroy } from '@angular/core';
 import { ContentService } from 'src/app/services/content.service';
 import { Observable } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -13,11 +14,11 @@ export class MenuComponent implements OnInit {
 
   public query = "";
   
-  constructor(private contentService: ContentService) { }
+  constructor(private contentService: ContentService, private router: Router) { }
 
   ngOnInit() {
   }
-
+  
   ngOnChanges(changes: SimpleChanges) {
     //console.log('changes: ', changes);
   }
