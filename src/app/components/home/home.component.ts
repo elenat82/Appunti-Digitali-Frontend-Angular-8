@@ -5,7 +5,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Observable, forkJoin, of, pipe } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 import { FilterlistPipe } from 'src/app/pipes/filterlist.pipe';
-import { Router, NavigationExtras } from '@angular/router';
+import { Router, NavigationExtras, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
 import { SpinnerOverlayService } from 'src/app/services/spinner-overlay/spinner-overlay-service.service';
 
 @Component({
@@ -21,21 +21,25 @@ export class HomeComponent implements OnInit {
   public materieGroups: any[];
   public materieOptions: Observable<any[]>;
 
-  constructor(private contentService: ContentService, public filterlistPipe: FilterlistPipe, private _formBuilder: FormBuilder, private router: Router, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService) { }
+  constructor(private contentService: ContentService, public filterlistPipe: FilterlistPipe, private _formBuilder: FormBuilder, private router: Router, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    setTimeout(() => {
-      forkJoin(
-        this.storageMap.get('html'),
-        this.storageMap.get('css'),
-        this.storageMap.get('javascript'),
-        this.storageMap.get('angular'),
-        this.storageMap.get('php'),
-        this.storageMap.get('drupal'),
-        this.storageMap.get('varie')
-        )
-        .subscribe((res: any) => { 
-          console.log('resssssssssssssssssss: ', res);
+    //cerco i dati nell'indexeddb
+    forkJoin(
+      this.contentService.getContentFromIndexedDB('html'),
+      this.contentService.getContentFromIndexedDB('css'),
+      this.contentService.getContentFromIndexedDB('javascript'),
+      this.contentService.getContentFromIndexedDB('angular'),
+      this.contentService.getContentFromIndexedDB('php'),
+      this.contentService.getContentFromIndexedDB('drupal'),
+      this.contentService.getContentFromIndexedDB('varie')
+    ).pipe(
+      
+    )
+    .subscribe(
+      (res) => {
+        console.log('resaaaaaaaaaaaaaa: ', res);
+        if (res[0] != undefined) {
           this.materieGroups = [
             {
               materia: "Html",
@@ -70,10 +74,57 @@ export class HomeComponent implements OnInit {
               //startWith(''),
               map(value => (value && value.length >= 3) ? this._filterGroup(value) : null)
             );
-            this.spinnerOverlayService.hide();
-        });
-    }, 10000);
+        }
+      },
+      (err) => {
+        console.log('err: ', err);
+
+      }
+    )
+    this.contentService.dataSavedToLS.subscribe(
+      (res) => {
+        console.log('resbbbbbbbbbbbbbbbbbbbbb: ', res);
+        this.materieGroups = [
+          {
+            materia: "Html",
+            articoli: res[0]
+          },
+          {
+            materia: "Css",
+            articoli: res[1]
+          },
+          {
+            materia: "JavaScript",
+            articoli: res[2]
+          },
+          {
+            materia: "Angular",
+            articoli: res[3]
+          },
+          {
+            materia: "Php",
+            articoli: res[4]
+          }, {
+            materia: "Drupal",
+            articoli: res[5]
+          },
+          {
+            materia: "Varie",
+            articoli: res[6]
+          }
+        ];
+        this.materieOptions = this.contentForm.get('query')!.valueChanges
+          .pipe(
+            //startWith(''),
+            map(value => (value && value.length >= 3) ? this._filterGroup(value) : null)
+          );
+      },
+      (err) => {
+        console.log('err: ', err);
+      }
+    );
   }
+
 
   private _filterGroup(value: string): any[] {
     if (value) {
@@ -85,9 +136,6 @@ export class HomeComponent implements OnInit {
     return this.materieGroups;
   }
 
-  selected(ev) {
-    this.router.navigate(['/content', ev.option.value.tipo.toLowerCase(), ev.option.value.id]);
-  }
 
   getOptionText(option) {
     if (option) {

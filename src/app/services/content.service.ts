@@ -1,9 +1,10 @@
 import { Injectable, Output, EventEmitter } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { StorageMap, JSONSchema, JSONSchemaObject, JSONSchemaArray } from '@ngx-pwa/local-storage';
 import { ContentHtml, ContentCss, ContentJS, ContentAngular, ContentPhp, ContentDrupal, ContentVarie } from '../models';
+import { Router, NavigationEnd, NavigationStart } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -18,7 +19,10 @@ export class ContentService {
     )
   };
 
-  constructor(private httpClient: HttpClient, private storageMap: StorageMap) { }
+  constructor(private httpClient: HttpClient, private storageMap: StorageMap, private router: Router) { 
+
+    
+  }
 
   getContentFromServer(typeOfContent: string): Observable<ContentHtml[] | ContentCss[] | ContentJS[] | ContentAngular[] | ContentPhp[] | ContentDrupal[] | ContentVarie[]> {
     let url = `${environment.rootPath}${environment.content}${environment[typeOfContent]}`;
@@ -32,4 +36,5 @@ export class ContentService {
   writeIntoIndexedDB(key: string, value: ContentHtml | ContentCss | ContentJS | ContentAngular | ContentPhp | ContentDrupal | ContentVarie): Observable<any> {
     return this.storageMap.set(key, value);
   }
+
 }

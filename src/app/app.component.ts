@@ -28,10 +28,11 @@ export class AppComponent implements OnInit {
   constructor(private contentService: ContentService, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService) { }
 
   ngOnInit() {
+    //cerco i dati nell'indexed db
     forkJoin(
       this.contentService.getContentFromIndexedDB('html'),
       this.contentService.getContentFromIndexedDB('css'),
-      this.contentService.getContentFromIndexedDB('javascript'),
+      this.contentService.getContentFromIndexedDB('js'),
       this.contentService.getContentFromIndexedDB('angular'),
       this.contentService.getContentFromIndexedDB('php'),
       this.contentService.getContentFromIndexedDB('drupal'),
@@ -40,10 +41,12 @@ export class AppComponent implements OnInit {
       
     ).subscribe(
       (response) => {
-        console.log('responseeeeeeeeeeeeeee from indexeddb: ', response);
-        if (response[0] != undefined) {
+        //se li trovo
+        if (response[0]) {
+          //non scrivo nulla nell'indexed db
           this.setUpData(response, false);
         }
+        //se non li trovo li prendo dal server
         else {
           forkJoin(
             this.contentService.getContentFromServer('html'),
@@ -53,16 +56,18 @@ export class AppComponent implements OnInit {
             this.contentService.getContentFromServer('php'),
             this.contentService.getContentFromServer('drupal'),
             this.contentService.getContentFromServer('varie')
-          )
-          .subscribe(
+          ).pipe(
+            
+          ).subscribe(
             (res) => {
-              console.log('res fromserverrrrrrrrrrrr: ', res);
-              if (res[0] != undefined) {
+              if (res) {
+                //e scrivo nell'indexeddb
                 this.setUpData(res, true);
               }
             },
             (err) => {
-              console.log('err: ', err);
+              console.log('errore nella fork join: ', err);
+              this.spinnerOverlayService.hide();
             }
           );
         }
@@ -102,12 +107,11 @@ export class AppComponent implements OnInit {
         this.contentService.writeIntoIndexedDB('varie', this.contentVarie)
       ).subscribe(
         () => {
-          this.contentService.dataSavedToLS.emit();
+          this.contentService.dataSavedToLS.emit(data);
         }
       )
     }
-    
-    
+
   }
 
   ngOnDestroy(): void {
