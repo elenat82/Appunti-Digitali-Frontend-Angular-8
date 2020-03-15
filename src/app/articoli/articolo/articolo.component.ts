@@ -21,6 +21,7 @@ export class ArticoloComponent implements OnInit {
     private storageMap: StorageMap) {this.router.routeReuseStrategy.shouldReuseRoute = () => false; }
 
   ngOnInit() {
+    
 
     this.activatedRoute.params.forEach((params: Params) => {
       this.storageMap.get(params.materia)
@@ -33,7 +34,22 @@ export class ArticoloComponent implements OnInit {
         map( (obj: any) => {
           let frag = document.createRange().createContextualFragment(obj.body);
           let codes = frag.querySelectorAll('.code');
-          console.log('codes: ', codes);
+          codes.forEach( el => {
+            el.classList.add('codepen');
+            el.setAttribute('data-prefill', '');
+            el.setAttribute('data-height', '400');
+            el.setAttribute('data-theme-id', '1');
+            el.setAttribute('data-default-tab', 'result');
+          })
+          const serializer = new XMLSerializer();
+          const document_fragment_string = serializer.serializeToString(frag);
+          obj.body = document_fragment_string;
+          let node = document.createElement('script');
+          node.src = 'https://static.codepen.io/assets/embed/ei.js';
+          node.type = 'text/javascript';
+          node.async = true;
+          node.charset = 'utf-8';
+          document.getElementsByTagName('head')[0].appendChild(node);
           return obj;
         })
       )

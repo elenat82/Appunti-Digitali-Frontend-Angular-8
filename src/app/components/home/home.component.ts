@@ -5,6 +5,7 @@ import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms'
 import { Observable, forkJoin, of, pipe } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 import { FilterlistPipe } from 'src/app/pipes/filterlist.pipe';
+import { SafePipe } from 'src/app/pipes/safe.pipe';
 import { Router, NavigationExtras, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
 import { SpinnerOverlayService } from 'src/app/services/spinner-overlay/spinner-overlay-service.service';
 
@@ -136,6 +137,9 @@ export class HomeComponent implements OnInit {
     return this.materieGroups;
   }
 
+  selected(ev) {
+    this.router.navigate(['/content', ev.option.value.tipo.toLowerCase(), ev.option.value.id]);
+  }
 
   getOptionText(option) {
     if (option) {

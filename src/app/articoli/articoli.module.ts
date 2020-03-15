@@ -1,3 +1,4 @@
+import { SafePipe } from './../pipes/safe.pipe';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ArticoloComponent } from './articolo/articolo.component';
@@ -7,7 +8,7 @@ import { AngularMaterialModule } from '../modules/angular-material.module';
 
 
 @NgModule({
-  declarations: [ArticoloComponent],
+  declarations: [ArticoloComponent, SafePipe],
   imports: [
     CommonModule,
     AngularMaterialModule,

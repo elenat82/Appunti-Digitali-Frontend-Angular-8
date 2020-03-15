@@ -7,7 +7,7 @@
             </mat-card-header>
             <mat-card-content>
                 <div class="content-container">
-                    <div [innerHTML]="content?.body"></div>
+                    <div [innerHTML]="content?.body | safe: 'html'"></div>
                 </div>
             </mat-card-content>
             <mat-card-footer>
