@@ -13,6 +13,9 @@ import { StorageMap } from '@ngx-pwa/local-storage';
 export class ArticoloComponent implements OnInit {
 
   public content: any;
+  public options = {
+    autoHide: false
+  }
 
   constructor(
     private router: Router, 

@@ -1,17 +1,25 @@
 .article-container {
     display: flex;
     height: 100%;
+    justify-content: space-between;
 }
 
 article {
     width: calc(100% - 250px);
+    height: 100%;
 }
 
 aside {
     width: 250px;
     background-color: aquamarine;
+    height: 100%;
 }
 
 .mat-card {
     margin: 1rem;
+    height: calc(100% - 2rem);
+}
+
+ngx-simplebar {
+    height: 100%;
 }

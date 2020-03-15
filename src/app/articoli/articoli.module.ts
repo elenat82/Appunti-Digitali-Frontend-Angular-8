@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ArticoloComponent } from './articolo/articolo.component';
 import { ArticoliRoutingRoutingModule } from './articoli-routing-routing.module';
 import { AngularMaterialModule } from '../modules/angular-material.module';
+import { SimplebarAngularModule } from 'simplebar-angular';
 
 
 
@@ -12,7 +13,8 @@ import { AngularMaterialModule } from '../modules/angular-material.module';
   imports: [
     CommonModule,
     AngularMaterialModule,
-    ArticoliRoutingRoutingModule
+    ArticoliRoutingRoutingModule,
+    SimplebarAngularModule
   ]/* ,
   exports: [ArticoloComponent] */
 })

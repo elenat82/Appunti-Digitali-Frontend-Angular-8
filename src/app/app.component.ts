@@ -67,7 +67,6 @@ export class AppComponent implements OnInit {
             },
             (err) => {
               console.log('errore nella fork join: ', err);
-              this.spinnerOverlayService.hide();
             }
           );
         }
@@ -112,6 +111,33 @@ export class AppComponent implements OnInit {
       )
     }
 
+  }
+
+  refreshContent() {
+    this.storageMap.clear().subscribe(
+      () => {
+        forkJoin(
+          this.contentService.getContentFromServer('html'),
+          this.contentService.getContentFromServer('css'),
+          this.contentService.getContentFromServer('javascript'),
+          this.contentService.getContentFromServer('angular'),
+          this.contentService.getContentFromServer('php'),
+          this.contentService.getContentFromServer('drupal'),
+          this.contentService.getContentFromServer('varie')
+        ).pipe(
+          
+        ).subscribe(
+          (res) => {
+            if (res) {
+              //e scrivo nell'indexeddb
+              this.setUpData(res, true);
+            }
+          },
+          (err) => {
+            console.log('errore nella fork join: ', err);
+          }
+        );
+      });
   }
 
   ngOnDestroy(): void {
