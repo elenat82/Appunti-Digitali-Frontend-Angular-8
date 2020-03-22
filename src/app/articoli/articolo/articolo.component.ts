@@ -1,33 +1,40 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router, NavigationExtras, Params } from '@angular/router';
 import { switchMap, map } from 'rxjs/operators';
 import { ContentService } from 'src/app/services/content.service';
 import { forkJoin, combineLatest, pipe } from 'rxjs';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { SpinnerOverlayService } from 'src/app/services/spinner-overlay/spinner-overlay-service.service';
+import { HighlightService } from 'src/app/services/highlight.service';
 
 @Component({
   selector: 'app-articolo',
   templateUrl: './articolo.component.html',
   styleUrls: ['./articolo.component.scss']
 })
-export class ArticoloComponent implements OnInit {
+export class ArticoloComponent implements OnInit, AfterViewChecked {
 
   public content: any;
   public options = {
     autoHide: false
   }
+  private highlighted: boolean = false;
+  private done = false;
+
+  private materiaArticolo: string ; 
 
   constructor(
     private router: Router, 
     private activatedRoute: ActivatedRoute, 
     private contentService: ContentService,
     public spinnerOverlayService: SpinnerOverlayService,
+    private highlightService: HighlightService,
     private storageMap: StorageMap) {this.router.routeReuseStrategy.shouldReuseRoute = () => false; }
 
   ngOnInit() {
     this.spinnerOverlayService.show();
     this.activatedRoute.params.forEach((params: Params) => {
+      this.materiaArticolo = params.materia;
       this.storageMap.get(params.materia)
       .pipe(
         map( (data : any[]) => {
@@ -37,13 +44,13 @@ export class ArticoloComponent implements OnInit {
         }),
         map( (obj: any) => {
           let frag = document.createRange().createContextualFragment(obj.body);
-          let codes = frag.querySelectorAll('.code');
+          let codes = frag.querySelectorAll('.penny');
           codes.forEach( el => {
             el.classList.add('codepen');
             el.setAttribute('data-prefill', '');
             el.setAttribute('data-height', '400');
             el.setAttribute('data-theme-id', '1');
-            el.setAttribute('data-default-tab', 'result');
+            el.setAttribute('data-default-tab', 'html,result');
           })
           const serializer = new XMLSerializer();
           const document_fragment_string = serializer.serializeToString(frag);
@@ -60,6 +67,7 @@ export class ArticoloComponent implements OnInit {
       .subscribe(
         (res : any) => {
           this.content = res;
+          this.done = true
           this.spinnerOverlayService.hide();
         },
         (err) => {
@@ -69,6 +77,13 @@ export class ArticoloComponent implements OnInit {
       )
     });
     
+  }
+
+  ngAfterViewChecked() {
+    if (!this.highlighted && this.done && this.materiaArticolo == "php" ) {
+      this.highlightService.highlightAll();
+      this.highlighted = true;
+    }
   }
 
   ngOnDestroy(): void {

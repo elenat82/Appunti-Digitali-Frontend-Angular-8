@@ -67,7 +67,7 @@
         <mat-nav-list>
             <h3 matSubheader>Approfondimenti</h3>
             <mat-list-item *ngFor="let appr of content?.approfondimenti">
-                <a matLine href="{{appr.url}}">{{ appr.text }}</a>
+                <a matLine href="{{appr.url}}" target="_blank" rel="no-opener">{{ appr.text }}</a>
             </mat-list-item>
             <mat-divider></mat-divider>
             <h3 matSubheader>Correlati</h3>

@@ -5,6 +5,7 @@ import { ArticoloComponent } from './articolo/articolo.component';
 import { ArticoliRoutingRoutingModule } from './articoli-routing-routing.module';
 import { AngularMaterialModule } from '../modules/angular-material.module';
 import { SimplebarAngularModule } from 'simplebar-angular';
+import { HighlightService } from '../services/highlight.service';
 
 
 
@@ -15,7 +16,7 @@ import { SimplebarAngularModule } from 'simplebar-angular';
     AngularMaterialModule,
     ArticoliRoutingRoutingModule,
     SimplebarAngularModule
-  ]/* ,
-  exports: [ArticoloComponent] */
+  ],
+  providers: [HighlightService]
 })
 export class ArticoliModule { }

@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~prismjs/plugins/toolbar/prism-toolbar.css";
+@import "~prismjs/themes/prism-coy";
 
 html,
 body {
@@ -7,6 +9,7 @@ body {
 body {
   margin: 0;
   font-family: Lato, "Helvetica Neue", sans-serif;
+  line-height: 1.5;
   background-image: url('/assets/img/sfondo-appunti.jpg');
 }
 * {
