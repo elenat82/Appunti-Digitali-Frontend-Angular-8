@@ -1,6 +1,6 @@
 import { Component, OnInit, AfterViewChecked } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router, NavigationExtras, Params } from '@angular/router';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap, map, tap } from 'rxjs/operators';
 import { ContentService } from 'src/app/services/content.service';
 import { forkJoin, combineLatest, pipe } from 'rxjs';
 import { StorageMap } from '@ngx-pwa/local-storage';
@@ -21,7 +21,7 @@ export class ArticoloComponent implements OnInit, AfterViewChecked {
   private highlighted: boolean = false;
   private done = false;
 
-  private materiaArticolo: string ; 
+  private materiaArticolo: string;
 
   constructor(
     private router: Router, 
@@ -51,6 +51,7 @@ export class ArticoloComponent implements OnInit, AfterViewChecked {
             el.setAttribute('data-height', '400');
             el.setAttribute('data-theme-id', '1');
             el.setAttribute('data-default-tab', 'html,result');
+            el.setAttribute('data-editable', 'true');
           })
           const serializer = new XMLSerializer();
           const document_fragment_string = serializer.serializeToString(frag);
@@ -62,6 +63,18 @@ export class ArticoloComponent implements OnInit, AfterViewChecked {
           node.charset = 'utf-8';
           document.getElementsByTagName('head')[0].appendChild(node);
           return obj;
+        }),
+        map( (res) => {
+          res.approfondimenti.forEach(element => {
+            if (element.url.includes("w3")) {
+              element.icon = "icon-app-w3c"
+            }
+            else {
+              element.icon = ""
+            }
+            
+          });
+          return res;
         })
       )
       .subscribe(

@@ -3,7 +3,18 @@
         <ngx-simplebar [options]="options">
             <mat-card>
                 <mat-card-header>
-                    <mat-card-subtitle>{{content?.tipo}}</mat-card-subtitle>
+                    <mat-card-subtitle>
+                        <div [ngSwitch]="content?.tipo">
+                            <i *ngSwitchCase="'Html'" class="icon-app-html5"></i>
+                            <i *ngSwitchCase="'Css'" class="icon-app-css3"></i>
+                            <i *ngSwitchCase="'Javascript'" class="icon-app-javascript"></i>
+                            <i *ngSwitchCase="'Angular'" class="icon-app-angular"></i>
+                            <i *ngSwitchCase="'Drupal'" class="icon-app-drupal"></i>
+                            <i *ngSwitchCase="'Php'" class="icon-app-php"></i>
+                            <i *ngSwitchCase="'Varie'" class="icon-app-heart"></i>
+                        {{content?.tipo}}
+                        </div>
+                    </mat-card-subtitle>
                     <mat-card-title>{{content?.titolo}}</mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
@@ -15,7 +26,7 @@
                     <div class="tags">
                         <ul>
                             <li>
-                                <mat-icon>label</mat-icon>
+                                <i class="icon-app-price-tags"></i>
                             </li>
                             <ng-container *ngIf="content?.tagsgenerici">
                                 <li *ngFor="let t of content.tagsgenerici">
@@ -67,7 +78,7 @@
         <mat-nav-list>
             <h3 matSubheader>Approfondimenti</h3>
             <mat-list-item *ngFor="let appr of content?.approfondimenti">
-                <a matLine href="{{appr.url}}" target="_blank" rel="no-opener">{{ appr.text }}</a>
+                <a matLine href="{{appr.url}}" target="_blank" rel="no-opener"><i [ngClass]="appr.icon"></i>{{ appr.text }}</a>
             </mat-list-item>
             <mat-divider></mat-divider>
             <h3 matSubheader>Correlati</h3>

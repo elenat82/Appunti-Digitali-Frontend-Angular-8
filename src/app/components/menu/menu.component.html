@@ -9,47 +9,48 @@
   <button mat-button *ngIf="query" matSuffix mat-icon-button aria-label="Clear" (click)="query=''">
     <mat-icon>close</mat-icon>
   </button>
+  <span matPrefix><i class="icon-app-search"></i></span>
 </mat-form-field>
 <ngx-simplebar [options]="simplebarOptions">
   <div class="menu-wrapper">
     <mat-nav-list>
-      <h3 matSubheader>Html</h3>
+      <h3 matSubheader><i class="icon-app-html5"></i>Html</h3>
       <mat-list-item *ngFor="let voice of menuHtml  | filterlist : query">
         <a matLine [routerLink]="['/content', voice.tipo.toLowerCase(),voice.id]"
           routerLinkActive="active-menu">{{ voice.titolo }}</a>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <h3 matSubheader>Css</h3>
+      <h3 matSubheader><i class="icon-app-css3"></i>Css</h3>
       <mat-list-item *ngFor="let voice of menuCss  | filterlist : query">
         <a matLine [routerLink]="['/content', voice.tipo.toLowerCase(),voice.id]"
           routerLinkActive="active-menu">{{ voice.titolo }}</a>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <h3 matSubheader>Javascript</h3>
+      <h3 matSubheader><i class="icon-app-javascript"></i>Javascript</h3>
       <mat-list-item *ngFor="let voice of menuJS  | filterlist : query">
         <a matLine [routerLink]="['/content', voice.tipo.toLowerCase(), voice.id]"
           routerLinkActive="active-menu">{{ voice.titolo }}</a>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <h3 matSubheader>Angular</h3>
+      <h3 matSubheader><i class="icon-app-angular"></i>Angular</h3>
       <mat-list-item *ngFor="let voice of menuAngular  | filterlist : query">
         <a matLine [routerLink]="['/content', voice.tipo.toLowerCase(),voice.id]"
           routerLinkActive="active-menu">{{ voice.titolo }}</a>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <h3 matSubheader>Php</h3>
+      <h3 matSubheader><i class="icon-app-php"></i>Php</h3>
       <mat-list-item *ngFor="let voice of menuPhp  | filterlist : query">
         <a matLine [routerLink]="['/content', voice.tipo.toLowerCase(),voice.id]"
           routerLinkActive="active-menu">{{ voice.titolo }}</a>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <h3 matSubheader>Drupal</h3>
+      <h3 matSubheader><i class="icon-app-drupal"></i>Drupal</h3>
       <mat-list-item *ngFor="let voice of menuDrupal  | filterlist : query">
         <a matLine [routerLink]="['/content', voice.tipo.toLowerCase(),voice.id]"
           routerLinkActive="active-menu">{{ voice.titolo }}</a>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <h3 matSubheader>Varie</h3>
+      <h3 matSubheader><i class="icon-app-heart"></i>Varie</h3>
       <mat-list-item *ngFor="let voice of menuVarie  | filterlist : query">
         <a matLine [routerLink]="['/content', voice.tipo.toLowerCase(),voice.id]"
           routerLinkActive="active-menu">{{ voice.titolo }}</a>
