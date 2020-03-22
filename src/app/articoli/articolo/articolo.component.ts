@@ -4,6 +4,7 @@ import { switchMap, map } from 'rxjs/operators';
 import { ContentService } from 'src/app/services/content.service';
 import { forkJoin, combineLatest, pipe } from 'rxjs';
 import { StorageMap } from '@ngx-pwa/local-storage';
+import { SpinnerOverlayService } from 'src/app/services/spinner-overlay/spinner-overlay-service.service';
 
 @Component({
   selector: 'app-articolo',
@@ -21,11 +22,11 @@ export class ArticoloComponent implements OnInit {
     private router: Router, 
     private activatedRoute: ActivatedRoute, 
     private contentService: ContentService,
+    public spinnerOverlayService: SpinnerOverlayService,
     private storageMap: StorageMap) {this.router.routeReuseStrategy.shouldReuseRoute = () => false; }
 
   ngOnInit() {
-    
-
+    this.spinnerOverlayService.show();
     this.activatedRoute.params.forEach((params: Params) => {
       this.storageMap.get(params.materia)
       .pipe(
@@ -59,6 +60,11 @@ export class ArticoloComponent implements OnInit {
       .subscribe(
         (res : any) => {
           this.content = res;
+          this.spinnerOverlayService.hide();
+        },
+        (err) => {
+          console.log('err: ', err);
+          this.spinnerOverlayService.hide();
         }
       )
     });

@@ -14,6 +14,7 @@ import { FilterlistPipe } from './pipes/filterlist.pipe';
 import { StorageModule } from '@ngx-pwa/local-storage';
 import { SpinnerModule } from './modules/spinner/spinner.module';
 import { ArticoliModule } from './articoli/articoli.module';
+import { SimplebarAngularModule } from 'simplebar-angular';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { ArticoliModule } from './articoli/articoli.module';
     HttpClientModule,
     SpinnerModule,
     ArticoliModule,
+    SimplebarAngularModule,
     StorageModule.forRoot({ 
       IDBNoWrap: true,
       IDBDBName: 'appuntiDigitaliDB', // custom database name when in `indexedDB`

@@ -25,22 +25,21 @@ export class HomeComponent implements OnInit {
   constructor(private contentService: ContentService, public filterlistPipe: FilterlistPipe, private _formBuilder: FormBuilder, private router: Router, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    //cerco i dati nell'indexeddb
+    this.spinnerOverlayService.show();
     forkJoin(
-      this.contentService.getContentFromIndexedDB('html'),
-      this.contentService.getContentFromIndexedDB('css'),
-      this.contentService.getContentFromIndexedDB('javascript'),
-      this.contentService.getContentFromIndexedDB('angular'),
-      this.contentService.getContentFromIndexedDB('php'),
-      this.contentService.getContentFromIndexedDB('drupal'),
-      this.contentService.getContentFromIndexedDB('varie')
+      this.contentService.getContentFromServer('html'),
+      this.contentService.getContentFromServer('css'),
+      this.contentService.getContentFromServer('javascript'),
+      this.contentService.getContentFromServer('angular'),
+      this.contentService.getContentFromServer('php'),
+      this.contentService.getContentFromServer('drupal'),
+      this.contentService.getContentFromServer('varie')
     ).pipe(
       
     )
     .subscribe(
       (res) => {
-        console.log('resaaaaaaaaaaaaaa: ', res);
-        if (res[0] != undefined) {
+        if (res) {
           this.materieGroups = [
             {
               materia: "Html",
@@ -75,55 +74,28 @@ export class HomeComponent implements OnInit {
               //startWith(''),
               map(value => (value && value.length >= 3) ? this._filterGroup(value) : null)
             );
+            forkJoin(
+              this.contentService.writeIntoIndexedDB('html', res[0]),
+              this.contentService.writeIntoIndexedDB('css', res[1]),
+              this.contentService.writeIntoIndexedDB('javascript', res[2]),
+              this.contentService.writeIntoIndexedDB('angular', res[3]),
+              this.contentService.writeIntoIndexedDB('php', res[4]),
+              this.contentService.writeIntoIndexedDB('drupal', res[5]),
+              this.contentService.writeIntoIndexedDB('varie', res[6])
+            ).subscribe(
+              () => {
+                this.contentService.dataSavedToLS.emit(res);
+                this.spinnerOverlayService.hide();
+              }
+            )
         }
       },
       (err) => {
         console.log('err: ', err);
+        this.spinnerOverlayService.hide();
 
       }
     )
-    this.contentService.dataSavedToLS.subscribe(
-      (res) => {
-        console.log('resbbbbbbbbbbbbbbbbbbbbb: ', res);
-        this.materieGroups = [
-          {
-            materia: "Html",
-            articoli: res[0]
-          },
-          {
-            materia: "Css",
-            articoli: res[1]
-          },
-          {
-            materia: "JavaScript",
-            articoli: res[2]
-          },
-          {
-            materia: "Angular",
-            articoli: res[3]
-          },
-          {
-            materia: "Php",
-            articoli: res[4]
-          }, {
-            materia: "Drupal",
-            articoli: res[5]
-          },
-          {
-            materia: "Varie",
-            articoli: res[6]
-          }
-        ];
-        this.materieOptions = this.contentForm.get('query')!.valueChanges
-          .pipe(
-            //startWith(''),
-            map(value => (value && value.length >= 3) ? this._filterGroup(value) : null)
-          );
-      },
-      (err) => {
-        console.log('err: ', err);
-      }
-    );
   }
 
 

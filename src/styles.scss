@@ -24,3 +24,7 @@ label.mat-form-field-label {
 div.simplebar-track.simplebar-vertical > div:before {
   background-color: blue ;
 }
+
+mat-sidenav, .mat-drawer-inner-container {
+  overflow-y: hidden !important;
+}

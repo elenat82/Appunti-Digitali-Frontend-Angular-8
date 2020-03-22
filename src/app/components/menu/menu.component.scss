@@ -1,3 +1,16 @@
+.logo-container {
+    width: 200px;
+    margin: auto;
+}
+
 .active-menu {
     background-color: aqua;
+}
+
+.menu-wrapper {
+    height: calc(100vh - 228.58px);
+}
+
+ngx-simplebar {
+    height: calc(100vh - 228.58px);
 }

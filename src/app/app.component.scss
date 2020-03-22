@@ -1,7 +1,11 @@
+mat-sidenav {
+    width: 300px;
+}
 .mat-sidenav-container {
     height: 100%;
     background-color: transparent;
 }
+
 .mat-sidenav-content {
     display: flex;
     flex-direction: column;
