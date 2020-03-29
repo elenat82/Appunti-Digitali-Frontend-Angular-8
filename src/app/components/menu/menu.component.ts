@@ -31,7 +31,6 @@ export class MenuComponent implements OnInit {
   ngOnInit() {
     this.contentService.dataSavedToLS.subscribe(
       (res) => {
-        console.log('res nel menuuuuuuuuuuuuuuuuuu: ', res);
         this.menuHtml = res[0];
         this.menuCss = res[1];
         this.menuJS = res[2];

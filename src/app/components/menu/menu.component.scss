@@ -3,8 +3,10 @@
     margin: auto;
 }
 
-.active-menu {
-    background-color: aqua;
+.mat-nav-list .mat-list-item.active-menu {
+    color: var(--primary-color);
+    background: var(--accent-lighter-color);
+    border-right: solid 4px var(--accent-color);
 }
 
 .menu-wrapper {

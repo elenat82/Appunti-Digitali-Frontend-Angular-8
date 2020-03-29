@@ -1,10 +1,26 @@
 .container {
     width: 100%;
     height: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    mat-form-field {
-        max-width: 300px;
-    }
+}
+
+form {
+    width: 50%;
+    max-width: 500px;
+}
+
+.list-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+ngx-simplebar {
+    height: calc(100% - 42px);
+}
+
+mat-list {
+    margin-top: 48px;
+}
+
+mat-card, .mat-card-content {
+    height: calc(100% - 42px);
 }

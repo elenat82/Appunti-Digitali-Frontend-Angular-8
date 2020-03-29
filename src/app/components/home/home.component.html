@@ -1,17 +1,116 @@
 <div class="container">
-  <form [formGroup]="contentForm">
-    <mat-form-field>
-      <input type="text" matInput placeholder="Cerca..." formControlName="query" [matAutocomplete]="autoGroup">
-      <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="contentForm.get('query').reset()">
-        <mat-icon>close</mat-icon>
-      </button>
-      <mat-autocomplete #autoGroup="matAutocomplete" (optionSelected)="selected($event)" [displayWith]="getOptionText">
-        <mat-optgroup *ngFor="let group of materieOptions | async" [label]="group.materia">
-          <mat-option *ngFor="let articolo of group.articoli" [value]="articolo">
-            {{articolo.titolo}}
-          </mat-option>
-        </mat-optgroup>
-      </mat-autocomplete>
-    </mat-form-field>
-  </form>
+  <mat-grid-list cols="3" rowHeight="fit" gutterSize="1rem">
+    <mat-grid-tile colspan="1" rowspan="3">
+      <div class="list-wrapper">
+          <mat-card>
+            <mat-card-header>
+                <mat-card-title>Notizie</mat-card-title>
+            </mat-card-header>
+            <ngx-simplebar [options]="options">
+            <mat-card-content>
+              <mat-list>
+                <mat-list-item *ngFor="let item of feed?.rss.channel[0].item; let ind=index;">
+                  <a matLine [href]="item.link[0]" target="_blank">
+                    {{item.title[0]}}
+                  </a>
+                  <p matLine>
+                    <span> {{item['dc:creator'][0]}}</span> <span> {{item.pubDate[0] | date: 'dd MMM yyyy'}}</span>
+                  </p>
+                </mat-list-item>
+              </mat-list>
+            </mat-card-content>
+          </ngx-simplebar>
+        </mat-card>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="3">
+      <div class="list-wrapper">
+          <mat-card>
+            <mat-card-header>
+                <mat-card-title>Preferiti su StackOverflow</mat-card-title>
+            </mat-card-header>
+            <ngx-simplebar [options]="options">
+            <mat-card-content>
+              <mat-list>
+                <mat-list-item *ngFor="let q of questions; let ind=index;">
+                  <a matLine [href]="q.link" target="_blank">{{ q.title }}</a>
+                </mat-list-item>
+              </mat-list>
+            </mat-card-content>
+          </ngx-simplebar>
+        </mat-card>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="1" rowspan="3">
+      <div class="list-wrapper">
+          <mat-card>
+            <mat-card-header>
+                <mat-card-title>Ultimi appunti letti</mat-card-title>
+            </mat-card-header>
+            <ngx-simplebar [options]="options">
+            <mat-card-content>
+              <mat-list>
+                <h3 matSubheader class="mat-subheading-2">Html</h3>
+                <mat-list-item *ngFor="let item of ultimiLettiHtml; let ind=index;">
+                  <a matLine [routerLink]="['/content', item.tipo.toLowerCase(),item.id]">{{ item.titolo }}</a>
+                </mat-list-item>
+                <h3 matSubheader class="mat-subheading-2">Css</h3>
+                <mat-list-item *ngFor="let item of ultimiLettiCss; let ind=index;">
+                  <a matLine [routerLink]="['/content', item.tipo.toLowerCase(),item.id]">{{ item.titolo }}</a>
+                </mat-list-item>
+                <h3 matSubheader class="mat-subheading-2">JavaScript</h3>
+                <mat-list-item *ngFor="let item of ultimiLettiJS; let ind=index;">
+                  <a matLine [routerLink]="['/content', item.tipo.toLowerCase(),item.id]">{{ item.titolo }}</a>
+                </mat-list-item>
+                <h3 matSubheader class="mat-subheading-2">Angular</h3>
+                <mat-list-item *ngFor="let item of ultimiLettiAngular; let ind=index;">
+                  <a matLine [routerLink]="['/content', item.tipo.toLowerCase(),item.id]">{{ item.titolo }}</a>
+                </mat-list-item>
+                <h3 matSubheader class="mat-subheading-2">Php</h3>
+                <mat-list-item *ngFor="let item of ultimiLettiPhp; let ind=index;">
+                  <a matLine [routerLink]="['/content', item.tipo.toLowerCase(),item.id]">{{ item.titolo }}</a>
+                </mat-list-item>
+                <h3 matSubheader class="mat-subheading-2">Drupal</h3>
+                <mat-list-item *ngFor="let item of ultimiLettiDrupal; let ind=index;">
+                  <a matLine [routerLink]="['/content', item.tipo.toLowerCase(),item.id]">{{ item.titolo }}</a>
+                </mat-list-item>
+                <h3 matSubheader class="mat-subheading-2">Varie</h3>
+                <mat-list-item *ngFor="let item of ultimiLettiVarie; let ind=index;">
+                  <a matLine [routerLink]="['/content', item.tipo.toLowerCase(),item.id]">{{ item.titolo }}</a>
+                </mat-list-item>
+              </mat-list>
+            </mat-card-content>
+          </ngx-simplebar>
+        </mat-card>
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile colspan="3" rowspan="1">
+      <form [formGroup]="contentForm">
+        <!-- <mat-form-field>
+          <mat-label>Cerca</mat-label>
+          <input matInput type="text" [(ngModel)]="query">
+          <button mat-button *ngIf="query" matSuffix mat-icon-button aria-label="Clear" (click)="query=''">
+            <mat-icon>close</mat-icon>
+          </button>
+          <span matPrefix><i class="icon-app-search"></i></span>
+        </mat-form-field> -->
+        <mat-form-field appearance="fill">
+          <mat-label>Cerca...</mat-label>
+          <input type="text" matInput formControlName="query" [matAutocomplete]="autoGroup">
+          <button mat-button *ngIf="contentForm.get('query').value" matSuffix mat-icon-button aria-label="Clear" (click)="contentForm.get('query').reset()">
+            <mat-icon>close</mat-icon>
+          </button>
+          <span matPrefix><i class="icon-app-search"></i></span>
+          <mat-autocomplete #autoGroup="matAutocomplete" (optionSelected)="selected($event)"
+            [displayWith]="getOptionText">
+            <mat-optgroup *ngFor="let group of materieOptions | async" [label]="group.materia">
+              <mat-option *ngFor="let articolo of group.articoli" [value]="articolo">
+                {{articolo.titolo}}
+              </mat-option>
+            </mat-optgroup>
+          </mat-autocomplete>
+        </mat-form-field>
+      </form>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>

@@ -76,12 +76,12 @@
     </article>
     <aside>
         <mat-nav-list>
-            <h3 matSubheader>Approfondimenti</h3>
+            <h3 matSubheader class="mat-subheading-2">Approfondimenti</h3>
             <mat-list-item *ngFor="let appr of content?.approfondimenti">
                 <a matLine href="{{appr.url}}" target="_blank" rel="no-opener"><i [ngClass]="appr.icon"></i>{{ appr.text }}</a>
             </mat-list-item>
             <mat-divider></mat-divider>
-            <h3 matSubheader>Correlati</h3>
+            <h3 matSubheader class="mat-subheading-2">Correlati</h3>
             <mat-list-item *ngFor="let corr of content?.correlati">
                 <a matLine href="{{corr.url}}">{{ corr.text }}</a>
             </mat-list-item>
