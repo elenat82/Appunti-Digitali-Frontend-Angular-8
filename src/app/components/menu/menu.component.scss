@@ -5,8 +5,8 @@
 
 .mat-nav-list .mat-list-item.active-menu {
     color: var(--primary-color);
-    background: var(--accent-lighter-color);
-    border-right: solid 4px var(--accent-color);
+    background: var(--primary-lighter-color);
+    border-right: solid 4px var(--primary-color);
 }
 
 .menu-wrapper {

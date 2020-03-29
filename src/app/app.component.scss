@@ -15,3 +15,14 @@ mat-sidenav {
 main {
     height: calc(100% - 128px);
 }
+
+.home-toolbar {
+    justify-content: space-between;
+}
+.strumenti-utili {
+    color: var(--accent-lighter-color);
+}
+
+.sidenav-toggle-button {
+    margin-right: 1rem;
+}

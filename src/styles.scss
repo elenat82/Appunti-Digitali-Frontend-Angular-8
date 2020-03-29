@@ -29,7 +29,7 @@ label.mat-form-field-label {
 }
 
 div.simplebar-track.simplebar-vertical > div:before {
-  background-color: var(--accent-color);
+  background-color: var(--accent-darker-color);
 }
 
 mat-sidenav, .mat-drawer-inner-container {
@@ -50,4 +50,75 @@ mat-list a {
 .mat-list-base .mat-subheader {
   color: var(--primary-color);
   font-weight: 700;
+}
+
+i[class|="icon"] {
+  margin-right: 1rem;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.mat-list .mat-list-item:hover {
+  background: rgba(51, 51, 51, 0.04);
+}
+
+.cp_embed_wrapper {
+  margin: 0 0 12px;
+}
+
+a[href*="caniuse"] {
+  display: block;
+  text-align: center;
+}
+
+.home-toolbar {
+  .mat-fab .mat-button-wrapper {
+    padding: initial;
+    display: initial;
+    line-height: initial;
+  }
+}
+
+.icon-app-newspaper, .icon-app-clock, .icon-app-price-tags {
+  color: var(--primary-color)
+}
+
+.content-container > div > p {
+  line-height: 1.5;
+}
+
+.content-container {
+  table {
+    border: 2px solid #FFFFFF;
+    width: 100%;
+    text-align: center;
+    border-collapse: collapse;
+  }
+  table td, table th {
+    border: 1px solid #FFFFFF;
+    padding: 3px 4px;
+  }
+  table tr:nth-child(even) {
+    background: var(--text-primary-color);
+  }
+  table thead {
+    background: #FFFFFF;
+    border-bottom: 4px solid #333333;
+  }
+  table thead th {
+    font-weight: bold;
+    color: #333333;
+    text-align: left;
+    border-left: 2px solid #333333;
+  }
+  table thead th:first-child {
+    border-left: none;
+  }
+  
+  table tfoot td {
+    font-size: 14px;
+  }
 }

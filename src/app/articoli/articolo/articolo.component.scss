@@ -11,7 +11,7 @@ article {
 
 aside {
     width: 250px;
-    background-color: aquamarine;
+    background-color: var(--primary-lighter-color);
     height: 100%;
 }
 
@@ -22,4 +22,8 @@ aside {
 
 ngx-simplebar {
     height: 100%;
+}
+
+.mat-card-subtitle, .mat-card-content {
+    font-size: 16px;
 }

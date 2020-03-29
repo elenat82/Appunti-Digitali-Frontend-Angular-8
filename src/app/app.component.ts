@@ -5,6 +5,7 @@ import { fadeAnimation } from './animations';
 import { ContentService } from './services/content.service';
 import { Observable, forkJoin, Subject } from 'rxjs';
 import { StorageMap } from '@ngx-pwa/local-storage';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-root',
@@ -16,9 +17,21 @@ export class AppComponent {
   
   public title = 'Appunti Digitali';
 
-  constructor(private contentService: ContentService, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService) { }
+  constructor(private contentService: ContentService, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService, public dialog: MatDialog) { }
 
   public getRouterOutletState(outlet) {
     return outlet.isActivated ? outlet.activatedRoute : '';
+  }
+
+  openModal(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '250px',
+      // data: { name: this.name, animal: this.animal }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      // this.animal = result;
+  });
   }
 }

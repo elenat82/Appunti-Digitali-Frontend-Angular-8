@@ -4,6 +4,7 @@
             <mat-card>
                 <mat-card-header>
                     <mat-card-subtitle>
+                        <h3>
                         <div [ngSwitch]="content?.tipo">
                             <i *ngSwitchCase="'Html'" class="icon-app-html5"></i>
                             <i *ngSwitchCase="'Css'" class="icon-app-css3"></i>
@@ -14,8 +15,9 @@
                             <i *ngSwitchCase="'Varie'" class="icon-app-heart"></i>
                         {{content?.tipo}}
                         </div>
+                    </h3>
                     </mat-card-subtitle>
-                    <mat-card-title>{{content?.titolo}}</mat-card-title>
+                    <mat-card-title><h2>{{content?.titolo}}</h2></mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
                     <div class="content-container">

@@ -5,14 +5,17 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">
-      <mat-toolbar-row>
-        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="sidenav.toggle()" class="mat-icon-button sidenav-toggle-button">
+      <mat-toolbar-row class="home-toolbar">
+        <div>
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button mat-fab (click)="sidenav.toggle()" class="mat-icon-button sidenav-toggle-button">
           <mat-icon aria-label="Side nav toggle icon" *ngIf="!sidenav.opened; else showCross">menu</mat-icon>
           <ng-template #showCross>
             <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
           </ng-template>
         </button>
-        {{title}}
+        <span>{{title}}</span>
+      </div>
+        <button mat-button class="strumenti-utili" (click)="openModal(mytemplate)"><i class="icon-app-wrench"></i>Strumenti utili</button>
       </mat-toolbar-row>
     </mat-toolbar>
     <main [@fadeAnimation]="getRouterOutletState(o)">
@@ -25,3 +28,18 @@
     </mat-toolbar>
   </mat-sidenav-content>
 </mat-sidenav-container>
+<ng-template #mytemplate>
+  <h2 mat-dialog-title><i class="icon-app-wrench"></i>Strumenti utili</h2>
+  <mat-dialog-content class="mat-typography">
+    <ul>
+      <li>link 1</li>
+      <li>link 1</li>
+      <li>link 1</li>
+      <li>link 1</li>
+      <li>link 1</li>
+    </ul>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Chiudi</button>
+  </mat-dialog-actions>
+</ng-template>
