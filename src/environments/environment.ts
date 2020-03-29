@@ -12,7 +12,8 @@ export const environment = {
   html: "content/html",
   javascript: "content/javascript",
   php: "content/php",
-  varie: "content/varie"
+  varie: "content/varie",
+  rssfeed: "aggregator/rss"
 };
 
 /*
