@@ -9,7 +9,6 @@ body {
 }
 body {
   margin: 0;
-  font-family: Lato, "Helvetica Neue", sans-serif;
   line-height: 1.5;
   background-image: url('/assets/img/sfondo-appunti.jpg');
 }
@@ -25,10 +24,30 @@ label.mat-form-field-label {
   padding-left: 10px;
 }
 
+#cerca-menu .mat-form-field-flex {
+  padding-left: 10px;
+}
+
 div.simplebar-track.simplebar-vertical > div:before {
-  background-color: blue ;
+  background-color: var(--accent-color);
 }
 
 mat-sidenav, .mat-drawer-inner-container {
   overflow-y: hidden !important;
+}
+
+mat-grid-list {
+  height: 100%;
+  margin: 1rem;
+}
+
+mat-list a {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mat-list-base .mat-subheader {
+  color: var(--primary-color);
+  font-weight: 700;
 }
