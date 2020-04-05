@@ -31,8 +31,14 @@ export class FeedsService {
         parseString(res, (err, result: any) => {
           parsedFeed = result;
         });
-        return parsedFeed
+        return parsedFeed;
       }),
+      map(
+        (res) => {
+          res.rss.channel[0].item.reverse();
+          return res;
+        }
+      ),
       catchError((error) => {
         console.log('error: ', error);
         return empty();

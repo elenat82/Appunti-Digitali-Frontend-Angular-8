@@ -26,3 +26,42 @@ main {
 .sidenav-toggle-button {
     margin-right: 1rem;
 }
+
+.mat-small {
+    i[class|="icon"]:not(:last-child) {
+        margin: 0 0.5rem 0 0.5rem;
+    }
+    i[class|="icon"]:last-child {
+        margin: 0;
+    }
+    a {
+        color: var(--primary-color);
+        margin-left: 0.5rem;
+    }
+    a.btn {
+        position: relative;
+        display: inline-block;
+        min-width: 154px;
+    }
+    a.btn:hover .button-stroke:nth-child(2) {
+        stroke-dashoffset: 0;
+    }
+
+    .button-stroke {
+        display: block;
+        width: 100%;
+        height: 20px;
+        position: absolute;
+        left: -10px;
+        bottom: -15px;
+        stroke-width: 4;
+        stroke: transparent;
+    }
+    .button-stroke:nth-child(2) {
+        stroke-dasharray: 650px;
+        stroke-dashoffset: 650px;
+        stroke: rgba(237, 150, 63, 0.7);
+        stroke-width: 5;
+        transition: stroke-dashoffset 800ms ease-out;
+    }
+}

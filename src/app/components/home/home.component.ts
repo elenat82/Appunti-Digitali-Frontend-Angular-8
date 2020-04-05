@@ -3,7 +3,7 @@ import { StorageMap } from '@ngx-pwa/local-storage';
 import { map, switchMap, delay, tap } from 'rxjs/operators';
 import { Component, OnInit, Input } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, forkJoin, of, pipe } from 'rxjs';
+import { Observable, forkJoin, of, pipe, concat } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 import { FilterlistPipe } from 'src/app/pipes/filterlist.pipe';
 import { SafePipe } from 'src/app/pipes/safe.pipe';
@@ -53,12 +53,11 @@ export class HomeComponent implements OnInit {
       this.storageMap.get("ultimiletti"),
       this.stackoverflowService.getFavorites()
     ).pipe(
-
+      
     )
       .subscribe(
         (res) => {
           if (res) {
-            console.log("ultimiletti", res[8]);
             this.materieGroups = [
               {
                 materia: "Html",

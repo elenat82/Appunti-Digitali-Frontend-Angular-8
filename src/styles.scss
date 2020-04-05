@@ -94,12 +94,12 @@ a[href*="caniuse"] {
   table {
     border: 2px solid #FFFFFF;
     width: 100%;
-    text-align: center;
+    text-align: left;
     border-collapse: collapse;
   }
   table td, table th {
     border: 1px solid #FFFFFF;
-    padding: 3px 4px;
+    padding: 0.25rem 0.5rem;
   }
   table tr:nth-child(even) {
     background: var(--text-primary-color);
@@ -111,13 +111,12 @@ a[href*="caniuse"] {
   table thead th {
     font-weight: bold;
     color: #333333;
-    text-align: left;
+    text-align: center;
     border-left: 2px solid #333333;
   }
   table thead th:first-child {
     border-left: none;
   }
-  
   table tfoot td {
     font-size: 14px;
   }
