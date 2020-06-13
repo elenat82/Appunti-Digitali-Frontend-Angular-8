@@ -1,8 +1,8 @@
-import { Component, OnInit, AfterViewChecked } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, HostListener } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router, NavigationExtras, Params } from '@angular/router';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { ContentService } from 'src/app/services/content.service';
-import { forkJoin, combineLatest, pipe } from 'rxjs';
+import { forkJoin, combineLatest, pipe, BehaviorSubject, Observable } from 'rxjs';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { SpinnerOverlayService } from 'src/app/services/spinner-overlay/spinner-overlay-service.service';
 import { HighlightService } from 'src/app/services/highlight.service';
@@ -22,6 +22,10 @@ export class ArticoloComponent implements OnInit, AfterViewChecked {
   private done = false;
 
   private materiaArticolo: string;
+
+  private screenWidth$ = new BehaviorSubject<number> (window.innerWidth);
+
+  public showAsideOnTheRight: boolean;
 
   constructor(
     private router: Router, 
@@ -83,7 +87,7 @@ export class ArticoloComponent implements OnInit, AfterViewChecked {
         }),
         map( (res) => {
           res.approfondimenti.forEach(element => {
-            if (element.url.includes("w3")) {
+            if (element.url.includes("www.w3.org")) {
               element.icon = "icon-app-w3c"
             }
             else {
@@ -106,14 +110,32 @@ export class ArticoloComponent implements OnInit, AfterViewChecked {
         }
       )
     });
+
+    this.getScreenWidth().subscribe(width => {
+      if (width < 1200) {
+        this.showAsideOnTheRight = false;
+     }
+     else if (width >= 1200) {
+      this.showAsideOnTheRight = true;
+     }
+   });
     
   }
 
+  @HostListener('window:resize', ['$event'])
+    onResize(event) {
+      this.screenWidth$.next(event.target.innerWidth);
+    }
+
   ngAfterViewChecked() {
-    if (!this.highlighted && this.done && this.materiaArticolo == "php" ) {
+    if (!this.highlighted && this.done /* && this.materiaArticolo == "php" */ ) {
       this.highlightService.highlightAll();
       this.highlighted = true;
     }
+  }
+
+  getScreenWidth(): Observable<number> {
+    return this.screenWidth$.asObservable();
   }
 
   ngOnDestroy(): void {

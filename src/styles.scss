@@ -96,6 +96,8 @@ a[href*="caniuse"] {
     width: 100%;
     text-align: left;
     border-collapse: collapse;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
   }
   table td, table th {
     border: 1px solid #FFFFFF;
@@ -120,4 +122,7 @@ a[href*="caniuse"] {
   table tfoot td {
     font-size: 14px;
   }
+  .keyword {
+    background-color: var(--accent-lighter-color);
+}
 }

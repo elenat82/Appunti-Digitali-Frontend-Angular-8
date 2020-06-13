@@ -1,5 +1,8 @@
 <div class="article-container">
-    <article>
+    <article [ngClass]="{
+        'showAsideOnTheRight': showAsideOnTheRight,
+        'showAsideOnTheBottom': !showAsideOnTheRight
+      }">
         <ngx-simplebar [options]="options">
             <mat-card>
                 <mat-card-header>
@@ -23,6 +26,19 @@
                     <div class="content-container">
                         <div [innerHTML]="content?.body | safe: 'html'"></div>
                     </div>
+                    <aside *ngIf="!showAsideOnTheRight" class="showAsideOnTheBottom">
+                        <mat-nav-list>
+                            <h3 matSubheader class="mat-subheading-2">Approfondimenti</h3>
+                            <mat-list-item *ngFor="let appr of content?.approfondimenti">
+                                <a matLine href="{{appr.url}}" target="_blank" rel="no-opener"><i [ngClass]="appr.icon"></i>{{ appr.text }}</a>
+                            </mat-list-item>
+                            <mat-divider></mat-divider>
+                            <h3 matSubheader class="mat-subheading-2">Correlati</h3>
+                            <mat-list-item *ngFor="let corr of content?.correlati">
+                                <a matLine href="{{corr.url}}">{{ corr.text }}</a>
+                            </mat-list-item>
+                        </mat-nav-list>
+                    </aside>
                 </mat-card-content>
                 <mat-card-footer>
                     <div class="tags">
@@ -76,7 +92,7 @@
             </mat-card>
         </ngx-simplebar>
     </article>
-    <aside>
+    <aside *ngIf="showAsideOnTheRight" class="showAsideOnTheRight">
         <mat-nav-list>
             <h3 matSubheader class="mat-subheading-2">Approfondimenti</h3>
             <mat-list-item *ngFor="let appr of content?.approfondimenti">

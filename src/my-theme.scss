@@ -8,16 +8,17 @@
 // have to load a single css file for Angular Material in your app.
 
 // Fonts
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Fira+Mono&display=swap');
      
 $fontConfig: (
-  display-4: mat-typography-level(112px, 112px, 300, 'Lato', -0.0134em),
+  //parametri del mat-typography-level:  font-size, line-height, font-family- letter-spacing
+  display-4: mat-typography-level(1rem, 1.5, 300, 'Fira Mono', 0.1rem), /* classe keyword */
   display-3: mat-typography-level(56px, 56px, 400, 'Lato', -0.0089em),
   display-2: mat-typography-level(45px, 48px, 400, 'Lato', 0.0000em),
   display-1: mat-typography-level(34px, 40px, 400, 'Lato', 0.0074em),
   headline: mat-typography-level(24px, 32px, 400, 'Lato', 0.0000em),
   title: mat-typography-level(20px, 32px, 400, 'Lato', 0.0075em),
-  subheading-2: mat-typography-level(16px, 28px, 700, 'Lato', 0.0094em),
+  subheading-2: mat-typography-level(1rem, 28px, 700, 'Lato', 0.0094em), /* titoli negli elenchi (tipo menu) */
   subheading-1: mat-typography-level(15px, 24px, 400, 'Lato', 0.0067em),
   body-2: mat-typography-level(14px, 24px, 400, 'Lato', 0.0179em),
   body-1: mat-typography-level(14px, 20px, 400, 'Lato', 0.0179em),

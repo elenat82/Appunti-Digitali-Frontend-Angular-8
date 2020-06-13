@@ -1,6 +1,6 @@
 
 <mat-sidenav-container hasBackdrop="false" autosize>
-  <mat-sidenav #sidenav mode="side" opened [fixedInViewport]="true" fixedTopGap="0">
+  <mat-sidenav #sidenav mode="side" [opened]="opened" [fixedInViewport]="true" fixedTopGap="0">
     <app-menu></app-menu>
   </mat-sidenav>
   <mat-sidenav-content>
@@ -23,7 +23,7 @@
     </main>
     <mat-toolbar>
       <mat-toolbar-row>
-        <small class="mat-small">Made with <i class="icon-app-drupal"></i> + <i class="icon-app-angular"></i> + <i class="icon-app-heart"></i> by <a class="btn"  href="mailto:e.trudini82@gmail.com" target="_blank"><span>e.trudini82<i class="icon-app-at-symbol"></i>gmail.com</span> <svg class="button-stroke" viewBox="0 0 154 13">
+        <small class="mat-small">Made with <i matTooltip="Drupal8"class="icon-app-drupal"></i> + <i class="icon-app-angular" matTooltip="Angular8"></i> + <i class="icon-app-heart" matTooltip="Love"></i> by <a class="btn"  href="mailto:e.trudini82@gmail.com" target="_blank"><span>e.trudini82<i class="icon-app-at-symbol"></i>gmail.com</span> <svg class="button-stroke" viewBox="0 0 154 13">
           <use href="#line"></use>
         </svg>
         <svg class="button-stroke" viewBox="0 0 154 13">
