@@ -39,6 +39,22 @@ ngx-simplebar {
     font-size: 1rem;
 }
 
+mat-chip-list:focus {
+    outline: none;
+}
+.mat-chip.mat-standard-chip.mat-chip-disabled {
+    opacity: 1;
+    background-color: var(--accent-lighter-color);
+}
+
+.mat-chip.mat-standard-chip.mat-chip-disabled.tags-icon-chip {
+    background-color: transparent;
+    i {
+        margin-right: 0;
+    }
+}
+
+
 @media screen and (max-width: 1200px) {
     
 }

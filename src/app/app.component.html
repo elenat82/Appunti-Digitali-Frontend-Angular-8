@@ -36,13 +36,22 @@
 <ng-template #mytemplate>
   <h2 mat-dialog-title><i class="icon-app-wrench"></i>Strumenti utili</h2>
   <mat-dialog-content class="mat-typography">
-    <ul>
-      <li>link 1</li>
-      <li>link 1</li>
-      <li>link 1</li>
-      <li>link 1</li>
-      <li>link 1</li>
-    </ul>
+    <mat-form-field id="cerca-strumenti" appearance="fill">
+      <mat-label>Cerca...</mat-label>
+      <input matInput type="text" [(ngModel)]="query">
+      <button mat-button *ngIf="query" matSuffix mat-icon-button aria-label="Clear" (click)="query=''">
+          <mat-icon>close</mat-icon>
+      </button>
+      <span matPrefix><i class="icon-app-search"></i></span>
+  </mat-form-field>
+  <ngx-simplebar [options]="simplebarOptions">
+      <div class="menu-wrapper">
+          <mat-nav-list>
+              <mat-list-item *ngFor="let el of strumentiUtili   | filterlist : query"><a matLine href="{{el.url}}" target="_blank"
+                      rel="no-opener">{{ el.text }}</a></mat-list-item>
+          </mat-nav-list>
+      </div>
+  </ngx-simplebar>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Chiudi</button>

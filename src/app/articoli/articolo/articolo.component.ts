@@ -64,14 +64,21 @@ export class ArticoloComponent implements OnInit, AfterViewChecked {
           })[0]
         }),
         map( (obj: any) => {
+          let defaultTab = params.materia == "javascript" ? "js" : params.materia;
           let frag = document.createRange().createContextualFragment(obj.body);
           let codes = frag.querySelectorAll('.penny');
           codes.forEach( el => {
+            console.log('el: ', el);
             el.classList.add('codepen');
-            el.setAttribute('data-prefill', '');
+            if (obj.titolo == "Geolocation API") {
+              el.setAttribute('data-prefill', '{"scripts":["https://maps.googleapis.com/maps/api/js?key=&extension=.js"]}');
+            }
+            else {
+              el.setAttribute('data-prefill', '');
+            }
             el.setAttribute('data-height', '400');
             el.setAttribute('data-theme-id', '1');
-            el.setAttribute('data-default-tab', 'html,result');
+            el.setAttribute('data-default-tab', '' + defaultTab  + ',result');
             el.setAttribute('data-editable', 'true');
           })
           const serializer = new XMLSerializer();

@@ -42,51 +42,51 @@
                 </mat-card-content>
                 <mat-card-footer>
                     <div class="tags">
-                        <ul>
-                            <li>
+                        <mat-chip-list>
+                            <mat-chip disabled class="tags-icon-chip">
                                 <i class="icon-app-price-tags"></i>
-                            </li>
+                            </mat-chip>
                             <ng-container *ngIf="content?.tagsgenerici">
-                                <li *ngFor="let t of content.tagsgenerici">
+                                <mat-chip disabled *ngFor="let t of content.tagsgenerici">
                                     <a>{{t.title}}</a>
-                                </li>
+                                </mat-chip>
                             </ng-container>
                             <ng-container *ngIf="content?.tagshtml">
-                                <li *ngFor="let t of content.tagshtml">
+                                <mat-chip disabled *ngFor="let t of content.tagshtml">
                                     <a>{{t.title}}</a>
-                                </li>
+                                </mat-chip>
                             </ng-container>
                             <ng-container *ngIf="content?.tagscss">
-                                <li *ngFor="let t of content.tagscss">
+                                <mat-chip disabled *ngFor="let t of content.tagscss">
                                     <a>{{t.title}}</a>
-                                </li>
+                                </mat-chip>
                             </ng-container>
                             <ng-container *ngIf="content?.tagsjs">
-                                <li *ngFor="let t of content.tagsjs">
+                                <mat-chip disabled *ngFor="let t of content.tagsjs">
                                     <a>{{t.title}}</a>
-                                </li>
+                                </mat-chip>
                             </ng-container>
                             <ng-container *ngIf="content?.tagsangular">
-                                <li *ngFor="let t of content.tagsangular">
+                                <mat-chip disabled *ngFor="let t of content.tagsangular">
                                     <a>{{t.title}}</a>
-                                </li>
+                                </mat-chip>
                             </ng-container>
                             <ng-container *ngIf="content?.tagsphp">
-                                <li *ngFor="let t of content.tagsphp">
+                                <mat-chip disabled *ngFor="let t of content.tagsphp">
                                     <a>{{t.title}}</a>
-                                </li>
+                                </mat-chip>
                             </ng-container>
                             <ng-container *ngIf="content?.tagsdrupal">
-                                <li *ngFor="let t of content.tagsdrupal">
+                                <mat-chip disabled *ngFor="let t of content.tagsdrupal">
                                     <a>{{t.title}}</a>
-                                </li>
+                                </mat-chip>
                             </ng-container>
                             <ng-container *ngIf="content?.tagsvarie">
-                                <li *ngFor="let t of content.tagsvarie">
+                                <mat-chip disabled *ngFor="let t of content.tagsvarie">
                                     <a>{{t.title}}</a>
-                                </li>
+                                </mat-chip>
                             </ng-container>
-                        </ul>
+                        </mat-chip-list>
                     </div>
                 </mat-card-footer>
             </mat-card>

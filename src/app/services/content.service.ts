@@ -37,4 +37,9 @@ export class ContentService {
     return this.storageMap.set(key, value);
   }
 
+  getStrumentiUtili(): Observable<any> {
+    let url = `${environment.rootPath}${environment.content}${environment.strumentiUtili}`;
+    return this.httpClient.get<any[]>(url);
+  }
+
 }

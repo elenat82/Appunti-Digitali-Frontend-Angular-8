@@ -13,7 +13,8 @@ export const environment = {
   javascript: "content/javascript",
   php: "content/php",
   varie: "content/varie",
-  rssfeed: "aggregator/rss"
+  rssfeed: "aggregator/rss",
+  strumentiUtili: "content/strumenti-utili"
 };
 
 /*

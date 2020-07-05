@@ -98,10 +98,12 @@ a[href*="caniuse"] {
     border-collapse: collapse;
     margin-top: 1rem;
     margin-bottom: 1rem;
+    table-layout: fixed;
   }
   table td, table th {
     border: 1px solid #FFFFFF;
     padding: 0.25rem 0.5rem;
+    word-break: break-word;
   }
   table tr:nth-child(even) {
     background: var(--text-primary-color);
@@ -122,7 +124,10 @@ a[href*="caniuse"] {
   table tfoot td {
     font-size: 14px;
   }
-  .keyword {
+  .parolachiave {
     background-color: var(--accent-lighter-color);
-}
+  }
+  .cell-true {
+    background-color: #c9e1bd;
+  } 
 }

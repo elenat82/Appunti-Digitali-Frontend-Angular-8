@@ -17,6 +17,12 @@ export class AppComponent implements OnInit {
   
   public title = 'Appunti Digitali';
   public opened: boolean;
+  public strumentiUtili;
+
+  public query = "";
+  public simplebarOptions = {
+    autoHide: false
+  }
 
   private screenWidth$ = new BehaviorSubject<number> (window.innerWidth);
   @ViewChild('sidenav', {static: false}) matSidenav: MatSidenav;
@@ -32,6 +38,14 @@ export class AppComponent implements OnInit {
         this.opened = true;
       }
     });
+
+    this.contentService.getStrumentiUtili().subscribe(
+      (res) => {
+        this.strumentiUtili = res[0].approfondimenti;
+      },
+      (err) => {
+        
+      })
   }
   @HostListener('window:resize', ['$event'])
   onResize(event) {
@@ -47,13 +61,11 @@ export class AppComponent implements OnInit {
 
   openModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
-      width: '250px',
-      // data: { name: this.name, animal: this.animal }
+      width: 'auto',
+      data: { strumentiUtili: this.strumentiUtili }
   });
 
   dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      // this.animal = result;
   });
   }
 }
