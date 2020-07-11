@@ -18,10 +18,10 @@
         <button mat-button class="strumenti-utili" (click)="openModal(mytemplate)"><i class="icon-app-wrench"></i>Strumenti utili</button>
       </mat-toolbar-row>
     </mat-toolbar>
-    <main [@fadeAnimation]="getRouterOutletState(o)">
+    <main [@fadeAnimation]="getRouterOutletState(o)" [ngClass]="{'showBottomToolbar': !contentService.hideBottomToolbar, 'hideBottomToolbar': contentService.hideBottomToolbar}">
       <router-outlet #o="outlet"></router-outlet>
     </main>
-    <mat-toolbar>
+    <mat-toolbar *ngIf="!contentService.hideBottomToolbar">
       <mat-toolbar-row>
         <small class="mat-small">Made with <i matTooltip="Drupal8"class="icon-app-drupal"></i> + <i class="icon-app-angular" matTooltip="Angular8"></i> + <i class="icon-app-heart" matTooltip="Love"></i> by <a class="btn"  href="mailto:e.trudini82@gmail.com" target="_blank"><span>e.trudini82<i class="icon-app-at-symbol"></i>gmail.com</span> <svg class="button-stroke" viewBox="0 0 154 13">
           <use href="#line"></use>

@@ -6,15 +6,19 @@
 form {
     width: 50%;
     max-width: 500px;
+    background-color: #d9dedf;
 }
 
-.list-wrapper {
+.list-wrapper.grid-layout {
     width: 100%;
     height: 100%;
 }
 
-ngx-simplebar {
+#nws-bar, #so-bar, #ul-bar {
     height: calc(100% - 42px);
+}
+#src-bar {
+    height: 100%;
 }
 
 mat-list {

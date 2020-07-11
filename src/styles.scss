@@ -131,3 +131,26 @@ a[href*="caniuse"] {
     background-color: #c9e1bd;
   } 
 }
+
+.mat-dialog-content {
+  max-height: none;
+}
+
+main.showBottomToolbar {
+  height: calc(100% - 128px);
+  background-image: url('/assets/img/stelline.png');
+}
+main.hideBottomToolbar {
+  height: calc(100% - 64px);
+  background-image: url('/assets/img/stelline.png');
+}
+
+.showBottomToolbar .list-wrapper.accordion-layout {
+  width: 100%;
+  height: calc(100vh - 305px);
+}
+
+.hideBottomToolbar .list-wrapper.accordion-layout {
+  width: 100%;
+  height: calc(100vh - 240px);
+}

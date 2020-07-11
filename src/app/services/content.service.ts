@@ -19,6 +19,10 @@ export class ContentService {
     )
   };
 
+  public shortScreen = false;
+  public nrOfColumns = 1;
+  public hideBottomToolbar = false;
+
   constructor(private httpClient: HttpClient, private storageMap: StorageMap, private router: Router) { 
 
     

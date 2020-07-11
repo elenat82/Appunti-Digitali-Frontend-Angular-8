@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
     scrollbarMinSize: 100
   }
 
-  constructor(private contentService: ContentService, public filterlistPipe: FilterlistPipe, private _formBuilder: FormBuilder, private router: Router, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService, private activatedRoute: ActivatedRoute, private feedService: FeedsService, private stackoverflowService : StackoverflowService) { }
+  constructor(public contentService: ContentService, public filterlistPipe: FilterlistPipe, private _formBuilder: FormBuilder, private router: Router, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService, private activatedRoute: ActivatedRoute, private feedService: FeedsService, private stackoverflowService : StackoverflowService) { }
 
   ngOnInit() {
     this.spinnerOverlayService.show();

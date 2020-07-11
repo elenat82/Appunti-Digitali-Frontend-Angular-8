@@ -14,7 +14,7 @@ import { MatDialog, MatSidenav } from '@angular/material';
   animations: [fadeAnimation]
 })
 export class AppComponent implements OnInit {
-  
+
   public title = 'Appunti Digitali';
   public opened: boolean;
   public strumentiUtili;
@@ -24,35 +24,74 @@ export class AppComponent implements OnInit {
     autoHide: false
   }
 
-  private screenWidth$ = new BehaviorSubject<number> (window.innerWidth);
-  @ViewChild('sidenav', {static: false}) matSidenav: MatSidenav;
+  private screenWidth$ = new BehaviorSubject<number>(window.innerWidth);
+  private screenHeight$ = new BehaviorSubject<number>(window.innerHeight);
+  @ViewChild('sidenav', { static: false }) matSidenav: MatSidenav;
 
-  constructor(private contentService: ContentService, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService, public dialog: MatDialog) { }
+  constructor(public contentService: ContentService, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService, public dialog: MatDialog) { }
 
   ngOnInit() {
+    console.log(
+      "%cQualcosa non va? Fammelo sapere!",
+      "padding:9px 10px; " +
+      "color: #284283; " +
+      "background-color: #66cdaa; " +
+      "line-height: 25px;");
+    console.log(
+      "%cScrivimi a: e.trudini82@gmail.com",
+      "padding:9px 10px; " + 
+      "color: #284283; " +
+      "background-color: #ffdab9; " +
+      "line-height: 25px;");
     this.getScreenWidth().subscribe(width => {
-       if (width < 1200) {
-         this.opened = false;
+      if (width < 1200) {
+        this.opened = false;
+        if (width < 1000) {
+          this.contentService.nrOfColumns = 3;
+        }
+        else {
+          this.contentService.nrOfColumns = 1;
+        }
       }
       else if (width >= 1200) {
         this.opened = true;
+        this.contentService.nrOfColumns = 1;
       }
     });
+
+    this.getScreenHeight().subscribe(height => {
+      if (height < 1000) {
+        this.contentService.shortScreen = true;
+        this.contentService.hideBottomToolbar = false;
+        if (height < 565) {
+          this.contentService.hideBottomToolbar = true;
+        }
+      }
+      else {
+        this.contentService.shortScreen = false;
+        this.contentService.hideBottomToolbar = false;
+      }
+
+    })
 
     this.contentService.getStrumentiUtili().subscribe(
       (res) => {
         this.strumentiUtili = res[0].approfondimenti;
       },
       (err) => {
-        
+
       })
   }
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.screenWidth$.next(event.target.innerWidth);
+    this.screenHeight$.next(event.target.innerHeight);
   }
   getScreenWidth(): Observable<number> {
     return this.screenWidth$.asObservable();
+  }
+  getScreenHeight(): Observable<number> {
+    return this.screenHeight$.asObservable();
   }
 
   public getRouterOutletState(outlet) {
@@ -61,11 +100,13 @@ export class AppComponent implements OnInit {
 
   openModal(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
-      width: 'auto',
+      width: '500px',
+      height: '600px',
+      maxHeight: 'none',
       data: { strumentiUtili: this.strumentiUtili }
-  });
+    });
 
-  dialogRef.afterClosed().subscribe(result => {
-  });
+    dialogRef.afterClosed().subscribe(result => {
+    });
   }
 }
