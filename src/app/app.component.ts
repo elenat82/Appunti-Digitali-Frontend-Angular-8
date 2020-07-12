@@ -24,6 +24,8 @@ export class AppComponent implements OnInit {
     autoHide: false
   }
 
+  public currentYear = new Date().getFullYear();
+
   private screenWidth$ = new BehaviorSubject<number>(window.innerWidth);
   private screenHeight$ = new BehaviorSubject<number>(window.innerHeight);
   @ViewChild('sidenav', { static: false }) matSidenav: MatSidenav;
@@ -43,6 +45,7 @@ export class AppComponent implements OnInit {
       "color: #284283; " +
       "background-color: #ffdab9; " +
       "line-height: 25px;");
+
     this.getScreenWidth().subscribe(width => {
       if (width < 1200) {
         this.opened = false;
@@ -65,6 +68,11 @@ export class AppComponent implements OnInit {
         this.contentService.hideBottomToolbar = false;
         if (height < 565) {
           this.contentService.hideBottomToolbar = true;
+          if (height < 411) {
+            //fare qualcosa per migliorare la visualizzazione
+          }
+          else {
+          }
         }
       }
       else {

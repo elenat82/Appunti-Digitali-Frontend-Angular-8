@@ -1,4 +1,3 @@
-
 <mat-sidenav-container hasBackdrop="false" autosize>
   <mat-sidenav #sidenav mode="side" [opened]="opened" [fixedInViewport]="true" fixedTopGap="0">
     <app-menu></app-menu>
@@ -7,28 +6,34 @@
     <mat-toolbar color="primary">
       <mat-toolbar-row class="home-toolbar">
         <div>
-        <button type="button" aria-label="Toggle sidenav" mat-icon-button mat-fab (click)="sidenav.toggle()" class="mat-icon-button sidenav-toggle-button">
-          <mat-icon aria-label="Side nav toggle icon" *ngIf="!sidenav.opened; else showCross">menu</mat-icon>
-          <ng-template #showCross>
-            <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
-          </ng-template>
-        </button>
-        <span>{{title}}</span>
-      </div>
-        <button mat-button class="strumenti-utili" (click)="openModal(mytemplate)"><i class="icon-app-wrench"></i>Strumenti utili</button>
+          <button type="button" aria-label="Toggle sidenav" mat-icon-button mat-fab (click)="sidenav.toggle()"
+            class="mat-icon-button sidenav-toggle-button">
+            <mat-icon aria-label="Side nav toggle icon" *ngIf="!sidenav.opened; else showCross">menu</mat-icon>
+            <ng-template #showCross>
+              <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
+            </ng-template>
+          </button>
+          <span>{{title}}</span>
+        </div>
+        <button mat-button class="strumenti-utili" (click)="openModal(mytemplate)"><i
+            class="icon-app-wrench"></i>Strumenti utili</button>
       </mat-toolbar-row>
     </mat-toolbar>
-    <main [@fadeAnimation]="getRouterOutletState(o)" [ngClass]="{'showBottomToolbar': !contentService.hideBottomToolbar, 'hideBottomToolbar': contentService.hideBottomToolbar}">
+    <main [@fadeAnimation]="getRouterOutletState(o)"
+      [ngClass]="{'showBottomToolbar': !contentService.hideBottomToolbar, 'hideBottomToolbar': contentService.hideBottomToolbar}">
       <router-outlet #o="outlet"></router-outlet>
     </main>
     <mat-toolbar *ngIf="!contentService.hideBottomToolbar">
       <mat-toolbar-row>
-        <small class="mat-small">Made with <i matTooltip="Drupal8"class="icon-app-drupal"></i> + <i class="icon-app-angular" matTooltip="Angular8"></i> + <i class="icon-app-heart" matTooltip="Love"></i> by <a class="btn"  href="mailto:e.trudini82@gmail.com" target="_blank"><span>e.trudini82<i class="icon-app-at-symbol"></i>gmail.com</span> <svg class="button-stroke" viewBox="0 0 154 13">
-          <use href="#line"></use>
-        </svg>
-        <svg class="button-stroke" viewBox="0 0 154 13">
-          <use href="#line"></use>
-        </svg></a></small>
+        <small class="mat-small">Made with <i matTooltip="Drupal8" class="icon-app-drupal"></i> + <i
+            class="icon-app-angular" matTooltip="Angular8"></i> + <i class="icon-app-heart" matTooltip="Love"></i> by
+          <a class="btn" href="mailto:e.trudini82@gmail.com" target="_blank"><span>e.trudini82<i
+                class="icon-app-at-symbol"></i>gmail.com</span> <svg class="button-stroke" viewBox="0 0 154 13">
+              <use href="#line"></use>
+            </svg>
+            <svg class="button-stroke" viewBox="0 0 154 13">
+              <use href="#line"></use>
+            </svg></a> &copy; {{currentYear}} Tutti i diritti riservati.</small>
       </mat-toolbar-row>
     </mat-toolbar>
   </mat-sidenav-content>
@@ -40,25 +45,26 @@
       <mat-label>Cerca...</mat-label>
       <input matInput type="text" [(ngModel)]="query">
       <button mat-button *ngIf="query" matSuffix mat-icon-button aria-label="Clear" (click)="query=''">
-          <mat-icon>close</mat-icon>
+        <mat-icon>close</mat-icon>
       </button>
       <span matPrefix><i class="icon-app-search"></i></span>
-  </mat-form-field>
-  <ngx-simplebar [options]="simplebarOptions">
+    </mat-form-field>
+    <ngx-simplebar [options]="simplebarOptions">
       <div class="menu-wrapper">
-          <mat-nav-list>
-              <mat-list-item *ngFor="let el of strumentiUtili   | filterlist : query"><a matLine href="{{el.url}}" target="_blank"
-                      rel="no-opener">{{ el.text }}</a></mat-list-item>
-          </mat-nav-list>
+        <mat-nav-list>
+          <mat-list-item *ngFor="let el of strumentiUtili   | filterlist : query"><a matLine href="{{el.url}}"
+              target="_blank" rel="no-opener">{{ el.text }}</a></mat-list-item>
+        </mat-nav-list>
       </div>
-  </ngx-simplebar>
+    </ngx-simplebar>
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Chiudi</button>
   </mat-dialog-actions>
 </ng-template>
 <svg id="stroke" xmlns="http://www.w3.org/2000/svg" width="0" height="0">
-	<defs>
-		<path id="line" d="M2 2c49.7 2.6 100 3.1 150 1.7-46.5 2-93 4.4-139.2 7.3 45.2-1.5 90.6-1.8 135.8-.6" fill="none" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/>
-	</defs>
+  <defs>
+    <path id="line" d="M2 2c49.7 2.6 100 3.1 150 1.7-46.5 2-93 4.4-139.2 7.3 45.2-1.5 90.6-1.8 135.8-.6" fill="none"
+      stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
+  </defs>
 </svg>

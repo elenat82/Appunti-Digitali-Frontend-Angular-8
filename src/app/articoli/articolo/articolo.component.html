@@ -8,19 +8,21 @@
                 <mat-card-header>
                     <mat-card-subtitle>
                         <h3>
-                        <div [ngSwitch]="content?.tipo">
-                            <i *ngSwitchCase="'Html'" class="icon-app-html5"></i>
-                            <i *ngSwitchCase="'Css'" class="icon-app-css3"></i>
-                            <i *ngSwitchCase="'Javascript'" class="icon-app-javascript"></i>
-                            <i *ngSwitchCase="'Angular'" class="icon-app-angular"></i>
-                            <i *ngSwitchCase="'Drupal'" class="icon-app-drupal"></i>
-                            <i *ngSwitchCase="'Php'" class="icon-app-php"></i>
-                            <i *ngSwitchCase="'Varie'" class="icon-app-heart"></i>
-                        {{content?.tipo}}
-                        </div>
-                    </h3>
+                            <div [ngSwitch]="content?.tipo">
+                                <i *ngSwitchCase="'Html'" class="icon-app-html5"></i>
+                                <i *ngSwitchCase="'Css'" class="icon-app-css3"></i>
+                                <i *ngSwitchCase="'Javascript'" class="icon-app-javascript"></i>
+                                <i *ngSwitchCase="'Angular'" class="icon-app-angular"></i>
+                                <i *ngSwitchCase="'Drupal'" class="icon-app-drupal"></i>
+                                <i *ngSwitchCase="'Php'" class="icon-app-php"></i>
+                                <i *ngSwitchCase="'Varie'" class="icon-app-heart"></i>
+                                {{content?.tipo}}
+                            </div>
+                        </h3>
                     </mat-card-subtitle>
-                    <mat-card-title><h2>{{content?.titolo}}</h2></mat-card-title>
+                    <mat-card-title>
+                        <h2>{{content?.titolo}}</h2>
+                    </mat-card-title>
                 </mat-card-header>
                 <mat-card-content>
                     <div class="content-container">
@@ -30,13 +32,16 @@
                         <mat-nav-list>
                             <h3 matSubheader class="mat-subheading-2">Approfondimenti</h3>
                             <mat-list-item *ngFor="let appr of content?.approfondimenti">
-                                <a matLine href="{{appr.url}}" target="_blank" rel="no-opener"><i [ngClass]="appr.icon"></i>{{ appr.text }}</a>
+                                <a matLine href="{{appr.url}}" target="_blank" rel="no-opener"><i
+                                        [ngClass]="appr.icon"></i>{{ appr.text }}</a>
                             </mat-list-item>
-                            <mat-divider></mat-divider>
-                            <h3 matSubheader class="mat-subheading-2">Correlati</h3>
-                            <mat-list-item *ngFor="let corr of content?.correlati">
-                                <a matLine href="{{corr.url}}">{{ corr.text }}</a>
-                            </mat-list-item>
+                            <ng-container *ngIf="content?.correlati.length">
+                                <mat-divider></mat-divider>
+                                <h3 matSubheader class="mat-subheading-2">Correlati</h3>
+                                <mat-list-item *ngFor="let corr of content?.correlati">
+                                    <a matLine href="{{corr.url}}">{{ corr.text }}</a>
+                                </mat-list-item>
+                            </ng-container>
                         </mat-nav-list>
                     </aside>
                 </mat-card-content>
@@ -96,13 +101,16 @@
         <mat-nav-list>
             <h3 matSubheader class="mat-subheading-2">Approfondimenti</h3>
             <mat-list-item *ngFor="let appr of content?.approfondimenti">
-                <a matLine href="{{appr.url}}" target="_blank" rel="no-opener"><i [ngClass]="appr.icon"></i>{{ appr.text }}</a>
+                <a matLine href="{{appr.url}}" target="_blank" rel="no-opener"><i
+                        [ngClass]="appr.icon"></i>{{ appr.text }}</a>
             </mat-list-item>
-            <mat-divider></mat-divider>
-            <h3 matSubheader class="mat-subheading-2">Correlati</h3>
-            <mat-list-item *ngFor="let corr of content?.correlati">
-                <a matLine href="{{corr.url}}">{{ corr.text }}</a>
-            </mat-list-item>
+            <ng-container *ngIf="content?.correlati.length">
+                <mat-divider></mat-divider>
+                <h3 matSubheader class="mat-subheading-2">Correlati</h3>
+                <mat-list-item *ngFor="let corr of content?.correlati">
+                    <a matLine href="{{corr.url}}">{{ corr.text }}</a>
+                </mat-list-item>
+            </ng-container>
         </mat-nav-list>
     </aside>
 </div>
