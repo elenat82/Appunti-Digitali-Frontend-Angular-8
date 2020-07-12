@@ -6,6 +6,11 @@ import { ContentService } from './services/content.service';
 import { Observable, forkJoin, Subject, BehaviorSubject } from 'rxjs';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { MatDialog, MatSidenav } from '@angular/material';
+import 'autotrack';
+
+(<any>window).ga('create', 'UA-64373138-1', 'auto');
+(<any>window).ga('require', 'autotrack');
+(<any>window).ga('send', 'pageview');
 
 @Component({
   selector: 'app-root',
