@@ -6,7 +6,7 @@ import { ContentResolverService } from '../services/content-resolver.service';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'content', loadChildren: () => import('../articoli/articoli.module').then(m => m.ArticoliModule)},
+  { path: 'appunti', loadChildren: () => import('../articoli/articoli.module').then(m => m.ArticoliModule)},
   { path: '', pathMatch: 'full', redirectTo: '/home' },
   { path: '**', redirectTo: '/home' }
 ];

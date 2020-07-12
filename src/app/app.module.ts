@@ -15,13 +15,15 @@ import { StorageModule } from '@ngx-pwa/local-storage';
 import { SpinnerModule } from './modules/spinner/spinner.module';
 import { ArticoliModule } from './articoli/articoli.module';
 import { SimplebarAngularModule } from 'simplebar-angular';
+import { SlugifyPipe } from './pipes/slugify.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     MenuComponent,
-    FilterlistPipe
+    FilterlistPipe,
+    SlugifyPipe
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,7 @@ import { SimplebarAngularModule } from 'simplebar-angular';
       IDBDBName: 'appuntiDigitaliDB', // custom database name when in `indexedDB`
       LSPrefix: 'appuntiDigitaliDB' }) // prefix when in `localStorage` fallback
   ],
-  providers: [FilterlistPipe],
+  providers: [FilterlistPipe, SlugifyPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { } 

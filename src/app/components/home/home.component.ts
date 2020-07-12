@@ -11,6 +11,7 @@ import { Router, NavigationExtras, ActivatedRoute, NavigationStart, NavigationEn
 import { SpinnerOverlayService } from 'src/app/services/spinner-overlay/spinner-overlay-service.service';
 import { FeedsService } from 'src/app/services/feeds.service';
 import * as xml2js from "xml2js";
+import { SlugifyPipe } from 'src/app/pipes/slugify.pipe';
 
 @Component({
   selector: 'app-home',
@@ -38,7 +39,7 @@ export class HomeComponent implements OnInit {
     scrollbarMinSize: 100
   }
 
-  constructor(public contentService: ContentService, public filterlistPipe: FilterlistPipe, private _formBuilder: FormBuilder, private router: Router, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService, private activatedRoute: ActivatedRoute, private feedService: FeedsService, private stackoverflowService : StackoverflowService) { }
+  constructor(public contentService: ContentService, public filterlistPipe: FilterlistPipe, private _formBuilder: FormBuilder, private router: Router, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService, private activatedRoute: ActivatedRoute, private feedService: FeedsService, private stackoverflowService: StackoverflowService, private slugifyPipe: SlugifyPipe) { }
 
   ngOnInit() {
     this.spinnerOverlayService.show();
@@ -53,7 +54,32 @@ export class HomeComponent implements OnInit {
       this.storageMap.get("ultimiletti"),
       this.stackoverflowService.getFavorites()
     ).pipe(
-      
+      map((data: any[]) => {
+        if (data.length) {
+          data[0].map( d => { //html
+            d.slug = this.slugifyPipe.transform(d.titolo);
+          });
+          data[1].map( d => { //css
+            d.slug = this.slugifyPipe.transform(d.titolo);
+          });
+          data[2].map( d => { //js
+            d.slug = this.slugifyPipe.transform(d.titolo);
+          });
+          data[3].map( d => { //angular
+            d.slug = this.slugifyPipe.transform(d.titolo);
+          });
+          data[4].map( d => { //php
+            d.slug = this.slugifyPipe.transform(d.titolo);
+          });
+          data[5].map( d => { //drupal
+            d.slug = this.slugifyPipe.transform(d.titolo);
+          });
+          data[0].map( d => { //varie
+            d.slug = this.slugifyPipe.transform(d.titolo);
+          });
+        }
+        return data;
+      })
     )
       .subscribe(
         (res) => {
@@ -108,7 +134,7 @@ export class HomeComponent implements OnInit {
                 this.spinnerOverlayService.hide();
               }
             );
-            if (res[7]) {
+            if (res[7].length && res[7][0] != undefined) {
               this.ultimiLettiHtml = res[0].filter(el => {
                 return res[7].includes(`${el.id}`);
               });
@@ -139,51 +165,54 @@ export class HomeComponent implements OnInit {
                 .sort((a, b) => a.r - b.r)
                 .map(a => a.x)
                 .slice(0, n);
-                this.ultimiLettiCss = res[1]
+              this.ultimiLettiCss = res[1]
                 .map(x => ({ x, r: Math.random() }))
                 .sort((a, b) => a.r - b.r)
                 .map(a => a.x)
                 .slice(0, n);
-                this.ultimiLettiJS = res[2]
+              this.ultimiLettiJS = res[2]
                 .map(x => ({ x, r: Math.random() }))
                 .sort((a, b) => a.r - b.r)
                 .map(a => a.x)
                 .slice(0, n);
-                this.ultimiLettiAngular = res[3]
+              this.ultimiLettiAngular = res[3]
                 .map(x => ({ x, r: Math.random() }))
                 .sort((a, b) => a.r - b.r)
                 .map(a => a.x)
                 .slice(0, n);
-                this.ultimiLettiPhp = res[4]
+              this.ultimiLettiPhp = res[4]
                 .map(x => ({ x, r: Math.random() }))
                 .sort((a, b) => a.r - b.r)
                 .map(a => a.x)
                 .slice(0, n);
-                this.ultimiLettiDrupal = res[5]
+              this.ultimiLettiDrupal = res[5]
                 .map(x => ({ x, r: Math.random() }))
                 .sort((a, b) => a.r - b.r)
                 .map(a => a.x)
                 .slice(0, n);
-                this.ultimiLettiVarie = res[6]
+              this.ultimiLettiVarie = res[6]
                 .map(x => ({ x, r: Math.random() }))
                 .sort((a, b) => a.r - b.r)
                 .map(a => a.x)
                 .slice(0, n);
             }
 
-            this.questions = res[8].items;
+            if(res[8]) { //preferiti di stackoverflow
+              this.questions = res[8].items;
+            }
           }
         },
         (err) => {
           console.log('err: ', err);
           this.spinnerOverlayService.hide();
-
         }
       );
 
     this.feedService.getFeeds().subscribe(
       (res) => {
-        this.feed = res;
+        if (res && res.rss) {
+          this.feed = res;
+        }
       },
       (err) => {
         console.log('err: ', err);
@@ -204,7 +233,7 @@ export class HomeComponent implements OnInit {
   }
 
   selected(ev) {
-    this.router.navigate(['/content', ev.option.value.tipo.toLowerCase(), ev.option.value.id]);
+    this.router.navigate(['/appunti', ev.option.value.tipo.toLowerCase(), ev.option.value.slug]);
   }
 
   getOptionText(option) {
@@ -214,8 +243,6 @@ export class HomeComponent implements OnInit {
     else {
       return ''
     }
-
   }
-
 
 }

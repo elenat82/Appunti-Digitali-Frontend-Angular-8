@@ -2,6 +2,7 @@ export interface ContentHtml {
     id: number;
     tipo: string;
     titolo: string;
+    slug?: string;
     body: string, 
     tagshtml: TaxTerm[];
     tagsgenerici: TaxTerm[];
@@ -15,6 +16,7 @@ export interface ContentCss {
     id: number;
     tipo: string;
     titolo: string;
+    slug?: string;
     body: string, 
     tagscss: TaxTerm[];
     tagsgenerici: TaxTerm[];
@@ -28,6 +30,7 @@ export interface ContentJS {
     id: number;
     tipo: string;
     titolo: string;
+    slug?: string;
     body: string, 
     tagsjs: TaxTerm[];
     tagsgenerici: TaxTerm[];
@@ -41,6 +44,7 @@ export interface ContentAngular {
     id: number;
     tipo: string;
     titolo: string;
+    slug?: string;
     body: string, 
     tagsangular: TaxTerm[];
     tagsgenerici: TaxTerm[];
@@ -54,6 +58,7 @@ export interface ContentPhp {
     id: number;
     tipo: string;
     titolo: string;
+    slug?: string;
     body: string, 
     tagsphp: TaxTerm[];
     tagsgenerici: TaxTerm[];
@@ -66,6 +71,7 @@ export interface ContentDrupal {
     id: number;
     tipo: string;
     titolo: string;
+    slug?: string;
     body: string, 
     tagsdrupal: TaxTerm[];
     tagsgenerici: TaxTerm[];
@@ -78,6 +84,7 @@ export interface ContentVarie {
     id: number;
     tipo: string;
     titolo: string;
+    slug?: string;
     body: string, 
     tagsgenerici: TaxTerm[];
     approfondimenti: string[];
