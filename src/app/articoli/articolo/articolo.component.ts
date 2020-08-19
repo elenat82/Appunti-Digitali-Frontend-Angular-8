@@ -90,13 +90,17 @@ export class ArticoloComponent implements OnInit, AfterViewChecked {
             if (res && res.approfondimenti) {
               res.approfondimenti.forEach(element => {
                 if (element.url.includes("www.w3.org")) {
-                  element.icon = "icon-app-w3c"
+                  element.icon = "icon-app-w3c";
+                }
+                else if (element.url.includes("google.com")) {
+                  element.icon = "icon-app-google";
+                }
+                else if (element.url.includes("twitter.com")) {
+                  element.icon = "icon-app-twitter";
                 }
                 else {
                   element.icon = ""
                 }
-                //aggiungere logo google
-
               });
             }
             return res;
