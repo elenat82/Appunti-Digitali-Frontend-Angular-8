@@ -47,38 +47,13 @@
         <div class="list-wrapper grid-layout">
           <mat-card>
             <mat-card-header>
-              <mat-card-title><i class="icon-app-clock"></i>Ultimi appunti letti</mat-card-title>
+              <mat-card-title><i class="icon-app-github"></i>Starred su Github</mat-card-title>
             </mat-card-header>
             <ngx-simplebar [options]="options" id="ul-bar">
               <mat-card-content>
                 <mat-list>
-                  <h3 matSubheader class="mat-subheading-2">Html</h3>
-                  <mat-list-item *ngFor="let item of ultimiLettiHtml; let ind=index;">
-                    <a matLine [routerLink]="['/appunti', item?.tipo.toLowerCase(),item?.slug]">{{ item?.titolo }}</a>
-                  </mat-list-item>
-                  <h3 matSubheader class="mat-subheading-2">Css</h3>
-                  <mat-list-item *ngFor="let item of ultimiLettiCss; let ind=index;">
-                    <a matLine [routerLink]="['/appunti', item?.tipo.toLowerCase(),item?.slug]">{{ item?.titolo }}</a>
-                  </mat-list-item>
-                  <h3 matSubheader class="mat-subheading-2">JavaScript</h3>
-                  <mat-list-item *ngFor="let item of ultimiLettiJS; let ind=index;">
-                    <a matLine [routerLink]="['/appunti', item?.tipo.toLowerCase(),item?.slug]">{{ item?.titolo }}</a>
-                  </mat-list-item>
-                  <h3 matSubheader class="mat-subheading-2">Angular</h3>
-                  <mat-list-item *ngFor="let item of ultimiLettiAngular; let ind=index;">
-                    <a matLine [routerLink]="['/appunti', item?.tipo.toLowerCase(),item?.slug]">{{ item.titolo }}</a>
-                  </mat-list-item>
-                  <h3 matSubheader class="mat-subheading-2">Php</h3>
-                  <mat-list-item *ngFor="let item of ultimiLettiPhp; let ind=index;">
-                    <a matLine [routerLink]="['/appunti', item?.tipo.toLowerCase(),item?.slug]">{{ item?.titolo }}</a>
-                  </mat-list-item>
-                  <h3 matSubheader class="mat-subheading-2">Drupal</h3>
-                  <mat-list-item *ngFor="let item of ultimiLettiDrupal; let ind=index;">
-                    <a matLine [routerLink]="['/appunti', item?.tipo.toLowerCase(),item?.slug]">{{ item?.titolo }}</a>
-                  </mat-list-item>
-                  <h3 matSubheader class="mat-subheading-2">Varie</h3>
-                  <mat-list-item *ngFor="let item of ultimiLettiVarie; let ind=index;">
-                    <a matLine [routerLink]="['/appunti', item?.tipo.toLowerCase(),item?.slug]">{{ item?.titolo }}</a>
+                  <mat-list-item *ngFor="let s of starred; let ind=index;">
+                    <a matLine [href]="s?.html_url" target="_blank">{{ s?.name }} - {{ s?.description }}</a>
                   </mat-list-item>
                 </mat-list>
               </mat-card-content>
@@ -167,10 +142,10 @@
       <mat-expansion-panel>
         <mat-expansion-panel-header>
           <mat-panel-title>
-            <i class="icon-app-clock"></i>
+            <i class="icon-app-github"></i>
           </mat-panel-title>
           <mat-panel-description>
-            Ultimi letti
+            Starred su Github
           </mat-panel-description>
         </mat-expansion-panel-header>
         <div class="list-wrapper accordion-layout">
@@ -178,37 +153,8 @@
             <ngx-simplebar [options]="options" id="ul-bar">
               <mat-card-content>
                 <mat-list>
-                  <h3 matSubheader class="mat-subheading-2">Html</h3>
-                  <mat-list-item *ngFor="let item of ultimiLettiHtml; let ind=index;">
-                    <a matLine [routerLink]="['/appunti', item?.tipo.toLowerCase(),item?.slug]">{{ item?.titolo }}</a>
-                  </mat-list-item>
-                  <h3 matSubheader class="mat-subheading-2">Css</h3>
-                  <mat-list-item *ngFor="let item of ultimiLettiCss; let ind=index;">
-                    <a matLine [routerLink]="['/appunti', item?.tipo.toLowerCase(),item?.slug]">{{ item?.titolo }}</a>
-                  </mat-list-item>
-                  <h3 matSubheader class="mat-subheading-2">JavaScript</h3>
-                  <mat-list-item *ngFor="let item of ultimiLettiJS; let ind=index;">
-                    <a matLine [routerLink]="['/appunti', item?.tipo.toLowerCase(),item?.slug]">{{ item?.titolo }}</a>
-                  </mat-list-item>
-                  <h3 matSubheader class="mat-subheading-2">Angular</h3>
-                  <mat-list-item *ngFor="let item of ultimiLettiAngular; let ind=index;">
-                    <a matLine [routerLink]="['/appunti', item?.tipo.toLowerCase(),item?.slug]">{{ item?.titolo }}</a>
-                  </mat-list-item>
-                  <ng-container *ngIf="ultimiLettiPhp?.length">
-                    <h3 matSubheader class="mat-subheading-2">Php</h3>
-                    <mat-list-item *ngFor="let item of ultimiLettiPhp; let ind=index;">
-                      <a matLine [routerLink]="['/appunti', item?.tipo.toLowerCase(),item?.slug]">{{ item?.titolo }}</a>
-                    </mat-list-item>
-                  </ng-container>
-                  <ng-container *ngIf="ultimiLettiDrupal?.length">
-                    <h3 matSubheader class="mat-subheading-2">Drupal</h3>
-                    <mat-list-item *ngFor="let item of ultimiLettiDrupal; let ind=index;">
-                      <a matLine [routerLink]="['/appunti', item?.tipo.toLowerCase(),item?.slug]">{{ item?.titolo }}</a>
-                    </mat-list-item>
-                  </ng-container>
-                  <h3 matSubheader class="mat-subheading-2">Varie</h3>
-                  <mat-list-item *ngFor="let item of ultimiLettiVarie; let ind=index;">
-                    <a matLine [routerLink]="['/appunti', item?.tipo.toLowerCase(),item?.slug]">{{ item?.titolo }}</a>
+                  <mat-list-item *ngFor="let s of starred; let ind=index;">
+                    <a matLine [href]="s?.html_url" target="_blank">{{ s?.name }} - {{ s?.description }}</a>
                   </mat-list-item>
                 </mat-list>
               </mat-card-content>

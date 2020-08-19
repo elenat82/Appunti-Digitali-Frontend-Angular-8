@@ -42,23 +42,6 @@ export class ArticoloComponent implements OnInit, AfterViewChecked {
     this.spinnerOverlayService.show();
     this.activatedRoute.params.forEach((params: Params) => {
       this.materiaArticolo = params.materia;
-      this.storageMap.get("ultimiletti").subscribe(
-        (res: any) => {
-          let ultimiLetti = [];
-          if (res && res.length && res[0] != undefined) {
-            ultimiLetti.push(params.id, ...res);
-          }
-          else {
-            ultimiLetti.push(params.id);
-          }
-          let uniques = [...new Set(ultimiLetti)];
-          uniques.length = Math.min(uniques.length, 20);
-          this.storageMap.set("ultimiletti", uniques).subscribe();
-        },
-        (err) => {
-          console.log('err: ', err);
-        }
-      )
       this.storageMap.get(params.materia)
         .pipe(
           map((data: any[]) => {

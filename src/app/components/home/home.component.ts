@@ -26,14 +26,8 @@ export class HomeComponent implements OnInit {
   public materieGroups: any[];
   public materieOptions: Observable<any[]>;
   public feed;
-  public ultimiLettiHtml;
-  public ultimiLettiCss;
-  public ultimiLettiJS;
-  public ultimiLettiAngular;
-  public ultimiLettiPhp;
-  public ultimiLettiDrupal;
-  public ultimiLettiVarie;
-  public questions;
+  public starred = [];
+  public questions = [];
   public options = {
     autoHide: false,
     scrollbarMinSize: 100
@@ -51,7 +45,7 @@ export class HomeComponent implements OnInit {
       this.contentService.getContentFromServer('php'),
       this.contentService.getContentFromServer('drupal'),
       this.contentService.getContentFromServer('varie'),
-      this.storageMap.get("ultimiletti"),
+      this.stackoverflowService.getStarred(),
       this.stackoverflowService.getFavorites()
     ).pipe(
       map((data: any[]) => {
@@ -74,7 +68,7 @@ export class HomeComponent implements OnInit {
           data[5].map( d => { //drupal
             d.slug = this.slugifyPipe.transform(d.titolo);
           });
-          data[0].map( d => { //varie
+          data[6].map( d => { //varie
             d.slug = this.slugifyPipe.transform(d.titolo);
           });
         }
@@ -134,70 +128,12 @@ export class HomeComponent implements OnInit {
                 this.spinnerOverlayService.hide();
               }
             );
-            if (res[7].length && res[7][0] != undefined) {
-              this.ultimiLettiHtml = res[0].filter(el => {
-                return res[7].includes(`${el.id}`);
-              });
-              this.ultimiLettiCss = res[1].filter(el => {
-                return res[7].includes(`${el.id}`);
-              });
-              this.ultimiLettiJS = res[2].filter(el => {
-                return res[7].includes(`${el.id}`);
-              });
-              this.ultimiLettiAngular = res[3].filter(el => {
-                return res[7].includes(`${el.id}`);
-              });
-              this.ultimiLettiPhp = res[4].filter(el => {
-                return res[7].includes(`${el.id}`);
-              });
-              this.ultimiLettiDrupal = res[5].filter(el => {
-                return res[7].includes(`${el.id}`);
-              });
-              this.ultimiLettiVarie = res[6].filter(el => {
-                return res[7].includes(`${el.id}`);
-              });
-            }
-            else {
-              //shuffle e prendi ultimi 3 di ognuno
-              const n = 3;
-              this.ultimiLettiHtml = res[0]
-                .map(x => ({ x, r: Math.random() }))
-                .sort((a, b) => a.r - b.r)
-                .map(a => a.x)
-                .slice(0, n);
-              this.ultimiLettiCss = res[1]
-                .map(x => ({ x, r: Math.random() }))
-                .sort((a, b) => a.r - b.r)
-                .map(a => a.x)
-                .slice(0, n);
-              this.ultimiLettiJS = res[2]
-                .map(x => ({ x, r: Math.random() }))
-                .sort((a, b) => a.r - b.r)
-                .map(a => a.x)
-                .slice(0, n);
-              this.ultimiLettiAngular = res[3]
-                .map(x => ({ x, r: Math.random() }))
-                .sort((a, b) => a.r - b.r)
-                .map(a => a.x)
-                .slice(0, n);
-              this.ultimiLettiPhp = res[4]
-                .map(x => ({ x, r: Math.random() }))
-                .sort((a, b) => a.r - b.r)
-                .map(a => a.x)
-                .slice(0, n);
-              this.ultimiLettiDrupal = res[5]
-                .map(x => ({ x, r: Math.random() }))
-                .sort((a, b) => a.r - b.r)
-                .map(a => a.x)
-                .slice(0, n);
-              this.ultimiLettiVarie = res[6]
-                .map(x => ({ x, r: Math.random() }))
-                .sort((a, b) => a.r - b.r)
-                .map(a => a.x)
-                .slice(0, n);
+
+            if (res[7] && res[7].length ) { // starred su github
+              this.starred =res[7];
             }
 
-            if(res[8]) { //preferiti di stackoverflow
+            if(res[8] && res[8].items) { //preferiti di stackoverflow
               this.questions = res[8].items;
             }
           }

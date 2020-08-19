@@ -12,5 +12,10 @@ export class StackoverflowService {
   getFavorites() {
     let url = "https://api.stackexchange.com/2.2/users/9113074/favorites?order=desc&sort=activity&site=stackoverflow";
     return this.httpClient.get(url)
-}
+  }
+
+  getStarred() {
+    let url = "https://api.github.com/users/elenat82/starred?per_page=100";
+    return this.httpClient.get(url);
+  }
 }
