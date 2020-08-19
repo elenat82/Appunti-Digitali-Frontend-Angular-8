@@ -1,9 +1,9 @@
 import { StackoverflowService } from './../../services/stackoverflow.service';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { map, switchMap, delay, tap } from 'rxjs/operators';
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, forkJoin, of, pipe, concat } from 'rxjs';
+import { Observable, forkJoin, of, pipe, concat, Subscription } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 import { FilterlistPipe } from 'src/app/pipes/filterlist.pipe';
 import { SafePipe } from 'src/app/pipes/safe.pipe';
@@ -18,7 +18,7 @@ import { SlugifyPipe } from 'src/app/pipes/slugify.pipe';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, OnDestroy {
 
   public contentForm: FormGroup = this._formBuilder.group({
     query: '',
@@ -33,11 +33,14 @@ export class HomeComponent implements OnInit {
     scrollbarMinSize: 100
   }
 
+  private indexedDBSubscription: Subscription;
+  private contentSubscription: Subscription;
+
   constructor(public contentService: ContentService, public filterlistPipe: FilterlistPipe, private _formBuilder: FormBuilder, private router: Router, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService, private activatedRoute: ActivatedRoute, private feedService: FeedsService, private stackoverflowService: StackoverflowService, private slugifyPipe: SlugifyPipe) { }
 
   ngOnInit() {
     this.spinnerOverlayService.show();
-    forkJoin(
+    this.contentSubscription = forkJoin(
       this.contentService.getContentFromServer('html'),
       this.contentService.getContentFromServer('css'),
       this.contentService.getContentFromServer('javascript'),
@@ -115,7 +118,7 @@ export class HomeComponent implements OnInit {
                 map(value => (value && value.length >= 3) ? this._filterGroup(value) : null)
               );
 
-            forkJoin(
+            this.indexedDBSubscription = forkJoin(
               this.contentService.writeIntoIndexedDB('html', res[0]),
               this.contentService.writeIntoIndexedDB('css', res[1]),
               this.contentService.writeIntoIndexedDB('javascript', res[2]),
@@ -182,6 +185,15 @@ export class HomeComponent implements OnInit {
     else {
       return ''
     }
+  }
+
+  trackByFunc(index: number, el: any) {
+    return el.id;
+  }
+
+  ngOnDestroy(): void {
+    this.indexedDBSubscription.unsubscribe();
+    this.contentSubscription.unsubscribe();
   }
 
 }

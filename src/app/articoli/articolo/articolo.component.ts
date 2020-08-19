@@ -1,8 +1,8 @@
-import { Component, OnInit, AfterViewChecked, HostListener, NgZone } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, HostListener, NgZone, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router, NavigationExtras, Params } from '@angular/router';
 import { switchMap, map, tap } from 'rxjs/operators';
 import { ContentService } from 'src/app/services/content.service';
-import { forkJoin, combineLatest, pipe, BehaviorSubject, Observable } from 'rxjs';
+import { forkJoin, combineLatest, pipe, BehaviorSubject, Observable, Subscription } from 'rxjs';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { SpinnerOverlayService } from 'src/app/services/spinner-overlay/spinner-overlay-service.service';
 import { HighlightService } from 'src/app/services/highlight.service';
@@ -12,7 +12,7 @@ import { HighlightService } from 'src/app/services/highlight.service';
   templateUrl: './articolo.component.html',
   styleUrls: ['./articolo.component.scss']
 })
-export class ArticoloComponent implements OnInit, AfterViewChecked {
+export class ArticoloComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   public content: any;
   public options = {
@@ -29,6 +29,9 @@ export class ArticoloComponent implements OnInit, AfterViewChecked {
 
   private codepenAddedToHead = false;
 
+  private storageSubscription: Subscription;
+  private screenSubscription: Subscription;
+
   constructor(
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -42,7 +45,7 @@ export class ArticoloComponent implements OnInit, AfterViewChecked {
     this.spinnerOverlayService.show();
     this.activatedRoute.params.forEach((params: Params) => {
       this.materiaArticolo = params.materia;
-      this.storageMap.get(params.materia)
+      this.storageSubscription = this.storageMap.get(params.materia)
         .pipe(
           map((data: any[]) => {
             if (data && data.length) {
@@ -119,7 +122,7 @@ export class ArticoloComponent implements OnInit, AfterViewChecked {
         )
     });
 
-    this.getScreenWidth().subscribe(width => {
+    this.screenSubscription = this.getScreenWidth().subscribe(width => {
       if (width < 1200) {
         this.showAsideOnTheRight = false;
       }
@@ -147,6 +150,8 @@ export class ArticoloComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnDestroy(): void {
+    this.storageSubscription.unsubscribe();
+    this.screenSubscription.unsubscribe();
     if (this.codepenAddedToHead) {
       let headtag = document.getElementsByTagName('head')[0];
       for (let i = 0; i < headtag.children.length; i++) {

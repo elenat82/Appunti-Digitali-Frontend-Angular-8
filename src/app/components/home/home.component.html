@@ -75,7 +75,7 @@
               [displayWith]="getOptionText">
               <ngx-simplebar [options]="options" id="src-bar">
                 <mat-optgroup *ngFor="let group of materieOptions | async" [label]="group.materia">
-                  <mat-option *ngFor="let articolo of group.articoli" [value]="articolo">
+                  <mat-option *ngFor="let articolo of group.articoli; trackBy : trackByFunc" [value]="articolo">
                     {{articolo.titolo}}
                   </mat-option>
                 </mat-optgroup>

@@ -54,7 +54,7 @@
     <ngx-simplebar [options]="simplebarOptions">
       <div class="menu-wrapper">
         <mat-nav-list>
-          <mat-list-item *ngFor="let el of strumentiUtili   | filterlist : query"><a matLine href="{{el.url}}"
+          <mat-list-item *ngFor="let el of strumentiUtili   | filterlist : query; trackBy : trackByFunc"><a matLine href="{{el.url}}"
               target="_blank" rel="no-opener">{{ el.text }}</a></mat-list-item>
         </mat-nav-list>
       </div>

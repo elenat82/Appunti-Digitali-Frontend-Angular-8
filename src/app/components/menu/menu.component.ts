@@ -72,4 +72,8 @@ export class MenuComponent implements OnInit {
       )
   }
 
+  trackByFunc(index: number, el: any) {
+    return el.id;
+  }
+
 }
