@@ -121,7 +121,7 @@ a[href*="caniuse"] {
     font-size: 14px;
   }
   .parolachiave {
-    background-color: var(--accent-lighter-color);
+    border: solid 0.5px var(--accent-lighter-color)
   }
   .cell-true {
     background-color: #c9e1bd;

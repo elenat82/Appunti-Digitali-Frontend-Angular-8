@@ -11,7 +11,7 @@
             <ngx-simplebar [options]="options" id="nws-bar">
               <mat-card-content>
                 <mat-list>
-                  <mat-list-item *ngFor="let item of feed?.rss.channel[0].item; let ind=index;">
+                  <mat-list-item *ngFor="let item of feed?.rss?.channel[0].item; let ind=index;">
                     <a matLine [href]="item.link[0]" target="_blank">
                       {{item.title[0]}}
                     </a>
@@ -102,7 +102,7 @@
             <ngx-simplebar [options]="options" id="nws-bar">
               <mat-card-content>
                 <mat-list>
-                  <mat-list-item *ngFor="let item of feed?.rss.channel[0].item; let ind=index;">
+                  <mat-list-item *ngFor="let item of feed?.rss?.channel[0].item; let ind=index;">
                     <a matLine [href]="item?.link[0]" target="_blank">
                       {{item?.title[0]}}
                     </a>

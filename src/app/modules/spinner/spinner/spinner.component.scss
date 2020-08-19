@@ -22,7 +22,7 @@
   border-radius: 50%;
 }
 .loader div:before {
-  background-color: #ffdab9;
+  background-color: var(--accent-lighter-color);
   animation: scale-1 2400ms linear infinite;
 }
 .loader div:after {

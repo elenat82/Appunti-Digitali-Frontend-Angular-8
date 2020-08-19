@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -9,13 +9,19 @@ export class StackoverflowService {
 
   constructor(private httpClient: HttpClient) { }
 
+  private httpOption = {
+    headers: new HttpHeaders(
+      { 'authorization': 'token 314b978f9df54d3e1b65b27ec68a211a672cbd69' }
+    )
+  };
+
   getFavorites() {
     let url = "https://api.stackexchange.com/2.2/users/9113074/favorites?order=desc&sort=activity&site=stackoverflow";
     return this.httpClient.get(url)
   }
 
   getStarred() {
-    let url = "https://api.github.com/users/elenat82/starred?per_page=100";
-    return this.httpClient.get(url);
+    let url = "https://api.github.com/users/elenat82/starred?per_page=500&sort=created";
+    return this.httpClient.get(url, this.httpOption);
   }
 }

@@ -46,7 +46,8 @@ export class HomeComponent implements OnInit {
       this.contentService.getContentFromServer('drupal'),
       this.contentService.getContentFromServer('varie'),
       this.stackoverflowService.getStarred(),
-      this.stackoverflowService.getFavorites()
+      this.stackoverflowService.getFavorites(),
+      this.feedService.getFeeds()
     ).pipe(
       map((data: any[]) => {
         if (data.length) {
@@ -130,11 +131,23 @@ export class HomeComponent implements OnInit {
             );
 
             if (res[7] && res[7].length ) { // starred su github
-              this.starred =res[7];
+              this.starred =res[7].sort((a, b) => {
+                if ( a.name.toLowerCase() < b.name.toLowerCase() ){
+                  return -1;
+                }
+                if ( a.name.toLowerCase() > b.name.toLowerCase() ){
+                  return 1;
+                }
+                return 0;
+              });
             }
 
             if(res[8] && res[8].items) { //preferiti di stackoverflow
               this.questions = res[8].items;
+            }
+
+            if(res[9] && res[9].rss) { //notizie
+              this.feed = res[9];
             }
           }
         },
@@ -144,16 +157,6 @@ export class HomeComponent implements OnInit {
         }
       );
 
-    this.feedService.getFeeds().subscribe(
-      (res) => {
-        if (res && res.rss) {
-          this.feed = res;
-        }
-      },
-      (err) => {
-        console.log('err: ', err);
-      }
-    );
 
   }
 
