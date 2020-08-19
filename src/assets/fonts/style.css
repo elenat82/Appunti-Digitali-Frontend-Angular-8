@@ -80,4 +80,5 @@ i {
 }
 .icon-app-heart:before {
   content: "\e9da";
+  color: var(--accent-lighter-color);
 }

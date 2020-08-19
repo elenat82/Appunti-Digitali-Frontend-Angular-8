@@ -8,12 +8,12 @@
 // have to load a single css file for Angular Material in your app.
 
 // Fonts
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Fira+Mono&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,300;0,400;0,700;1,400&family=Fira+Mono&display=swap&family=Rock+Salt&display=swap');
      
 $fontConfig: (
   //parametri del mat-typography-level:  font-size, line-height, font-family- letter-spacing
   display-4: mat-typography-level(1rem, 1.5, 300, 'Fira Mono', 0.1rem), /* classe keyword */
-  display-3: mat-typography-level(56px, 56px, 400, 'Lato', -0.0089em),
+  display-3: mat-typography-level(1rem, 28px, 700, 'Rock Salt', 0.0094em),
   display-2: mat-typography-level(45px, 48px, 400, 'Lato', 0.0000em),
   display-1: mat-typography-level(34px, 40px, 400, 'Lato', 0.0074em),
   headline: mat-typography-level(24px, 32px, 400, 'Lato', 0.0000em),

@@ -13,7 +13,9 @@
               <mat-icon aria-label="Side nav toggle icon">close</mat-icon>
             </ng-template>
           </button>
-          <span>{{title}}</span>
+          <a [routerLink]="['/home']" class="link-to-home">
+            <h1>{{title}}</h1>
+          </a>
         </div>
         <button mat-button class="strumenti-utili" (click)="openModal(mytemplate)"><i
             class="icon-app-wrench"></i>Strumenti utili</button>
