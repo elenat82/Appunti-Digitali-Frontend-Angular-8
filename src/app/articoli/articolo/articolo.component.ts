@@ -1,11 +1,12 @@
-import { Component, OnInit, AfterViewChecked, HostListener, NgZone, OnDestroy } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, HostListener, OnDestroy, ChangeDetectorRef } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router, NavigationExtras, Params } from '@angular/router';
-import { switchMap, map, tap } from 'rxjs/operators';
+import { switchMap, map, tap, flatMap } from 'rxjs/operators';
 import { ContentService } from 'src/app/services/content.service';
-import { forkJoin, combineLatest, pipe, BehaviorSubject, Observable, Subscription } from 'rxjs';
+import { forkJoin, combineLatest, pipe, BehaviorSubject, Observable, of } from 'rxjs';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { SpinnerOverlayService } from 'src/app/services/spinner-overlay/spinner-overlay-service.service';
 import { HighlightService } from 'src/app/services/highlight.service';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-articolo',
@@ -27,10 +28,7 @@ export class ArticoloComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   public showAsideOnTheRight: boolean;
 
-  private codepenAddedToHead = false;
-
-  private storageSubscription: Subscription;
-  private screenSubscription: Subscription;
+  private codepenAddedToBody = false;
 
   constructor(
     private router: Router,
@@ -39,13 +37,15 @@ export class ArticoloComponent implements OnInit, AfterViewChecked, OnDestroy {
     public spinnerOverlayService: SpinnerOverlayService,
     private highlightService: HighlightService,
     private storageMap: StorageMap,
-    private zone: NgZone) { this.router.routeReuseStrategy.shouldReuseRoute = () => false; }
+    private titleService: Title) {
+    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
+  }
 
   ngOnInit() {
     this.spinnerOverlayService.show();
     this.activatedRoute.params.forEach((params: Params) => {
       this.materiaArticolo = params.materia;
-      this.storageSubscription = this.storageMap.get(params.materia)
+      this.storageMap.get(this.materiaArticolo)
         .pipe(
           map((data: any[]) => {
             if (data && data.length) {
@@ -79,14 +79,17 @@ export class ArticoloComponent implements OnInit, AfterViewChecked, OnDestroy {
             return obj;
           }),
           tap((x) => {
-            if (this.codepenAddedToHead == false) {
+            if (this.codepenAddedToBody == false) {
               let node = document.createElement('script');
               node.src = 'https://static.codepen.io/assets/embed/ei.js';
               node.type = 'text/javascript';
               node.async = true;
               node.charset = 'utf-8';
-              document.getElementsByTagName('head')[0].appendChild(node);
-              this.codepenAddedToHead = true;
+              document.getElementsByTagName('article')[0].appendChild(node);
+              setTimeout(() => {
+                (<any>window).__CPEmbed();
+              }, 0);
+              this.codepenAddedToBody = true;
             }
           }),
           map((res) => {
@@ -107,6 +110,11 @@ export class ArticoloComponent implements OnInit, AfterViewChecked, OnDestroy {
               });
             }
             return res;
+          }),
+          tap((el) => {
+            if (el) {
+              this.titleService.setTitle("Appunti Digitali | " + el.tipo + " - " + el.titolo);
+            }
           })
         )
         .subscribe(
@@ -122,7 +130,7 @@ export class ArticoloComponent implements OnInit, AfterViewChecked, OnDestroy {
         )
     });
 
-    this.screenSubscription = this.getScreenWidth().subscribe(width => {
+    this.getScreenWidth().subscribe(width => {
       if (width < 1200) {
         this.showAsideOnTheRight = false;
       }
@@ -150,17 +158,16 @@ export class ArticoloComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.storageSubscription.unsubscribe();
-    this.screenSubscription.unsubscribe();
-    if (this.codepenAddedToHead) {
-      let headtag = document.getElementsByTagName('head')[0];
-      for (let i = 0; i < headtag.children.length; i++) {
-        const el = headtag.children[i];
+    if (this.codepenAddedToBody) {
+      let bodytag = document.getElementsByTagName('article')[0];
+      for (let i = bodytag.children.length - 1; i >= 0; i--) {
+        const el = bodytag.children[i];
         if (el.nodeName == 'SCRIPT') {
           let src = el.attributes.getNamedItem("src");
           if (src.value == 'https://static.codepen.io/assets/embed/ei.js') {
-            headtag.removeChild(el);
-            this.codepenAddedToHead = false;
+            bodytag.removeChild(el);
+            this.codepenAddedToBody = false;
+            break;
           }
         }
       }

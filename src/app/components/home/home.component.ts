@@ -3,7 +3,7 @@ import { StorageMap } from '@ngx-pwa/local-storage';
 import { map, switchMap, delay, tap } from 'rxjs/operators';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, forkJoin, of, pipe, concat, Subscription } from 'rxjs';
+import { Observable, forkJoin, of, pipe, concat } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 import { FilterlistPipe } from 'src/app/pipes/filterlist.pipe';
 import { SafePipe } from 'src/app/pipes/safe.pipe';
@@ -12,6 +12,7 @@ import { SpinnerOverlayService } from 'src/app/services/spinner-overlay/spinner-
 import { FeedsService } from 'src/app/services/feeds.service';
 import * as xml2js from "xml2js";
 import { SlugifyPipe } from 'src/app/pipes/slugify.pipe';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-home',
@@ -33,14 +34,12 @@ export class HomeComponent implements OnInit, OnDestroy {
     scrollbarMinSize: 100
   }
 
-  private indexedDBSubscription: Subscription;
-  private contentSubscription: Subscription;
-
-  constructor(public contentService: ContentService, public filterlistPipe: FilterlistPipe, private _formBuilder: FormBuilder, private router: Router, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService, private activatedRoute: ActivatedRoute, private feedService: FeedsService, private stackoverflowService: StackoverflowService, private slugifyPipe: SlugifyPipe) { }
+  constructor(public contentService: ContentService, public filterlistPipe: FilterlistPipe, private _formBuilder: FormBuilder, private router: Router, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService, private activatedRoute: ActivatedRoute, private feedService: FeedsService, private stackoverflowService: StackoverflowService, private slugifyPipe: SlugifyPipe, private titleService: Title) { }
 
   ngOnInit() {
+    this.titleService.setTitle("Appunti Digitali | Gli appunti di una Front End Developer");
     this.spinnerOverlayService.show();
-    this.contentSubscription = forkJoin(
+    forkJoin(
       this.contentService.getContentFromServer('html'),
       this.contentService.getContentFromServer('css'),
       this.contentService.getContentFromServer('javascript'),
@@ -118,7 +117,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                 map(value => (value && value.length >= 3) ? this._filterGroup(value) : null)
               );
 
-            this.indexedDBSubscription = forkJoin(
+            forkJoin(
               this.contentService.writeIntoIndexedDB('html', res[0]),
               this.contentService.writeIntoIndexedDB('css', res[1]),
               this.contentService.writeIntoIndexedDB('javascript', res[2]),
@@ -192,8 +191,6 @@ export class HomeComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.indexedDBSubscription.unsubscribe();
-    this.contentSubscription.unsubscribe();
   }
 
 }
