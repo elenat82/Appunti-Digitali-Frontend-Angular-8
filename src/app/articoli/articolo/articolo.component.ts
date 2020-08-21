@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewChecked, HostListener, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, AfterViewChecked, HostListener, OnDestroy } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router, NavigationExtras, Params } from '@angular/router';
 import { switchMap, map, tap, flatMap } from 'rxjs/operators';
 import { ContentService } from 'src/app/services/content.service';
@@ -27,8 +27,6 @@ export class ArticoloComponent implements OnInit, AfterViewChecked, OnDestroy {
   private screenWidth$ = new BehaviorSubject<number>(window.innerWidth);
 
   public showAsideOnTheRight: boolean;
-
-  private codepenAddedToBody = false;
 
   constructor(
     private router: Router,
@@ -78,20 +76,6 @@ export class ArticoloComponent implements OnInit, AfterViewChecked, OnDestroy {
             }
             return obj;
           }),
-          tap((x) => {
-            if (this.codepenAddedToBody == false) {
-              let node = document.createElement('script');
-              node.src = 'https://static.codepen.io/assets/embed/ei.js';
-              node.type = 'text/javascript';
-              node.async = true;
-              node.charset = 'utf-8';
-              document.getElementsByTagName('article')[0].appendChild(node);
-              setTimeout(() => {
-                (<any>window).__CPEmbed();
-              }, 0);
-              this.codepenAddedToBody = true;
-            }
-          }),
           map((res) => {
             if (res && res.approfondimenti) {
               res.approfondimenti.forEach(element => {
@@ -120,8 +104,11 @@ export class ArticoloComponent implements OnInit, AfterViewChecked, OnDestroy {
         .subscribe(
           (res: any) => {
             this.content = res;
-            this.done = true
-            this.spinnerOverlayService.hide();
+            setTimeout(() => {
+              (<any>window).__CPEmbed();
+              this.done = true;
+              this.spinnerOverlayService.hide();
+            }, 0);
           },
           (err) => {
             console.log('err: ', err);
@@ -158,19 +145,5 @@ export class ArticoloComponent implements OnInit, AfterViewChecked, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    if (this.codepenAddedToBody) {
-      let bodytag = document.getElementsByTagName('article')[0];
-      for (let i = bodytag.children.length - 1; i >= 0; i--) {
-        const el = bodytag.children[i];
-        if (el.nodeName == 'SCRIPT') {
-          let src = el.attributes.getNamedItem("src");
-          if (src.value == 'https://static.codepen.io/assets/embed/ei.js') {
-            bodytag.removeChild(el);
-            this.codepenAddedToBody = false;
-            break;
-          }
-        }
-      }
-    }
   }
 }
