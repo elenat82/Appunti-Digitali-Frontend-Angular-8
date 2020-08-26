@@ -1,9 +1,9 @@
 import { StackoverflowService } from './../../services/stackoverflow.service';
 import { StorageMap } from '@ngx-pwa/local-storage';
-import { map, switchMap, delay, tap, pairwise, filter } from 'rxjs/operators';
+import { map, switchMap, delay, tap, pairwise, filter, finalize, mergeMap, ignoreElements } from 'rxjs/operators';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Observable, forkJoin, of, pipe, concat } from 'rxjs';
+import { Observable, forkJoin, of, pipe, concat, Subject, defer, merge } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 import { FilterlistPipe } from 'src/app/pipes/filterlist.pipe';
 import { SafePipe } from 'src/app/pipes/safe.pipe';
@@ -37,21 +37,23 @@ export class HomeComponent implements OnInit, OnDestroy {
   constructor(public contentService: ContentService, public filterlistPipe: FilterlistPipe, private _formBuilder: FormBuilder, private router: Router, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService, private activatedRoute: ActivatedRoute, private feedService: FeedsService, private stackoverflowService: StackoverflowService, private slugifyPipe: SlugifyPipe, private titleService: Title) {
   }
 
+
+
   ngOnInit() {
     this.titleService.setTitle("Appunti Digitali | Gli appunti di una Front End Developer");
-    this.spinnerOverlayService.show();
-    forkJoin(
-      this.contentService.getContentFromServer('html'),
-      this.contentService.getContentFromServer('css'),
-      this.contentService.getContentFromServer('javascript'),
-      this.contentService.getContentFromServer('angular'),
-      this.contentService.getContentFromServer('php'),
-      this.contentService.getContentFromServer('drupal'),
-      this.contentService.getContentFromServer('varie'),
-      this.stackoverflowService.getStarred(),
-      this.stackoverflowService.getFavorites(),
-      this.feedService.getFeeds()
-    ).pipe(
+    this.spinnerOverlayService.show("");
+
+    this.contentService.getContentWithPercent(['html', 'css', 'javascript', 'angular', 'php', 'drupal', 'varie'])
+    .pipe(
+      mergeMap(([finalResult, progress]) => merge(
+        progress.pipe(
+          tap((value) => {
+            console.log(`${value} completed`);
+          }),
+          ignoreElements()
+        ),
+        finalResult
+      )),
       map((data: any[]) => {
         if (data.length) {
           data[0].map(d => { //html
@@ -78,94 +80,93 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
         return data;
       })
-    )
-      .subscribe(
-        (res) => {
-          if (res) {
-            this.materieGroups = [
-              {
-                materia: "Html",
-                articoli: res[0]
-              },
-              {
-                materia: "Css",
-                articoli: res[1]
-              },
-              {
-                materia: "JavaScript",
-                articoli: res[2]
-              },
-              {
-                materia: "Angular",
-                articoli: res[3]
-              },
-              {
-                materia: "Php",
-                articoli: res[4]
-              }, {
-                materia: "Drupal",
-                articoli: res[5]
-              },
-              {
-                materia: "Varie",
-                articoli: res[6]
-              }
-            ];
-
-            this.materieOptions = this.contentForm.get('query')!.valueChanges
-              .pipe(
-                //startWith(''),
-                map(value => (value && value.length >= 3) ? this._filterGroup(value) : null)
-              );
-
-            forkJoin(
-              this.contentService.writeIntoIndexedDB('html', res[0]),
-              this.contentService.writeIntoIndexedDB('css', res[1]),
-              this.contentService.writeIntoIndexedDB('javascript', res[2]),
-              this.contentService.writeIntoIndexedDB('angular', res[3]),
-              this.contentService.writeIntoIndexedDB('php', res[4]),
-              this.contentService.writeIntoIndexedDB('drupal', res[5]),
-              this.contentService.writeIntoIndexedDB('varie', res[6])
-            ).subscribe(
-              () => {
-                this.contentService.dataSavedToLS.emit(res);
-                this.activatedRoute.queryParams.subscribe(
-                  par => {
-                    if (par.returnUrl) {
-                      this.router.navigate([par.returnUrl])
+    ).subscribe(
+          (res) => {
+            if (res) {
+              this.materieGroups = [
+                {
+                  materia: "Html",
+                  articoli: res[0]
+                },
+                {
+                  materia: "Css",
+                  articoli: res[1]
+                },
+                {
+                  materia: "JavaScript",
+                  articoli: res[2]
+                },
+                {
+                  materia: "Angular",
+                  articoli: res[3]
+                },
+                {
+                  materia: "Php",
+                  articoli: res[4]
+                }, {
+                  materia: "Drupal",
+                  articoli: res[5]
+                },
+                {
+                  materia: "Varie",
+                  articoli: res[6]
+                }
+              ];
+  
+              this.materieOptions = this.contentForm.get('query')!.valueChanges
+                .pipe(
+                  //startWith(''),
+                  map(value => (value && value.length >= 3) ? this._filterGroup(value) : null)
+                );
+  
+              forkJoin(
+                this.contentService.writeIntoIndexedDB('html', res[0]),
+                this.contentService.writeIntoIndexedDB('css', res[1]),
+                this.contentService.writeIntoIndexedDB('javascript', res[2]),
+                this.contentService.writeIntoIndexedDB('angular', res[3]),
+                this.contentService.writeIntoIndexedDB('php', res[4]),
+                this.contentService.writeIntoIndexedDB('drupal', res[5]),
+                this.contentService.writeIntoIndexedDB('varie', res[6])
+              ).subscribe(
+                () => {
+                  this.contentService.dataSavedToLS.emit(res);
+                  this.activatedRoute.queryParams.subscribe(
+                    par => {
+                      if (par.returnUrl) {
+                        this.router.navigate([par.returnUrl])
+                      }
                     }
+                  )
+                  this.spinnerOverlayService.hide();
+                }
+              );
+  
+              if (res[7] && res[7].length) { // starred su github
+                this.starred = res[7].sort((a, b) => {
+                  if (a.name.toLowerCase() < b.name.toLowerCase()) {
+                    return -1;
                   }
-                )
-                this.spinnerOverlayService.hide();
+                  if (a.name.toLowerCase() > b.name.toLowerCase()) {
+                    return 1;
+                  }
+                  return 0;
+                });
               }
-            );
-
-            if (res[7] && res[7].length) { // starred su github
-              this.starred = res[7].sort((a, b) => {
-                if (a.name.toLowerCase() < b.name.toLowerCase()) {
-                  return -1;
-                }
-                if (a.name.toLowerCase() > b.name.toLowerCase()) {
-                  return 1;
-                }
-                return 0;
-              });
+  
+              if (res[8] && res[8].items) { //preferiti di stackoverflow
+                this.questions = res[8].items;
+              }
+  
+              if (res[9] && res[9].rss) { //notizie
+                this.feed = res[9];
+              }
             }
-
-            if (res[8] && res[8].items) { //preferiti di stackoverflow
-              this.questions = res[8].items;
-            }
-
-            if (res[9] && res[9].rss) { //notizie
-              this.feed = res[9];
-            }
+          },
+          (err) => {
+            console.log('err: ', err);
+            this.spinnerOverlayService.hide();
           }
-        },
-        (err) => {
-          console.log('err: ', err);
-          this.spinnerOverlayService.hide();
-        }
-      );
+        );
 
 
   }
