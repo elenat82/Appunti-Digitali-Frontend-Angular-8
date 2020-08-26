@@ -7,11 +7,12 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SpinnerComponent implements OnInit {
 
-  @Input() message = '';
+  @Input() message;
 
   constructor() { }
 
   ngOnInit() {
+    console.log(this.message);
   }
 
 }
