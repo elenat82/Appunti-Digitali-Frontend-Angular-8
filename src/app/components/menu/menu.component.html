@@ -17,26 +17,26 @@
       <h3  class="mat-display-3"><i class="icon-app-html5"></i>Html</h3>
       <mat-list-item *ngFor="let voice of menuHtml  | filterlist : query; trackBy : trackByFunc"
         [routerLink]="['/appunti', voice.tipo.toLowerCase(),voice.slug]" routerLinkActive="active-menu">
-        <a matLine>{{ voice.titolo }}</a>
+        <a matLine [innerHTML]="voice.titolo"></a>
       </mat-list-item>
       <mat-divider></mat-divider>
       <h3  class="mat-display-3"><i class="icon-app-css3"></i>Css</h3>
       <mat-list-item *ngFor="let voice of menuCss  | filterlist : query; trackBy : trackByFunc"
         [routerLink]="['/appunti', voice.tipo.toLowerCase(),voice.slug]" routerLinkActive="active-menu">
-        <a matLine>{{ voice.titolo }}</a>
+        <a matLine [innerHTML]="voice.titolo"></a>
       </mat-list-item>
       <mat-divider></mat-divider>
       <h3  class="mat-display-3"><i class="icon-app-javascript"></i>Javascript</h3>
       <mat-list-item *ngFor="let voice of menuJS  | filterlist : query; trackBy : trackByFunc"
         [routerLink]="['/appunti', voice.tipo.toLowerCase(), voice.slug]" routerLinkActive="active-menu">
-        <a matLine>{{ voice.titolo }}</a>
+        <a matLine [innerHTML]="voice.titolo"></a>
       </mat-list-item>
       <ng-container *ngIf="menuAngular?.length">
       <mat-divider></mat-divider>
       <h3  class="mat-display-3"><i class="icon-app-angular"></i>Angular</h3>
       <mat-list-item *ngFor="let voice of menuAngular  | filterlist : query; trackBy : trackByFunc"
         [routerLink]="['/appunti', voice.tipo.toLowerCase(),voice.slug]" routerLinkActive="active-menu">
-        <a matLine>{{ voice.titolo }}</a>
+        <a matLine [innerHTML]="voice.titolo"></a>
       </mat-list-item>
     </ng-container>
       <ng-container *ngIf="menuPhp?.length">
@@ -44,7 +44,7 @@
         <h3  class="mat-display-3"><i class="icon-app-php"></i>Php</h3>
         <mat-list-item *ngFor="let voice of menuPhp  | filterlist : query; trackBy : trackByFunc"
           [routerLink]="['/appunti', voice.tipo.toLowerCase(),voice.slug]" routerLinkActive="active-menu">
-          <a matLine>{{ voice.titolo }}</a>
+          <a matLine [innerHTML]="voice.titolo"></a>
         </mat-list-item>
       </ng-container>
       <ng-container *ngIf="menuDrupal?.length">
@@ -52,14 +52,14 @@
         <h3  class="mat-display-3"><i class="icon-app-drupal"></i>Drupal</h3>
         <mat-list-item *ngFor="let voice of menuDrupal  | filterlist : query; trackBy : trackByFunc"
           [routerLink]="['/appunti', voice.tipo.toLowerCase(),voice.slug]" routerLinkActive="active-menu">
-          <a matLine>{{ voice.titolo }}</a>
+          <a matLine [innerHTML]="voice.titolo"></a>
         </mat-list-item>
       </ng-container>
       <mat-divider></mat-divider>
       <h3  class="mat-display-3"><i class="icon-app-heart"></i>Varie</h3>
       <mat-list-item *ngFor="let voice of menuVarie  | filterlist : query; trackBy : trackByFunc"
         [routerLink]="['/appunti', voice.tipo.toLowerCase(),voice.slug]" routerLinkActive="active-menu">
-        <a matLine>{{ voice.titolo }}</a>
+        <a matLine [innerHTML]="voice.titolo"></a>
       </mat-list-item>
     </mat-nav-list>
   </div>
