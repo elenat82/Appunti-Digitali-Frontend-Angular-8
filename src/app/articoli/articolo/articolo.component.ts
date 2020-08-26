@@ -23,6 +23,7 @@ export class ArticoloComponent implements OnInit, AfterViewChecked, OnDestroy {
   private done = false;
 
   private materiaArticolo: string;
+  private slugArticolo: string;
 
   private screenWidth$ = new BehaviorSubject<number>(window.innerWidth);
 
@@ -41,20 +42,24 @@ export class ArticoloComponent implements OnInit, AfterViewChecked, OnDestroy {
 
   ngOnInit() {
     this.spinnerOverlayService.show();
-    this.activatedRoute.params.forEach((params: Params) => {
-      this.materiaArticolo = params.materia;
-      this.storageMap.get(this.materiaArticolo)
+
+    this.activatedRoute.params
         .pipe(
+          switchMap( (params: any) => {
+            this.materiaArticolo = params.materia;
+            this.slugArticolo = params.slug;
+            return this.storageMap.get(this.materiaArticolo)
+          }),
           map((data: any[]) => {
             if (data && data.length) {
               return data.filter(el => {
-                return el.slug == params.slug
+                return el.slug == this.slugArticolo;
               })[0]
             }
           }),
           map((obj: any) => {
             if (obj) {
-              let defaultTab = params.materia == "javascript" ? "js" : params.materia;
+              let defaultTab = this.materiaArticolo == "javascript" ? "js" : this.materiaArticolo;
               let frag = document.createRange().createContextualFragment(obj.body);
               let codes = frag.querySelectorAll('.penny');
               codes.length && codes.forEach(el => {
@@ -115,7 +120,6 @@ export class ArticoloComponent implements OnInit, AfterViewChecked, OnDestroy {
             this.spinnerOverlayService.hide();
           }
         )
-    });
 
     this.getScreenWidth().subscribe(width => {
       if (width < 1200) {

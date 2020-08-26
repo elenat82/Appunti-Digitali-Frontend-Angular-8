@@ -1,13 +1,13 @@
 import { StackoverflowService } from './../../services/stackoverflow.service';
 import { StorageMap } from '@ngx-pwa/local-storage';
-import { map, switchMap, delay, tap } from 'rxjs/operators';
+import { map, switchMap, delay, tap, pairwise, filter } from 'rxjs/operators';
 import { Component, OnInit, Input, OnDestroy } from '@angular/core';
 import { FormControl, FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Observable, forkJoin, of, pipe, concat } from 'rxjs';
 import { ContentService } from 'src/app/services/content.service';
 import { FilterlistPipe } from 'src/app/pipes/filterlist.pipe';
 import { SafePipe } from 'src/app/pipes/safe.pipe';
-import { Router, NavigationExtras, ActivatedRoute, NavigationStart, NavigationEnd } from '@angular/router';
+import { Router, NavigationExtras, ActivatedRoute, NavigationStart, NavigationEnd, RoutesRecognized } from '@angular/router';
 import { SpinnerOverlayService } from 'src/app/services/spinner-overlay/spinner-overlay-service.service';
 import { FeedsService } from 'src/app/services/feeds.service';
 import * as xml2js from "xml2js";
@@ -34,7 +34,8 @@ export class HomeComponent implements OnInit, OnDestroy {
     scrollbarMinSize: 100
   }
 
-  constructor(public contentService: ContentService, public filterlistPipe: FilterlistPipe, private _formBuilder: FormBuilder, private router: Router, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService, private activatedRoute: ActivatedRoute, private feedService: FeedsService, private stackoverflowService: StackoverflowService, private slugifyPipe: SlugifyPipe, private titleService: Title) { }
+  constructor(public contentService: ContentService, public filterlistPipe: FilterlistPipe, private _formBuilder: FormBuilder, private router: Router, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService, private activatedRoute: ActivatedRoute, private feedService: FeedsService, private stackoverflowService: StackoverflowService, private slugifyPipe: SlugifyPipe, private titleService: Title) {
+  }
 
   ngOnInit() {
     this.titleService.setTitle("Appunti Digitali | Gli appunti di una Front End Developer");
@@ -53,25 +54,25 @@ export class HomeComponent implements OnInit, OnDestroy {
     ).pipe(
       map((data: any[]) => {
         if (data.length) {
-          data[0].map( d => { //html
+          data[0].map(d => { //html
             d.slug = this.slugifyPipe.transform(d.titolo);
           });
-          data[1].map( d => { //css
+          data[1].map(d => { //css
             d.slug = this.slugifyPipe.transform(d.titolo);
           });
-          data[2].map( d => { //js
+          data[2].map(d => { //js
             d.slug = this.slugifyPipe.transform(d.titolo);
           });
-          data[3].map( d => { //angular
+          data[3].map(d => { //angular
             d.slug = this.slugifyPipe.transform(d.titolo);
           });
-          data[4].map( d => { //php
+          data[4].map(d => { //php
             d.slug = this.slugifyPipe.transform(d.titolo);
           });
-          data[5].map( d => { //drupal
+          data[5].map(d => { //drupal
             d.slug = this.slugifyPipe.transform(d.titolo);
           });
-          data[6].map( d => { //varie
+          data[6].map(d => { //varie
             d.slug = this.slugifyPipe.transform(d.titolo);
           });
         }
@@ -128,27 +129,34 @@ export class HomeComponent implements OnInit, OnDestroy {
             ).subscribe(
               () => {
                 this.contentService.dataSavedToLS.emit(res);
+                this.activatedRoute.queryParams.subscribe(
+                  par => {
+                    if (par.returnUrl) {
+                      this.router.navigate([par.returnUrl])
+                    }
+                  }
+                )
                 this.spinnerOverlayService.hide();
               }
             );
 
-            if (res[7] && res[7].length ) { // starred su github
-              this.starred =res[7].sort((a, b) => {
-                if ( a.name.toLowerCase() < b.name.toLowerCase() ){
+            if (res[7] && res[7].length) { // starred su github
+              this.starred = res[7].sort((a, b) => {
+                if (a.name.toLowerCase() < b.name.toLowerCase()) {
                   return -1;
                 }
-                if ( a.name.toLowerCase() > b.name.toLowerCase() ){
+                if (a.name.toLowerCase() > b.name.toLowerCase()) {
                   return 1;
                 }
                 return 0;
               });
             }
 
-            if(res[8] && res[8].items) { //preferiti di stackoverflow
+            if (res[8] && res[8].items) { //preferiti di stackoverflow
               this.questions = res[8].items;
             }
 
-            if(res[9] && res[9].rss) { //notizie
+            if (res[9] && res[9].rss) { //notizie
               this.feed = res[9];
             }
           }
