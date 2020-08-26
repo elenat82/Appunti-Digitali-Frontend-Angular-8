@@ -35,7 +35,7 @@
               <mat-card-content>
                 <mat-list>
                   <mat-list-item *ngFor="let q of questions; let ind=index;">
-                    <a matLine [href]="q?.link" target="_blank">{{ q?.title }}</a>
+                    <a matLine [href]="q?.link" target="_blank" [innerHTML]="q?.title"></a>
                   </mat-list-item>
                 </mat-list>
               </mat-card-content>
