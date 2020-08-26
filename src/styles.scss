@@ -157,3 +157,8 @@ main.hideBottomToolbar {
   width: 100%;
   background-color: #d9dedf;
 }
+
+.mat-snack-bar-container.blue-snackbar {
+  background-color: var(--accent-darker-color);
+  color: #FFFFFF;
+}

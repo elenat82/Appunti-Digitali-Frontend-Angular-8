@@ -38,12 +38,15 @@ mat-sidenav {
         color: var(--primary-color);
         margin-left: 0.5rem;
     }
-    a.btn {
+    div.btn {
+        color: var(--primary-color);
+        margin-left: 0.5rem;
+        cursor: pointer;
         position: relative;
         display: inline-block;
         min-width: 154px;
     }
-    a.btn:hover .button-stroke:nth-child(2) {
+    div.btn:hover .button-stroke:nth-child(2) {
         stroke-dashoffset: 0;
     }
 

@@ -5,7 +5,7 @@ import { fadeAnimation } from './animations';
 import { ContentService } from './services/content.service';
 import { Observable, forkJoin, Subject, BehaviorSubject } from 'rxjs';
 import { StorageMap } from '@ngx-pwa/local-storage';
-import { MatDialog, MatSidenav } from '@angular/material';
+import { MatDialog, MatSidenav, MatSnackBar } from '@angular/material';
 import 'autotrack/lib/plugins/clean-url-tracker';
 import 'autotrack/lib/plugins/outbound-link-tracker';
 import 'autotrack/lib/plugins/page-visibility-tracker';
@@ -47,7 +47,7 @@ export class AppComponent implements OnInit {
   private screenHeight$ = new BehaviorSubject<number>(window.innerHeight);
   @ViewChild('sidenav', { static: false }) matSidenav: MatSidenav;
 
-  constructor(public contentService: ContentService, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService, public dialog: MatDialog) { }
+  constructor(public contentService: ContentService, private storageMap: StorageMap, public spinnerOverlayService: SpinnerOverlayService, public dialog: MatDialog, public snackBar: MatSnackBar) { }
 
   ngOnInit() {
     console.log(
@@ -137,5 +137,23 @@ export class AppComponent implements OnInit {
 
   trackByFunc(index: number, el: any) {
     return el.url;
+  }
+
+  copy() {
+    let selBox = document.createElement('textarea');
+    selBox.style.position = 'fixed';
+    selBox.style.left = '0';
+    selBox.style.top = '0';
+    selBox.style.opacity = '0';
+    selBox.value = "e.trudini82@gmail.com";
+    document.body.appendChild(selBox);
+    selBox.focus();
+    selBox.select();
+    document.execCommand('copy');
+    document.body.removeChild(selBox);
+    this.snackBar.open("Copiato!", null, {
+      duration: 2000,
+      panelClass: ['blue-snackbar']
+    })
   }
 }

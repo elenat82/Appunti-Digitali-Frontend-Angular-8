@@ -29,13 +29,13 @@
       <mat-toolbar-row>
         <small class="mat-small">Made with <i matTooltip="Drupal8" class="icon-app-drupal"></i> + <i
             class="icon-app-angular" matTooltip="Angular8"></i> + <i class="icon-app-heart" matTooltip="Love"></i> by
-          <a class="btn" href="mailto:e.trudini82@gmail.com" target="_blank"><span>e.trudini82<i
+          <div class="btn" [matMenuTriggerFor]="menu" aria-label="Email menu"><span>e.trudini82<i
                 class="icon-app-at-symbol"></i>gmail.com</span> <svg class="button-stroke" viewBox="0 0 154 13">
               <use href="#line"></use>
             </svg>
             <svg class="button-stroke" viewBox="0 0 154 13">
               <use href="#line"></use>
-            </svg></a> &copy; {{currentYear}} Tutti i diritti riservati - Solo cookie tecnici.</small>
+            </svg></div> &copy; {{currentYear}} Tutti i diritti riservati - Solo cookie tecnici.</small>
       </mat-toolbar-row>
     </mat-toolbar>
   </mat-sidenav-content>
@@ -70,3 +70,13 @@
       stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke" />
   </defs>
 </svg>
+<mat-menu #menu="matMenu">
+  <a href="mailto:e.trudini82@gmail.com" target="_blank" mat-menu-item>
+    <mat-icon color="primary">mail_outline</mat-icon>
+    <span>Scrivi email</span>
+  </a>
+  <button mat-menu-item (click)="copy()">
+    <mat-icon color="primary">content_copy</mat-icon>
+    <span>Copia indirizzo</span>
+  </button>
+</mat-menu>
