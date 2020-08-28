@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
-import { empty } from 'rxjs';
+import { empty, of } from 'rxjs';
 import * as xml2js from "xml2js";
 import { environment } from 'src/environments/environment';
 
@@ -18,11 +18,8 @@ export class FeedsService {
     responseType: "text"
   };
 
-  
-
   getFeeds() {
-    //fare su drupal una vista e chiamare l'url da qui
-    let url = `${environment.rootPath}${environment.rssfeed}`;
+    let url = `${environment.rootPath}${environment.rssfeed}ddddddddd`;
     return this.httpClient.get(url, this.requestOptions)
     .pipe(
       map( res => {
@@ -41,7 +38,7 @@ export class FeedsService {
       ),
       catchError((error) => {
         console.log('error: ', error);
-        return empty();
+        return of([]);
         })
     )
 }
