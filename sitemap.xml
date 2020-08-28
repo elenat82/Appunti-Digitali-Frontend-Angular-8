@@ -1,0 +1,314 @@
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+<url>
+    <loc>https://www.appunti-digitali.it/home</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/html/introduzione</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/html/i-tag-fondamentali</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/html/il-tag-head</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/html/elementi-di-testo-comuni</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/html/elementi-di-testo-meno-comuni</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/html/le-sezioni</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/html/le-liste</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/html/le-tabelle</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/html/i-link</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/html/i-form</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/html/le-immagini</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/html/meter-e-progress</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/html/audio-e-video</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/html/caratteri-speciali</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/html/gli-attributi</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/html/specifiche-wai-aria</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/introduzione</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/i-selettori</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/gli-pseudo-selettori</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/la-formattazione-del-testo</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/gli-sfondi</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/flexbox</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/le-ombre</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/le-liste</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/le-tabelle</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/il-box-model</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/i-posizionamenti</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/le-animazioni</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/le-media-queries</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/le-unita039-di-misura</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/i-colori</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/display</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/il-cursore</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/layout-statico-fluido-adaptive-e-responsive</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/reset-e-normalize</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/sass-parte-i</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/css/sass-parte-ii</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/introduzione</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/tipi-di-dato</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/variabili-e-costanti</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/gli-operatori-binari</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/gli-operatori-unari</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/strutture-di-controllo</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/gli-oggetti</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/gli-array</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/le-stringhe</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/i-numeri</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/le-funzioni</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/le-date</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/operazioni-sulle-date</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/console-api</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/programmazione-asincrona-promises-fetch-e-asyncawait</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/le-promises</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/fetch-api</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/geolocation-api</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/canvas-api</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/internationalization</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/validazione-form</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/operazioni-sulle-stringhe</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/json</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/window-metodi</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/programmazione-funzionale</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/window-eventi</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/document-proprieta</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/document-metodi</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/document-eventi</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/element-proprieta</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/element-metodi</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/element-eventi</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/javascript/window-proprieta</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/varie/xmlhttprequest-proprieta</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/varie/xmlhttprequest-metodi</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/varie/xmlhttprequest-eventi</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/varie/oop-introduzione</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/varie/git-parte-i</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/varie/git-parte-ii</loc>
+    <changefreq>weekly</changefreq>
+</url>
+<url>
+    <loc>https://www.appunti-digitali.it/appunti/varie/le-regular-expressions</loc>
+    <changefreq>weekly</changefreq>
+</url>
+</urlset>
