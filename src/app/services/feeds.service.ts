@@ -19,7 +19,7 @@ export class FeedsService {
   };
 
   getFeeds() {
-    let url = `${environment.rootPath}${environment.rssfeed}ddddddddd`;
+    let url = `${environment.rootPath}${environment.rssfeed}`;
     return this.httpClient.get(url, this.requestOptions)
     .pipe(
       map( res => {
