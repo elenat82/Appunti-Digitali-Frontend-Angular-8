@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 import { StorageMap, JSONSchema, JSONSchemaObject, JSONSchemaArray } from '@ngx-pwa/local-storage';
 import { ContentHtml, ContentCss, ContentJS, ContentAngular, ContentPhp, ContentDrupal, ContentVarie } from '../models';
 import { Router, NavigationEnd, NavigationStart } from '@angular/router';
-import { finalize, tap } from 'rxjs/operators';
+import { finalize, tap, catchError } from 'rxjs/operators';
 
 function forkJoinWithProgress(arrayOfObservables) {
   return defer(() => { // here we go
@@ -18,7 +18,8 @@ function forkJoinWithProgress(arrayOfObservables) {
         finalize(() => {
           const percentValue = ++counter * 100 / arrayOfObservables.length;
           percent$.next(percentValue);
-        })
+        }),
+        catchError(e => {return of([])})
       )
     );
     const finalResult$ = forkJoin(modilefiedObservablesList).pipe(

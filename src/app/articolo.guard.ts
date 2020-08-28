@@ -17,11 +17,11 @@ export class ArticoloGuard implements CanActivate {
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
 
-      return this.storageMap.has('html')
+      return this.storageMap.size
       .pipe(
         take(1),
-        map( (isVerified: boolean) => {
-          if (!isVerified) {
+        map( (num: number) => {
+          if (num < 7) {
             this.router.navigate(['/home'], {skipLocationChange: true, queryParams: {returnUrl: state.url}});
             return false;
           }

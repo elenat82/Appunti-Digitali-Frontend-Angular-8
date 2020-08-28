@@ -136,7 +136,7 @@ export class HomeComponent implements OnInit, OnDestroy {
                         this.router.navigate([par.returnUrl])
                       }
                     }
-                  )
+                  );
                   this.spinnerOverlayService.hide();
                 }
               );
@@ -152,7 +152,6 @@ export class HomeComponent implements OnInit, OnDestroy {
                   return 0;
                 });
               }
-  
               if (res[8] && res[8].items) { //preferiti di stackoverflow
                 this.questions = res[8].items;
               }

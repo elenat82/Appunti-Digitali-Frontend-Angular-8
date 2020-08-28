@@ -104,23 +104,23 @@ export class ArticoloComponent implements OnInit, AfterViewChecked, OnDestroy {
         tap((el) => {
           if (el) {
             this.titleService.setTitle("Appunti Digitali | " + el.tipo + " - " + el.titolo);
-          }
-          if (
-            el.tagsgenerici && el.tagsgenerici.length ||
-            el.tagshtml && el.tagshtml.length ||
-            el.versionihtml && el.versionihtml.length ||
-            el.tagscss && el.tagscss.length ||
-            el.versionicss && el.versionicss.length ||
-            el.tagsjs && el.tagsjs.length ||
-            el.versionijs && el.versionijs.length ||
-            el.tagsangular && el.tagsangular.length ||
-            el.tagsphp && el.tagsphp.length ||
-            el.tagsdrupal && el.tagsdrupal.length
-          ) {
-            this.showTags = true;
-          }
-          else {
-            this.showTags = false;
+            if (
+              el.tagsgenerici && el.tagsgenerici.length ||
+              el.tagshtml && el.tagshtml.length ||
+              el.versionihtml && el.versionihtml.length ||
+              el.tagscss && el.tagscss.length ||
+              el.versionicss && el.versionicss.length ||
+              el.tagsjs && el.tagsjs.length ||
+              el.versionijs && el.versionijs.length ||
+              el.tagsangular && el.tagsangular.length ||
+              el.tagsphp && el.tagsphp.length ||
+              el.tagsdrupal && el.tagsdrupal.length
+            ) {
+              this.showTags = true;
+            }
+            else {
+              this.showTags = false;
+            }
           }
         })
       )
