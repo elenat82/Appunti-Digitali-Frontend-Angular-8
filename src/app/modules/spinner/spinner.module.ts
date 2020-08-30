@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { SpinnerOverlayComponent } from './spinner-overlay/spinner-overlay.component';
 import { SpinnerOverlayService } from '../../services/spinner-overlay/spinner-overlay-service.service';
+import { MatProgressBarModule } from '@angular/material';
 
 
 
@@ -12,7 +13,8 @@ import { SpinnerOverlayService } from '../../services/spinner-overlay/spinner-ov
     SpinnerComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MatProgressBarModule
   ],
   exports: [
     SpinnerComponent,

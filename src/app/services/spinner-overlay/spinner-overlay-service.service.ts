@@ -9,10 +9,11 @@ import { SpinnerOverlayComponent } from 'src/app/modules/spinner/spinner-overlay
 export class SpinnerOverlayService {
 
   private overlayRef: OverlayRef = null;
+  private componentInstance;
 
   constructor(private overlay: Overlay) { }
 
-  public show(message = '') {
+  public show(percent = 0) {
     // Returns an OverlayRef (which is a PortalHost)
 
     if (!this.overlayRef) {
@@ -24,8 +25,8 @@ export class SpinnerOverlayService {
 
     // run in async context for triggering "tick", thus avoid ExpressionChangedAfterItHasBeenCheckedError
     setTimeout(() => {
-      const component = this.overlayRef.attach(spinnerOverlayPortal); // Attach ComponentPortal to PortalHost
-      (component.instance as any).message = message;
+      this.componentInstance = this.overlayRef.attach(spinnerOverlayPortal); // Attach ComponentPortal to PortalHost
+      (this.componentInstance.instance as any).percent = percent;
     });
 
   }
@@ -34,5 +35,9 @@ export class SpinnerOverlayService {
     if (!!this.overlayRef) {
       this.overlayRef.detach();
     }
+  }
+
+  public updatePercent(updatedPercent) {
+    (this.componentInstance.instance as any).percent = updatedPercent;
   }
 }

@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SpinnerOverlayComponent implements OnInit {
 
-  @Input() public message: string;
+  @Input() public percent: number;
 
   constructor() { }
 

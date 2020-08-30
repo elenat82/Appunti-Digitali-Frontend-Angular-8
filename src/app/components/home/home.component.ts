@@ -41,14 +41,14 @@ export class HomeComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.titleService.setTitle("Appunti Digitali | Gli appunti di una Front End Developer");
-    this.spinnerOverlayService.show("");
+    this.spinnerOverlayService.show(0);
 
     this.contentService.getContentWithPercent(['html', 'css', 'javascript', 'angular', 'php', 'drupal', 'varie'])
     .pipe(
       mergeMap(([finalResult, progress]) => merge(
         progress.pipe(
           tap((value) => {
-            console.log(`${value} completed`);
+            this.spinnerOverlayService.updatePercent(value);
           }),
           ignoreElements()
         ),
