@@ -236,4 +236,18 @@ $altTheme: mat-dark-theme($theme-primary, $theme-accent, $theme-warn);
   min-height: 2.5em;
 }
 
-
+.tip {
+  background-image: url('assets/img/blue-line.svg'),
+    url('assets/img/red-line.svg');
+  background-size: 100vw 2.5rem, 28px 28px;
+  background-repeat: repeat, repeat-y;
+  background-position: 0 0, 64px -117px;
+  padding-left: 103px;
+  padding-right: 100px;
+  background-color: #FEFAF1;
+}
+.tip p {
+  line-height: 2.5rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
