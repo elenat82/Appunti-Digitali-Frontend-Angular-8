@@ -58,7 +58,7 @@ export class AppComponent implements OnInit {
       "line-height: 25px;");
     console.log(
       "%cScrivimi a: e.trudini82@gmail.com",
-      "padding:9px 10px; " + 
+      "padding:9px 10px; " +
       "color: #284283; " +
       "background-color: #ffdab9; " +
       "line-height: 25px;");
@@ -155,5 +155,25 @@ export class AppComponent implements OnInit {
       duration: 2000,
       panelClass: ['blue-snackbar']
     })
+  }
+
+  toggleMenu() {
+    this.matSidenav.toggle();
+    if (this.matSidenav.opened) {
+      var audioOpen = new Audio("assets/sounds/plunger-immediate.mp3");
+      audioOpen.oncanplaythrough = function (ev) {
+        if (audioOpen.canPlayType('audio/mpeg')) {
+          audioOpen.play();
+        }
+      }
+    }
+    else {
+      var audioClose = new Audio("assets/sounds/menu-open.mp3");
+      audioClose.oncanplaythrough = function (ev) {
+        if (audioClose.canPlayType('audio/mpeg')) {
+          audioClose.play();
+        }
+      }
+    }
   }
 }
