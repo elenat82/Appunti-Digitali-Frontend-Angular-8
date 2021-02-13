@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'appuntifont';
-  src:  url('fonts/appuntifont.eot?pdhnby');
-  src:  url('fonts/appuntifont.eot?pdhnby#iefix') format('embedded-opentype'),
-    url('fonts/appuntifont.ttf?pdhnby') format('truetype'),
-    url('fonts/appuntifont.woff?pdhnby') format('woff'),
-    url('fonts/appuntifont.svg?pdhnby#appuntifont') format('svg');
+  src:  url('fonts/appuntifont.eot?4jacqc');
+  src:  url('fonts/appuntifont.eot?4jacqc#iefix') format('embedded-opentype'),
+    url('fonts/appuntifont.ttf?4jacqc') format('truetype'),
+    url('fonts/appuntifont.woff?4jacqc') format('woff'),
+    url('fonts/appuntifont.svg?4jacqc#appuntifont') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,8 +25,9 @@ i {
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-app-at-symbol:before {
-  content: "\e909";
+.icon-app-youtube:before {
+  content: "\e90d";
+  color: #f00;
 }
 .icon-app-angular:before {
   content: "\e900";
@@ -70,6 +71,9 @@ i {
 .icon-app-w3c:before {
   content: "\e906";
   color: #005a9c;
+}
+.icon-app-at-symbol:before {
+  content: "\e909";
 }
 .icon-app-newspaper:before {
   content: "\e908";
