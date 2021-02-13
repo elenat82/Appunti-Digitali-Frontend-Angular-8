@@ -94,6 +94,9 @@ export class ArticoloComponent implements OnInit, AfterViewChecked, OnDestroy {
               else if (element.url.includes("twitter.com")) {
                 element.icon = "icon-app-twitter";
               }
+              else if (element.url.includes("youtube.com")) {
+                element.icon = "icon-app-youtube";
+              }
               else {
                 element.icon = ""
               }

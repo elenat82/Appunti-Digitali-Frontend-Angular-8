@@ -60,7 +60,8 @@ mat-chip-list:focus {
 
 .mat-list-base .mat-list-item {
     height: auto;
-    margin-bottom: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
 }
 
 .mat-list-base .mat-list-item .mat-line {
