@@ -12,7 +12,7 @@ export class StackoverflowService {
 
   private httpOption = {
     headers: new HttpHeaders(
-      { 'authorization': 'token 314b978f9df54d3e1b65b27ec68a211a672cbd69' }
+      { 'authorization': 'token VECCHIO_TOKEN' }
     )
   };
 
