@@ -17,9 +17,16 @@ export class StackoverflowService {
   };
 
   getFavorites() {
-    let url = "https://api.stackexchange.com/2.3/users/9113074/favorites?order=desc&sort=activity&site=stackoverflow&key=REMOVED_STACKOVERFLOW_KEY";
     //https://meta.stackexchange.com/questions/382991/api-request-for-favorites-now-returning-an-empty-list-is-there-a-way-to-get
+
     //ora i favorites sono privati e non si può più
+
+    //let url = "https://api.stackexchange.com/2.3/users/9113074/favorites?order=desc&sort=activity&site=stackoverflow&key=REMOVED_STACKOVERFLOW_KEY";
+
+    //in sostituzione prendo le domande taggate come argomenti di frontend
+
+    let url = "https://api.stackexchange.com/2.3/questions?order=desc&sort=activity&tagged=html;css;javascript;angular&site=stackoverflow";
+    
     return this.httpClient.get(url);
   }
 
