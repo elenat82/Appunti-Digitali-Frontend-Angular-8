@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'appuntifont';
-  src:  url('fonts/appuntifont.eot?4jacqc');
-  src:  url('fonts/appuntifont.eot?4jacqc#iefix') format('embedded-opentype'),
-    url('fonts/appuntifont.ttf?4jacqc') format('truetype'),
-    url('fonts/appuntifont.woff?4jacqc') format('woff'),
-    url('fonts/appuntifont.svg?4jacqc#appuntifont') format('svg');
+  src:  url('fonts/appuntifont.eot?ey6yg3');
+  src:  url('fonts/appuntifont.eot?ey6yg3#iefix') format('embedded-opentype'),
+    url('fonts/appuntifont.ttf?ey6yg3') format('truetype'),
+    url('fonts/appuntifont.woff?ey6yg3') format('woff'),
+    url('fonts/appuntifont.svg?ey6yg3#appuntifont') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -95,5 +95,7 @@ i {
 }
 .icon-app-heart:before {
   content: "\e9da";
-  color: var(--accent-lighter-color);
+}
+.icon-app-download:before {
+  content: "\e9c7";
 }
