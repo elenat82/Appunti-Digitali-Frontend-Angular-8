@@ -3,13 +3,15 @@ import { ContentAngular, ContentCss, ContentDrupal, ContentHtml, ContentJS, Cont
 import { Component, OnInit, Output, EventEmitter, ViewChild, HostListener } from '@angular/core';
 import { fadeAnimation } from './animations';
 import { ContentService } from './services/content.service';
-import { Observable, forkJoin, Subject, BehaviorSubject } from 'rxjs';
+import { Observable, forkJoin, Subject, BehaviorSubject, interval } from 'rxjs';
 import { StorageMap } from '@ngx-pwa/local-storage';
 import { MatDialog, MatSidenav, MatSnackBar } from '@angular/material';
 import 'autotrack/lib/plugins/clean-url-tracker';
 import 'autotrack/lib/plugins/outbound-link-tracker';
 import 'autotrack/lib/plugins/page-visibility-tracker';
 import 'autotrack/lib/plugins/url-change-tracker';
+import { takeUntil } from 'rxjs/operators';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 
 
 (<any>window).ga('create', 'UA-64373138-1', 'auto');
@@ -28,13 +30,36 @@ import 'autotrack/lib/plugins/url-change-tracker';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations: [fadeAnimation]
+  animations: [fadeAnimation,
+    trigger('animateText', [
+      // Defining the hidden state
+      state('hidden', style({
+        opacity: 0
+      })),
+      // Defining the visible state
+      state('visible', style({
+        opacity: 1
+      })),
+      // Defining the animation for state changes
+      transition('hidden <=> visible', [
+        animate('1s ease-out')
+      ])
+    ])
+  ]
+
 })
 export class AppComponent implements OnInit {
 
   public title = 'Appunti Digitali';
   public opened: boolean;
   public strumentiUtili;
+
+  public greeting: string;
+  public greetingList: Array<string> = ['Benvenuto!', 'Welcome!', 'Bienvenu!', 'Bienvenido!'];
+  public ngUnsubscribe: Subject<any> = new Subject();
+  // Start with hidden state and then change it to visible state 
+  // to animate the text when the component is rendered
+  public currentState = 'hidden';
 
   public query = "";
   public simplebarOptions = {
@@ -107,6 +132,18 @@ export class AppComponent implements OnInit {
 
       })
   }
+
+  //https://stackblitz.com/edit/stackoverflow-51222243?file=src%2Fapp%2Fapp.component.ts
+  ngAfterViewInit() {
+    this.currentState = 'hidden';
+    this.greeting = this.greetingList[0];
+
+    interval(1000)
+      .pipe(takeUntil(this.ngUnsubscribe))
+      .subscribe(() => {
+        this.currentState = 'hidden';
+      });
+  }
   @HostListener('window:resize', ['$event'])
   onResize(event) {
     this.screenWidth$.next(event.target.innerWidth);
@@ -140,7 +177,7 @@ export class AppComponent implements OnInit {
       width: '500px',
       height: '600px',
       maxHeight: 'none',
-      data: {  }
+      data: {}
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -187,5 +224,22 @@ export class AppComponent implements OnInit {
         }
       }
     }
+  }
+
+  //https://stackoverflow.com/questions/60482512/how-to-animate-the-change-of-a-variable-in-angular8-that-is-not-a-list
+  animationFinished(event: AnimationEvent) {
+    if (event.fromState === 'void' && event.toState === 'hidden') {
+      this.currentState = 'visible';
+    } else if (event.fromState === 'visible' && event.toState === 'hidden') {
+      const greetingIndex = this.greetingList.findIndex((greeting: string) => greeting === this.greeting);
+      const nextgreeting = this.greetingList[greetingIndex + 1];
+      this.greeting = nextgreeting ? nextgreeting : this.greetingList[0];
+      this.currentState = 'visible';
+    }
+  }
+
+  ngOnDestroy() {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
   }
 }

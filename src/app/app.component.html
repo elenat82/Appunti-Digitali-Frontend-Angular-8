@@ -66,7 +66,7 @@
   </mat-dialog-actions>
 </ng-template>
 <ng-template #profilotemplate>
-  <h2 mat-dialog-title><i class="icon-app-wrench"></i>Elena Trudini - Front End Developer</h2>
+  <h2 mat-dialog-title class="text-rotator" id="textRotator" [@animateText]="currentState" (@animateText.done)="animationFinished($event)"><span>{{greeting}}</span></h2>
   <mat-dialog-content class="mat-typography">
 
   </mat-dialog-content>
