@@ -55,7 +55,7 @@ export class AppComponent implements OnInit {
   public strumentiUtili;
 
   public greeting: string;
-  public greetingList: Array<string> = ['Benvenuto!', 'Welcome!', 'Bienvenu!', 'Bienvenido!'];
+  public greetingList: Array<string> = ['Benvenuto!', 'Welcome!', 'Bienvenu!', '¡Bienvenido!', 'Willkommen!'];
   public ngUnsubscribe: Subject<any> = new Subject();
   // Start with hidden state and then change it to visible state 
   // to animate the text when the component is rendered
@@ -174,10 +174,9 @@ export class AppComponent implements OnInit {
 
   openModalProfilo(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
-      width: '500px',
+      width: '600px',
       height: '600px',
       maxHeight: 'none',
-      data: {}
     });
 
     dialogRef.afterClosed().subscribe(result => {

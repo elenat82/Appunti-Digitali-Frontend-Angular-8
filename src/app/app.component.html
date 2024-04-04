@@ -71,10 +71,36 @@
   </div>
   <h2 mat-dialog-title class="text-rotator" id="textRotator" [@animateText]="currentState" (@animateText.done)="animationFinished($event)"><span class="mat-headline">{{greeting}}</span></h2>
   <mat-dialog-content class="mat-typography">
-    <p class="testo-profilo mat-body-2">Condivido su queste pagine la mia passione per lo sviluppo web attraverso esempi pratici e dettagliati.</p>
-    <p class="firma mat-body-2">Elena</p>
+    <p class="testo-profilo mat-body-2">Condivido su queste pagine la mia passione per lo sviluppo web.</p>
+    <p class="testo-profilo mat-body-2">Grazie per essere passato, se vuoi contattarmi:</p>
+    <mat-list>
+      <mat-list-item>
+        <p matline>
+          <a href="mailto:e.trudini82@gmail.com" target="_blank">
+            <mat-icon color="primary">alternate_email</mat-icon>
+            <span>e.trudini82@gmail.com</span>
+          </a>
+        </p>
+      </mat-list-item>
+      <mat-list-item>
+        <p matline>
+          <a href="tel:+393661672558" target="_blank">
+            <mat-icon color="primary">local_phone</mat-icon>
+            <span>366 - 167 2558</span>
+          </a>
+        </p>
+      </mat-list-item>
+      <mat-list-item>
+        <p matline>
+          <a href="https://www.linkedin.com/in/elenatrudini/" target="_blank">
+            <mat-icon color="primary">local_phone</mat-icon>
+            <span>LinkedIn</span>
+          </a>
+        </p>
+      </mat-list-item>
+    </mat-list>
     <div class="download-cv">
-      <a mat-button color="accent" href="" title="Download CV"><i class="icon-app-download"></i>Download CV</a>
+      <a href="../assets/files/Trudini_Elena_CV_2024.pdf" target="_blank" title="Download CV" class='freehand-btn'><i class="icon-app-download"></i>Download CV</a>
     </div>
 
   </mat-dialog-content>

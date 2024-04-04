@@ -99,8 +99,31 @@ ngx-simplebar {
     }
 }
 
-.firma {
-    text-align: right;
-    padding-right: 1rem;
+.download-cv {
+    display: flex;
+    justify-content: center;
 }
 
+.freehand-btn {
+    align-self: center;
+    background: transparent;
+    background-size: cover;
+    
+    padding: 0.67em 0.67em;
+    letter-spacing: 0.042em;
+    
+    border-radius: 10.625em 0.625em 9.375em 0.625em/0.625em 9.375em 0.625em 9.375em;
+    
+    box-shadow: 0.84em 1.584em 1.42em -1.084em rgba(0, 0, 0, 0.3);
+
+    border-style: dashed;
+    border-width: 0.084em;
+    font-family: 'Rock Salt', cursive;
+    
+    transition: all .5s ease;
+}
+
+.freehand-btn:hover,
+.freehand-btn:focus {
+    box-shadow: 0.084em 0.334em 0.167em -0.25em rgba(0, 0, 0, 0.4);
+}
