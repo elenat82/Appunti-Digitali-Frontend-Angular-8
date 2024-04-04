@@ -21,11 +21,6 @@ mat-sidenav {
     justify-content: space-between;
 }
 
-.profilo {
-    color: var(--accent-lighter-color);
-    font-family: 'Rock Salt', cursive;
-}
-
 .sidenav-toggle-button {
     margin-right: 1rem;
 }
@@ -84,7 +79,28 @@ ngx-simplebar {
     position: absolute;
 }
 
-#textRotator {
+.profilo {
+    color: var(--accent-lighter-color);
     font-family: 'Rock Salt', cursive;
-    text-align: center;
 }
+
+#textRotator {
+    text-align: center;
+    color: var(--primary-color);
+    padding: 1rem;
+}
+
+.img-profilo {
+    display: flex;
+    justify-content: center;
+    img {
+        border-radius: 50%;
+        width: 120px;
+    }
+}
+
+.firma {
+    text-align: right;
+    padding-right: 1rem;
+}
+

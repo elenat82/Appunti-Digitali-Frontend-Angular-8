@@ -31,7 +31,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   animations: [fadeAnimation,
-    trigger('animateText', [
+    trigger('animateText', [// spostre nel file animations.ts
       // Defining the hidden state
       state('hidden', style({
         opacity: 0
