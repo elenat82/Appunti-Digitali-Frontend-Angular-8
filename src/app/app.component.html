@@ -17,7 +17,7 @@
             <h1>{{title}}</h1>
           </a>
         </div>
-        <button mat-button class="strumenti-utili" (click)="openModal(mytemplate)"><i
+        <button mat-button class="strumenti-utili" (click)="openModalStrumenti(strumentiutilitemplate)"><i
             class="icon-app-wrench"></i>Strumenti utili</button>
       </mat-toolbar-row>
     </mat-toolbar>
@@ -25,7 +25,7 @@
       [ngClass]="{'showBottomToolbar': !contentService.hideBottomToolbar, 'hideBottomToolbar': contentService.hideBottomToolbar}">
       <router-outlet #o="outlet"></router-outlet>
     </main>
-    <mat-toolbar *ngIf="!contentService.hideBottomToolbar">
+    <mat-toolbar *ngIf="!contentService.hideBottomToolbar" class="footer-toolbar">
       <mat-toolbar-row>
         <small class="mat-small">Made with <i matTooltip="Drupal8" class="icon-app-drupal"></i> + <i
             class="icon-app-angular" matTooltip="Angular8"></i> + <i class="icon-app-heart" matTooltip="Love"></i> by
@@ -36,11 +36,13 @@
             <svg class="button-stroke" viewBox="0 0 154 13">
               <use href="#line"></use>
             </svg></div> &copy; {{currentYear}} Tutti i diritti riservati - Solo cookie tecnici.</small>
+            <button mat-button class="strumenti-utili" (click)="openModalStrumenti(strumentiutilitemplate)"><i
+              class="icon-app-wrench"></i>Strumenti utili</button>
       </mat-toolbar-row>
     </mat-toolbar>
   </mat-sidenav-content>
 </mat-sidenav-container>
-<ng-template #mytemplate>
+<ng-template #strumentiutilitemplate>
   <h2 mat-dialog-title><i class="icon-app-wrench"></i>Strumenti utili</h2>
   <mat-dialog-content class="mat-typography">
     <mat-form-field id="cerca-strumenti" appearance="fill">

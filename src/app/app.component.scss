@@ -16,11 +16,13 @@ mat-sidenav {
     justify-content: space-between;
 }
 
-.home-toolbar {
+.home-toolbar,
+.footer-toolbar mat-toolbar-row {
     justify-content: space-between;
 }
+
 .strumenti-utili {
-    color: var(--accent-lighter-color);
+    // color: var(--accent-lighter-color);
 }
 
 .sidenav-toggle-button {

@@ -123,7 +123,7 @@ export class AppComponent implements OnInit {
     return outlet.isActivated ? outlet.activatedRoute : '';
   }
 
-  openModal(templateRef) {
+  openModalStrumenti(templateRef) {
     let dialogRef = this.dialog.open(templateRef, {
       width: '500px',
       height: '600px',
