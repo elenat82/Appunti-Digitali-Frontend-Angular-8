@@ -17,8 +17,7 @@
             <h1>{{title}}</h1>
           </a>
         </div>
-        <button mat-button class="strumenti-utili" (click)="openModalStrumenti(strumentiutilitemplate)"><i
-            class="icon-app-wrench"></i>Strumenti utili</button>
+        <button mat-button class="profilo" (click)="openModalProfilo(profilotemplate)">Chi sono?</button>
       </mat-toolbar-row>
     </mat-toolbar>
     <main [@fadeAnimation]="getRouterOutletState(o)"
@@ -61,6 +60,15 @@
         </mat-nav-list>
       </div>
     </ngx-simplebar>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close>Chiudi</button>
+  </mat-dialog-actions>
+</ng-template>
+<ng-template #profilotemplate>
+  <h2 mat-dialog-title><i class="icon-app-wrench"></i>Elena Trudini - Front End Developer</h2>
+  <mat-dialog-content class="mat-typography">
+
   </mat-dialog-content>
   <mat-dialog-actions align="end">
     <button mat-button mat-dialog-close>Chiudi</button>

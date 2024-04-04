@@ -135,6 +135,18 @@ export class AppComponent implements OnInit {
     });
   }
 
+  openModalProfilo(templateRef) {
+    let dialogRef = this.dialog.open(templateRef, {
+      width: '500px',
+      height: '600px',
+      maxHeight: 'none',
+      data: {  }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
   trackByFunc(index: number, el: any) {
     return el.url;
   }
