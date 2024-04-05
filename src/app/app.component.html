@@ -73,7 +73,7 @@
     <img src="../assets/img/picture.png" alt="Elena Trudini">
   </div>
   <h2 mat-dialog-title class="text-rotator" id="textRotator" [@animateText]="currentState"
-    (@animateText.done)="animationFinished($event)"><span class="mat-headline">{{greeting}}</span></h2>
+    (@animateText.done)="animationFinished($event)"><span class="mat-headline" style="backface-visibility: visible !important;">{{greeting}}</span></h2>
   <mat-dialog-content class="mat-typography modale-profilo">
     <p class="testo-profilo mat-body-2">Condivido su queste pagine la mia passione per lo sviluppo web.</p>
     <p class="testo-profilo mat-body-2">Grazie per essere passato, se vuoi contattarmi:</p>

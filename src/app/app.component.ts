@@ -11,7 +11,7 @@ import 'autotrack/lib/plugins/outbound-link-tracker';
 import 'autotrack/lib/plugins/page-visibility-tracker';
 import 'autotrack/lib/plugins/url-change-tracker';
 import { takeUntil } from 'rxjs/operators';
-import { animate, state, style, transition, trigger } from '@angular/animations';
+import { AnimationEvent } from '@angular/animations';
 
 
 (<any>window).ga('create', 'UA-64373138-1', 'auto');

@@ -5,7 +5,8 @@ import {
   style,
   query, 
   group, 
-  state
+  state,
+  keyframes
 } from '@angular/animations';
 
 export const fadeAnimation = trigger('fadeAnimation', [
@@ -27,14 +28,20 @@ export const fadeAnimation = trigger('fadeAnimation', [
 export const animateText = trigger('animateText', [
   // Defining the hidden state
   state('hidden', style({
-    opacity: 0
+    //opacity: 0,
   })),
   // Defining the visible state
   state('visible', style({
-    opacity: 1
+    //opacity: 1,
   })),
   // Defining the animation for state changes
   transition('hidden <=> visible', [
-    animate('1s ease-out')
+    animate('1s', keyframes ( [
+      style({transform: 'perspective(400px) rotate3d(1, 0, 0, 90deg)'}),
+      style({transform: 'perspective(400px) rotate3d(1, 0, 0, -20deg)'}),
+      style({transform: 'perspective(400px) rotate3d(1, 0, 0, 10deg)'}),
+      style({transform: 'perspective(400px) rotate3d(1, 0, 0, -5deg)'}),
+      style({transform: 'perspective(400px)'}),
+    ]))
   ])
 ])
