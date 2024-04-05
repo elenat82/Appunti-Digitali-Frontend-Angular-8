@@ -227,9 +227,9 @@ export class AppComponent implements OnInit {
 
   //https://stackoverflow.com/questions/60482512/how-to-animate-the-change-of-a-variable-in-angular8-that-is-not-a-list
   animationFinished(event: AnimationEvent) {
-    if (event.fromState === 'void' && event.toState === 'hidden') {
+    if (event && event.fromState === 'void' && event.toState === 'hidden') {
       this.currentState = 'visible';
-    } else if (event.fromState === 'visible' && event.toState === 'hidden') {
+    } else if (event && event.fromState === 'visible' && event.toState === 'hidden') {
       const greetingIndex = this.greetingList.findIndex((greeting: string) => greeting === this.greeting);
       const nextgreeting = this.greetingList[greetingIndex + 1];
       this.greeting = nextgreeting ? nextgreeting : this.greetingList[0];
