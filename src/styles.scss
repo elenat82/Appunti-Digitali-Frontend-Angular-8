@@ -47,6 +47,11 @@ mat-list a {
   text-overflow: ellipsis;
 }
 
+.mat-nav-list a {
+  display: block;
+  width: 100%;
+}
+
 .mat-list-base .mat-subheader {
   color: var(--primary-color);
   font-weight: 700;

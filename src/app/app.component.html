@@ -70,37 +70,31 @@
     <img src="../assets/img/picture.png" alt="Elena Trudini">
   </div>
   <h2 mat-dialog-title class="text-rotator" id="textRotator" [@animateText]="currentState" (@animateText.done)="animationFinished($event)"><span class="mat-headline">{{greeting}}</span></h2>
-  <mat-dialog-content class="mat-typography">
+  <mat-dialog-content class="mat-typography modale-profilo">
     <p class="testo-profilo mat-body-2">Condivido su queste pagine la mia passione per lo sviluppo web.</p>
     <p class="testo-profilo mat-body-2">Grazie per essere passato, se vuoi contattarmi:</p>
-    <mat-list>
+    <mat-nav-list>
       <mat-list-item>
-        <p matline>
-          <a href="mailto:e.trudini82@gmail.com" target="_blank">
+          <a matline href="mailto:e.trudini82@gmail.com" target="_blank" title="Scrivimi una mail">
             <i class="icon-app-at-symbol"></i>
             <span>e.trudini82@gmail.com</span>
           </a>
-        </p>
       </mat-list-item>
       <mat-list-item>
-        <p matline>
-          <a href="tel:+393661672558" target="_blank">
+          <a matline href="tel:+393661672558" target="_blank" title="Chiamami">
             <i class="icon-app-phone"></i>
             <span>366 - 167 2558</span>
           </a>
-        </p>
       </mat-list-item>
       <mat-list-item>
-        <p matline>
-          <a href="https://www.linkedin.com/in/elenatrudini/" target="_blank">
+          <a matline href="https://www.linkedin.com/in/elenatrudini/" target="_blank" title="Visita il mio profilo LinkedIn">
             <i class="icon-app-linkedin"></i>
             <span>LinkedIn</span>
           </a>
-        </p>
       </mat-list-item>
-    </mat-list>
+    </mat-nav-list>
     <div class="download-cv">
-      <a href="../assets/files/Trudini_Elena_CV_2024.pdf" target="_blank" title="Download CV" class='freehand-btn'><i class="icon-app-download"></i>Download CV</a>
+      <a href="../assets/files/Trudini_Elena_CV_2024.pdf" target="_blank" title="Scarica CV" class='freehand-btn'>Scarica CV</a>
     </div>
 
   </mat-dialog-content>

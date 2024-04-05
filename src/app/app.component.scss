@@ -84,12 +84,6 @@ ngx-simplebar {
     font-family: 'Rock Salt', cursive;
 }
 
-#textRotator {
-    text-align: center;
-    color: var(--primary-color);
-    padding: 1rem;
-}
-
 .img-profilo {
     display: flex;
     justify-content: center;
@@ -99,31 +93,39 @@ ngx-simplebar {
     }
 }
 
+#textRotator {
+    text-align: center;
+    color: var(--primary-color);
+    padding: 1rem;
+}
+
+.modale-profilo a i {
+    color: var(--accent-color);
+}
+
 .download-cv {
     display: flex;
     justify-content: center;
 }
 
 .freehand-btn {
-    align-self: center;
-    background: transparent;
-    background-size: cover;
-    
     padding: 0.67em 0.67em;
-    letter-spacing: 0.042em;
-    
+    letter-spacing: 0.3rem;
     border-radius: 10.625em 0.625em 9.375em 0.625em/0.625em 9.375em 0.625em 9.375em;
-    
-    box-shadow: 0.84em 1.584em 1.42em -1.084em rgba(0, 0, 0, 0.3);
-
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+    background-color: var(--primary-lighter-color);
+    box-shadow: 0.24em 0.284em 0.42em -0.184em var(--primary-darker-color);
     border-style: dashed;
     border-width: 0.084em;
     font-family: 'Rock Salt', cursive;
-    
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     transition: all .5s ease;
 }
 
 .freehand-btn:hover,
 .freehand-btn:focus {
-    box-shadow: 0.084em 0.334em 0.167em -0.25em rgba(0, 0, 0, 0.4);
+    box-shadow: 0.084em 0.334em 0.167em -0.25em var(--primary-darker-color);
 }

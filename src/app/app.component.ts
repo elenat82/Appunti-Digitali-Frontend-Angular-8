@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
   public strumentiUtili;
 
   public greeting: string;
-  public greetingList: Array<string> = ['Benvenuto!', 'Welcome!', 'Bienvenu!', '¡Bienvenido!', 'Willkommen!'];
+  public greetingList: Array<string> = ['Benvenuto!', 'Welcome!', 'Bienvenue!', '¡Bienvenido!', 'Willkommen!', 'Bem vindo!', 'Bine ai venit!'];
   public ngUnsubscribe: Subject<any> = new Subject();
   // Start with hidden state and then change it to visible state 
   // to animate the text when the component is rendered
