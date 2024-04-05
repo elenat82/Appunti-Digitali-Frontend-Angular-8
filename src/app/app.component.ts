@@ -1,7 +1,7 @@
 import { SpinnerOverlayService } from './services/spinner-overlay/spinner-overlay-service.service';
 import { ContentAngular, ContentCss, ContentDrupal, ContentHtml, ContentJS, ContentPhp, ContentVarie } from './models';
 import { Component, OnInit, Output, EventEmitter, ViewChild, HostListener } from '@angular/core';
-import { fadeAnimation } from './animations';
+import { fadeAnimation, animateText } from './animations';
 import { ContentService } from './services/content.service';
 import { Observable, forkJoin, Subject, BehaviorSubject, interval } from 'rxjs';
 import { StorageMap } from '@ngx-pwa/local-storage';
@@ -30,22 +30,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
-  animations: [fadeAnimation,
-    trigger('animateText', [// spostre nel file animations.ts
-      // Defining the hidden state
-      state('hidden', style({
-        opacity: 0
-      })),
-      // Defining the visible state
-      state('visible', style({
-        opacity: 1
-      })),
-      // Defining the animation for state changes
-      transition('hidden <=> visible', [
-        animate('1s ease-out')
-      ])
-    ])
-  ]
+  animations: [fadeAnimation, animateText]
 
 })
 export class AppComponent implements OnInit {
