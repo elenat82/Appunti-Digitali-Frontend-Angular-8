@@ -185,3 +185,13 @@ main.hideBottomToolbar {
   display: block;
   margin: auto;
 }
+
+@media screen and (max-height: 933px) {
+  main.showBottomToolbar {
+      height: calc(100% - 148px);
+  }
+
+  .showBottomToolbar .list-wrapper.accordion-layout {
+      height: calc(100vh - 350px);
+  }
+}

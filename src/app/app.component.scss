@@ -136,8 +136,17 @@ ngx-simplebar {
     box-shadow: 0.084em 0.334em 0.167em -0.25em rgba(51, 51, 51, 0.54);
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 816px) {
     .footer-toolbar mat-toolbar-row {
         justify-content: space-around;
     }
 }
+
+@media screen and (max-width: 462px) {
+    .footer-toolbar mat-toolbar-row {
+        height: 100px;
+        padding: 0.5rem 1rem 0.5rem 1rem;
+
+    }
+}
+
