@@ -14,7 +14,7 @@ import { takeUntil } from 'rxjs/operators';
 import { AnimationEvent } from '@angular/animations';
 
 
-(<any>window).ga('create', 'UA-64373138-1', 'auto');
+/* (<any>window).ga('create', 'UA-64373138-1', 'auto');
 (<any>window).ga('require', 'cleanUrlTracker');
 (<any>window).ga('require', 'outboundLinkTracker', {
   events: ['click', 'auxclick', 'contextmenu']
@@ -23,7 +23,7 @@ import { AnimationEvent } from '@angular/animations';
   sendInitialPageview: true,
   timeZone: 'Europe/Rome'
 });
-(<any>window).ga('require', 'urlChangeTracker');
+(<any>window).ga('require', 'urlChangeTracker'); */
 //(<any>window).ga('send', 'pageview'); non serve perchè è già compreso nel pageVisibilityTracker
 
 @Component({
