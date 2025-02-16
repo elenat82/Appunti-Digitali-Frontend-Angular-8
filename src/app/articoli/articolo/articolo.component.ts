@@ -69,7 +69,14 @@ export class ArticoloComponent implements OnInit, AfterViewChecked, OnDestroy {
                 el.setAttribute('data-prefill', '{"scripts":["https://maps.googleapis.com/maps/api/js?key=&extension=.js"]}');
               }
               else {
-                el.setAttribute('data-prefill', '');
+                let titolo = obj.titolo;
+                let prefillData = {
+                  title: titolo,
+                  tags: [],
+                  scripts: [],
+                  stylesheets: []
+              };
+              el.setAttribute('data-prefill', JSON.stringify(prefillData));
               }
               el.setAttribute('data-height', '400');
               el.setAttribute('data-theme-id', '1');
